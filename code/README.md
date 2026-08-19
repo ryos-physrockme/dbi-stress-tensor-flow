@@ -6,7 +6,7 @@ This directory contains the exploratory and verification code used in the four-d
 
 - `nn_closure_search.py` — neural-network regression from stress-tensor invariants to the dimensionless deformation generator, rational SVD readout, and independent numerical validation.
 - `coordinate_free_sympy.py` — exact symbolic checks of four-dimensional matrix identities.
-- Additional reduction/validation scripts are kept here as the public manuscript is synchronized with the repository.
+- `reduction_5d_to_4d_sympy.py` — exact and numerical checks of the five-dimensional Born--Infeld to four-dimensional DBI reduction.
 
 ## Role of the neural network
 
@@ -15,6 +15,8 @@ The neural-network calculation is exploratory. It tests whether the deformation 
 ## Reproducibility
 
 Python dependencies are listed in the repository-level `requirements.txt`. Numerical output files are stored under `data/`.
+
+The current working scripts retain the `/mnt/data` output directory used in the development environment. Before the first versioned preprint release, these output paths will be replaced by a configurable or repository-relative output directory and the dependency versions will be pinned.
 
 ## License
 
