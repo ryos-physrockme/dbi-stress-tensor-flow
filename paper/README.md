@@ -1,9 +1,10 @@
 # Manuscript
 
-This directory is reserved for the manuscript source for the four-dimensional single-scalar DBI stress-tensor flow project.
+This directory contains the current manuscript source for the four-dimensional single-scalar DBI stress-tensor flow project.
 
-The current working manuscript is written in Japanese for internal review. Its structure and front matter are being prepared with JHEP as the primary journal target, motivated by the closest DBI/stress-tensor-flow literature. The final journal choice is not fixed yet.
+- `paper_ja.tex` is the Japanese public-review version used to check the logic, notation, and presentation before translation.
+- The English submission/preprint version will be prepared after the Japanese manuscript is finalized.
 
-The manuscript treats the neural-network calculation as a discovery tool: the network is used to test whether the deformation generator can be predicted from stress-tensor invariants, while the scientific claims are established analytically.
+The manuscript is intended as a self-contained analytic paper. The neural-network exploration is described as the discovery route, while the final flow equations are derived analytically.
 
-Before submission, the repository will contain the final LaTeX source and will be made public together with the preprint. The generated PDF is not intended to be version-controlled; it can be rebuilt from the source.
+For reproducibility code and numerical outputs, see `../code/` and `../data/`.
