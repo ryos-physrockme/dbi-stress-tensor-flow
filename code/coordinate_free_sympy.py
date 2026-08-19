@@ -22,11 +22,15 @@ Temporary scalar contractions used only in the proof:
 """
 
 from __future__ import annotations
+
+import os
 import json
 from pathlib import Path
 import sympy as sp
 
-OUT = Path('/mnt/data')
+REPO_ROOT = Path(__file__).resolve().parents[1]
+OUT = Path(os.environ.get('DBI_OUTPUT_DIR', REPO_ROOT / 'data')).resolve()
+OUT.mkdir(parents=True, exist_ok=True)
 SUMMARY = OUT / 'dbi_4d_coordinate_free_sympy_summary.json'
 
 # ------------------------------------------------------------------
