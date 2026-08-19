@@ -32,6 +32,8 @@ where Ek = e_k(M).
 
 from __future__ import annotations
 
+import os
+
 from pathlib import Path
 import json
 import math
@@ -44,7 +46,9 @@ import matplotlib.pyplot as plt
 np.set_printoptions(precision=8, suppress=True)
 torch.set_default_dtype(torch.float32)
 
-OUT = Path('/mnt/data')
+REPO_ROOT = Path(__file__).resolve().parents[1]
+OUT = Path(os.environ.get('DBI_OUTPUT_DIR', REPO_ROOT / 'data')).resolve()
+OUT.mkdir(parents=True, exist_ok=True)
 CSV_SUMMARY = OUT / 'dbi_4d_single_scalar_validation.csv'
 CSV_LAMBDA = OUT / 'dbi_4d_single_scalar_error_by_lambda.csv'
 FIG_SCATTER = OUT / 'dbi_4d_nn_scout_scatter.png'
