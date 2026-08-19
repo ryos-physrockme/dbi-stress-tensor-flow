@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use material from this work, please cite the eventual paper/preprint once available."
+title: "Stress-tensor flows in four-dimensional single-scalar DBI theory"
+type: software
+authors:
+  - family-names: Suda
+    given-names: Ryosuke
