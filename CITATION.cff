@@ -1,7 +1,9 @@
 cff-version: 1.2.0
-message: "If you use material from this work, please cite the eventual paper/preprint once available."
+message: "If you use material from this repository, please cite the associated preprint once it becomes available; until then, cite this repository URL and commit."
 title: "Stress-tensor flows in four-dimensional single-scalar DBI theory"
 type: software
 authors:
   - family-names: Suda
     given-names: Ryosuke
+repository-code: "https://github.com/ryos-physrockme/dbi-stress-tensor-flow"
+license: MIT
