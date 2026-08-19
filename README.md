@@ -6,8 +6,8 @@ The project combines an exploratory neural-network search with analytic derivati
 
 ## Repository structure
 
-- `paper/` — current Japanese manuscript source. An English submission version will be prepared after the Japanese draft is finalized.
-- `notes/` — detailed Japanese calculation notes with intermediate algebra and background explanations.
+- `paper/` — manuscript status and submission-related material. The current Japanese manuscript source will be synchronized after the public-review draft is frozen.
+- `notes/` — detailed calculation-note material and documentation.
 - `code/` — neural-network exploration, exact symbolic checks, and independent numerical validation.
 - `data/` — numerical outputs used to validate the exploratory and analytic calculations.
 
@@ -23,7 +23,7 @@ The repository contains code for:
 
 ## Status
 
-Work in progress. The manuscript is undergoing public review before preparation of an English preprint/submission version.
+Work in progress. The Japanese manuscript is undergoing public review before preparation of an English preprint/submission version.
 
 ## Author
 
