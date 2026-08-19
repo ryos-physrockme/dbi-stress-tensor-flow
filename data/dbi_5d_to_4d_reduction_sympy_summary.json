@@ -1,0 +1,15 @@
+{
+  "generic_5d_determinant_reduction": "exact zero",
+  "generic_D2_R_identity": "exact zero",
+  "elimination_of_R_without_lambda_derivative": "exact zero",
+  "reduced_5d_flow_equals_generic_4d_stress_only_formula": "exact zero",
+  "conversion_to_T_invariants": "exact zero",
+  "null_branch_discriminant": "exact square",
+  "exact_rational_matrix_examples": [
+    {"sector":"timelike","u_squared":"-1/16","D_squared":"690289/752640","5d_flow_minus_direct_4d_flow":"exact zero","det_I_minus_lambda_T5_minus_D":"exact zero","block_trace_relation":"exact zero","4d_stress_only_minus_direct_flow":"exact zero"},
+    {"sector":"spacelike","u_squared":"41/400","D_squared":"112202884727/102453120000","5d_flow_minus_direct_4d_flow":"exact zero","det_I_minus_lambda_T5_minus_D":"exact zero","block_trace_relation":"exact zero","4d_stress_only_minus_direct_flow":"exact zero"},
+    {"sector":"null","u_squared":"0","D_squared":"446246029/455347200","5d_flow_minus_direct_4d_flow":"exact zero","det_I_minus_lambda_T5_minus_D":"exact zero","block_trace_relation":"exact zero","4d_stress_only_minus_direct_flow":"exact zero"},
+    {"sector":"pure Born-Infeld","u_squared":"0","D_squared":"379222919/384199200","5d_flow_minus_direct_4d_flow":"exact zero","det_I_minus_lambda_T5_minus_D":"exact zero","block_trace_relation":"exact zero","4d_stress_only_minus_direct_flow":"exact zero"}
+  ],
+  "numerical_validation_csv": "data/reduction_5d_to_4d_validation.csv"
+}
