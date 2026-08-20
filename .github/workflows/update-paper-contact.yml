@@ -1,5 +1,6 @@
 name: One-shot paper contact update
 
+# Triggered once to update the title-page contact layout and rebuild the PDF.
 on:
   push:
     paths:
