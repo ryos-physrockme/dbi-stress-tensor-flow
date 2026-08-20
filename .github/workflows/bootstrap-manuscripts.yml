@@ -3,7 +3,7 @@ name: Bootstrap manuscript files
 on:
   pull_request:
     branches: [main]
-    types: [opened]
+    types: [opened, reopened]
 
 permissions:
   contents: write
@@ -21,9 +21,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p paper notes
-          base64 -d .github/bootstrap/paper_en.tex.gz.b64 | gzip -d > paper/paper_en.tex
-          base64 -d .github/bootstrap/paper_ja.tex.gz.b64 | gzip -d > paper/paper_ja.tex
-          base64 -d .github/bootstrap/calculation_note_ja.tex.gz.b64 | gzip -d > notes/calculation_note_ja.tex
+          cat .github/bootstrap/paper_en.part*.b64 | base64 -d | gzip -d > paper/paper_en.tex
+          cat .github/bootstrap/paper_ja.part*.b64 | base64 -d | gzip -d > paper/paper_ja.tex
+          cat .github/bootstrap/calculation_note_ja.part*.b64 | base64 -d | gzip -d > notes/calculation_note_ja.tex
 
       - name: Compile manuscripts with LuaLaTeX
         uses: xu-cheng/latex-action@v4
