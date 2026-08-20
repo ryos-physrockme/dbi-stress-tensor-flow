@@ -1,0 +1,794 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\geometry{top=23mm,bottom=25mm,left=24mm,right=24mm}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!50!black}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.12em}
+\numberwithin{equation}{section}
+
+\newcommand{\dd}{\mathrm d}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Lag}{\mathcal L}
+\newcommand{\G}{\mathcal G}
+\newcommand{\Id}{\mathbf 1}
+\newcommand{\eps}{\varepsilon}
+
+\title{1個の実スカラー場を含む4次元 Dirac--Born--Infeld 理論の\\stress-tensor flow}
+\author{須田 亮介 (Ryosuke Suda)\\[1mm]
+\small Graduate School of Science and Engineering, Saitama University,\\
+\small 255 Shimo-Okubo, Sakura-ku, Saitama 338-8570, Japan\\
+\small \texttt{r.suda.813@ms.saitama-u.ac.jp}}
+\date{日本語版原稿（公開レビュー稿）--- 2026年8月}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+4次元で Abelian gauge field と1個の実スカラー場を含む Dirac--Born--Infeld 理論を考え、Lagrangian を変形パラメータで微分して得られる量を stress tensor の局所的不変量だけで表す flow equation を導く。スカラー場の勾配が null でない場合には、有理式で書かれる表示が得られる。同じ式が4次元 DBI Lagrangian からの直接計算と、既知の5次元 Born--Infeld flow の次元還元の双方から得られる。スカラー場の勾配が null となる場合には、$X=0$ でも有限な別の表示を与え、スカラー場を取り除くと既知の4次元 Born--Infeld flow に帰着することを確認する。あわせて、この DBI 理論から得られる stress tensor の不変量が満たす代数関係を示す。
+\end{abstract}
+
+\noindent\textbf{キーワード:} Dirac--Born--Infeld theory; non-linear electrodynamics; stress-tensor deformation; D-branes
+
+\tableofcontents
+\bigskip
+
+\section{はじめに}
+
+非線形電磁気学は、Maxwell 理論の非線形拡張を通じて電磁双対性、因果性、波の伝播などを調べる場として長く研究されてきた。Born--Infeld (BI) 理論はその代表例であり、近年は conformal invariance と electromagnetic duality を同時に保つ ModMax 理論、その Born--Infeld 型拡張、複屈折を生じない理論の分類などを通じて4次元 non-linear electrodynamics (NLED) の構造が改めて調べられている\cite{BornInfeld1934,Bandos2020,Sorokin2021,Ferko2023Birefringence,Ferko2023Duality}。
+
+これらの研究と並行して、stress tensor から作られる局所演算子によって Lagrangian を変形する方法が発展してきた。その原型である2次元の $T\overline T$ deformation は、irrelevant deformation でありながら、可積分性を保つ場合があり、有限体積スペクトルなどを厳密に追うことができる\cite{SmirnovZamolodchikov2016}。高次元への一般化は一意ではないが、BI、ModMax--BI、brane action などについて、変形パラメータに沿った Lagrangian の変化を stress tensor の不変量で表す flow equation が見いだされている\cite{Taylor2018,Ferko2022,Conti2022,Ferko2023Duality,Brizio2026}。
+
+Gauge field と worldvolume scalar を同時に含む Dirac--Born--Infeld (DBI) 理論では事情が複雑になる。一般の次元では、Lagrangian を変形パラメータで微分した量に field strength や scalar gradient から作られる不変量が現れ、それらが stress tensor だけから復元できるとは限らない。Blair--Lahnsteiner--Obers--Yan は D$p$-brane DBI action を生成する flow を調べ、gauge field を含む完全な flow equation を $p=1,2$ について得た一方、4次元 worldvolume に対応する $p=3$ では変形パラメータの一次までの結果を与えた\cite{Blair2025}。Brizio--Kade--Sfondrini--Sorokin は BI 理論の stress-tensor flow を一般次元で導き、DBI 理論については2次元と3次元を詳しく解析した\cite{Brizio2026}。同論文では、$d\geq4$ の DBI flow を今後の課題として挙げ、とくに4次元で実スカラー場が1個の場合には、変形を stress tensor の scalar invariants だけで書ける可能性があると指摘している。 また Ferko--Hu--Huang--Koutrolikos--Tartaglino-Mazzucchelli は、3次元 Born--Infeld 理論と DBI の scalar sector に対する stress-tensor-like flow を構成し、gauge field と scalar を同時に含む full DBI action を flow から得る問題を自然な次の課題として挙げている\cite{Ferko2024DBI}。
+
+そこで本稿では、4次元で1個の実スカラー場を含む DBI 理論を取り上げる。解析計算に先立ち、DBI Lagrangian を変形パラメータで微分して得た量を、同じ場配置から得られる stress tensor から作られる4個の scalar invariants で回帰した。ニューラルネットワークは独立な test data に対してもこの量を小さい誤差で再現し、stress tensor の不変量だけを入力として変形パラメータ微分を予測できることを示した。続いて同じ数値データに単純な有理式を当てはめ、後に解析的に導出する式の候補を得た。
+
+この数値結果を手掛かりとして、4次元 DBI Lagrangian から flow equation を解析的に導出する。計算の途中では field strength と scalar gradient から作られる不変量が現れるが、4次元の反対称行列が満たす恒等式を用いると、それらを stress tensor の不変量だけで書き直すことができる。さらに、既知の5次元 Born--Infeld flow を次元還元して同じ4次元式を導く。スカラー場の勾配が null となる場合には一般式の分母が消えるため、この場合を別に扱い、Born--Infeld 理論だけを残す極限も確認する。数値探索の設定は付録\ref{app:numerical-search}にまとめ、以下の解析では数値的に得た候補式を仮定しない。
+
+以下で扱う flow equation はすべて古典 Lagrangian に対する flow であり、4次元における量子変形の定義は仮定しない。
+
+本稿の構成は次の通りである。第\ref{sec:dbi}節で4次元 DBI 理論と stress tensor の規約を定める。第\ref{sec:flow}節で4次元 DBI Lagrangian から flow equation を導き、既存の $p=3$ の摂動的結果との関係を確認する。第\ref{sec:reduction}節では5次元 Born--Infeld 理論から同じ式を次元還元によって導く。第\ref{sec:null}節でスカラー場の勾配が null の場合と Born--Infeld 極限を扱い、第\ref{sec:constraint}節で stress tensor の不変量が満たす代数関係を述べる。第\ref{sec:discussion}節で結果をまとめ、その意味と今後の展開を議論する。
+
+\section{4次元 DBI 理論}
+\label{sec:dbi}
+
+まず、4次元で1個の実スカラー場を含む DBI 理論の規約を定める。本節では作用と Hilbert stress tensor を導入する。次節以降では stress tensor の characteristic polynomial を用いるため、添字を一つ上げた mixed tensor $T^\mu{}_{\nu}$ と $T_{\mu\nu}$ を区別して書く。
+
+\subsection{規約と作用}
+
+時空の metric signature を $(-,+,+,+)$ とする。4次元の canonical normalization では $[\lambda]=-4$ であり、以下では DBI の実分枝を記述するため $\lambda>0$ とする。得られる代数式は平方根が定義される範囲で解析接続できる。Abelian gauge potential を $A_\mu$ とし、field strength を
+\begin{equation}
+ F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu
+ \label{eq:F-definition}
+\end{equation}
+で定義する。実スカラー場を $\phi$ とする。変形パラメータ $\lambda$ を含む4次元 DBI 作用を
+\begin{equation}
+ I_\lambda=\int\dd^4x\sqrt{-g}\,\Lag_\lambda,
+ \qquad
+ \Lag_\lambda=\frac{1-\Delta}{\lambda}
+ \label{eq:action}
+\end{equation}
+と書く。ここで
+\begin{equation}
+ \G_{\mu\nu}
+ =g_{\mu\nu}+\lambda\,\partial_\mu\phi\,\partial_\nu\phi
+ +\sqrt\lambda F_{\mu\nu},
+ \qquad
+ \Delta=\sqrt{\frac{\det\G}{\det g}}
+ \label{eq:dbi-matrix}
+\end{equation}
+であり、平方根は $\lambda\to0$ で $\Delta\to1$ となる分枝を選ぶ。
+
+スカラー場の勾配の Lorentz norm を
+\begin{equation}
+ X=\partial_\mu\phi\,\partial^\mu\phi
+ \label{eq:X-definition}
+\end{equation}
+と書く。また、$\lambda\to0$ 極限を確認するため、NLED の標準的な不変量
+\begin{equation}
+ S=-\frac14F_{\mu\nu}F^{\mu\nu}
+ \label{eq:S-definition}
+\end{equation}
+を用いる。式\eqref{eq:dbi-matrix}を $\lambda$ のまわりで展開すると
+\begin{equation}
+ \Lag_\lambda=S-\frac12X+O(\lambda)
+ \label{eq:seed}
+\end{equation}
+となる。
+したがって $\lambda=0$ では、Maxwell field と free massless scalar からなる理論に戻る。
+
+\subsection{Stress tensor}
+
+flow equation を stress tensor の不変量で記述するため、まず DBI 作用に対応する Hilbert stress tensor を求める。Hilbert stress tensor を
+\begin{equation}
+ T_{\mu\nu}
+ =-\frac{2}{\sqrt{-g}}\frac{\delta I_\lambda}{\delta g^{\mu\nu}}
+ \label{eq:stress-definition}
+\end{equation}
+で定義する。式\eqref{eq:action}を metric で変分すると
+\begin{equation}
+ T^{\mu\nu}
+ =\frac1\lambda
+ \left[g^{\mu\nu}-\Delta(\G^{-1})^{(\mu\nu)}\right],
+ \qquad
+ (\G^{-1})^{(\mu\nu)}
+ =\frac12\left[(\G^{-1})^{\mu\nu}+(\G^{-1})^{\nu\mu}\right]
+ \label{eq:stress-dbi}
+\end{equation}
+を得る。以下、stress tensor の行列不変量を取るときには mixed tensor
+\begin{equation}
+ T^\mu{}_{\nu}=g^{\mu\rho}T_{\rho\nu}
+ \label{eq:mixed-T}
+\end{equation}
+を用いる。
+
+式\eqref{eq:stress-dbi}が、以後の計算で用いる stress tensor の表示である。次節では、同じ場配置に対する $\partial_\lambda\Lag_\lambda$ を計算し、その結果を $T^\mu{}_{\nu}$ の不変量だけで書き直す。
+
+\section{4次元の flow equation}
+\label{sec:flow}
+
+本節では、metric、field strength、scalar gradient を固定して4次元 DBI Lagrangian を変形パラメータ $\lambda$ で微分し、その結果を stress tensor の不変量で表す。最初に必要な不変量を定義し、解析式を探す際に用いた数値探索を短く説明する。その後、数値的に得た候補を仮定せず、DBI Lagrangian から flow equation を導く。
+
+metric $g_{\mu\nu}$、field strength $F_{\mu\nu}$、および scalar gradient $\partial_\mu\phi$ を固定したまま $\Lag_\lambda$ を $\lambda$ で微分し、
+\begin{equation}
+ Q_\lambda\equiv
+ \left.\frac{\partial\Lag_\lambda}{\partial\lambda}\right|_{g_{\mu\nu},\,F_{\mu\nu},\,\partial_\mu\phi}
+ \label{eq:Q-definition}
+\end{equation}
+と書く。以下では $Q_\lambda$ を式\eqref{eq:stress-dbi}から作られる不変量だけで表す。
+
+まず
+\begin{equation}
+ M^\mu{}_{\nu}=\delta^\mu{}_{\nu}-\lambda T^\mu{}_{\nu}
+ \label{eq:M-definition}
+\end{equation}
+を導入する。4次元行列 $N$ の elementary symmetric polynomials $e_k(N)$ は
+\begin{equation}
+ \det(z\Id-N)
+ =z^4-e_1(N)z^3+e_2(N)z^2-e_3(N)z+e_4(N)
+ \label{eq:elementary-definition}
+\end{equation}
+によって定義し、$M$ に対しては $E_k=e_k(M)$ と略記する。
+
+これらの量を用いた数値探索では、$X\neq0$ かつ scalar gradient が timelike である領域を対象とし、ランダムに生成した DBI 場配置から $(E_1,E_2,E_3,E_4)$ と $\lambda^2Q_\lambda$ を計算し、
+\begin{equation}
+ (E_1,E_2,E_3,E_4)\longmapsto \lambda^2Q_\lambda
+ \label{eq:numerical-clue}
+\end{equation}
+をニューラルネットワークで回帰した。独立な test data に対しても小さい誤差で $Q_\lambda$ を予測できたことから、$Q_\lambda$ がこれらの不変量だけの関数として表せる可能性が示唆された。network architecture、loss、候補となる有理式を抽出した手順は付録\ref{app:numerical-search}に示す。以下ではこの数値結果を仮定せずに計算を進める。
+
+4次元の反対称 $4\times4$ 行列 $F^\mu{}_{\nu}$ に対して、Cayley--Hamilton 恒等式は以下の形に簡約される。その式に現れる pseudoscalar invariant を
+\begin{equation}
+ P=-\frac14F_{\mu\nu}\widetilde F^{\mu\nu},
+ \qquad
+ \widetilde F^{\mu\nu}
+ =\frac{1}{2\sqrt{-g}}\eps^{\mu\nu\rho\sigma}F_{\rho\sigma},
+ \qquad \eps^{0123}=+1
+ \label{eq:P-definition}
+\end{equation}
+と定義する。式\eqref{eq:S-definition}の $S$ とこの $P$ を用いると
+\begin{equation}
+ (\sqrt\lambda F)^4-2\lambda S(\sqrt\lambda F)^2-\lambda^2P^2\Id=0
+ \label{eq:F-characteristic-main}
+\end{equation}
+を満たす。また、invertible matrix $A$ と column vectors $u,v$ に対して
+
+\begin{equation}
+ \det(A+uv^{\mathsf T})=\det A\left(1+v^{\mathsf T}A^{-1}u\right)
+ \label{eq:rank-one-det-main}
+\end{equation}
+を用いる。式\eqref{eq:stress-dbi}をこの二つの関係で整理すると、まず
+\begin{equation}
+ E_4=\det M=1+\lambda X
+ \label{eq:E4}
+\end{equation}
+が得られる。行列積を展開した導出は付録\ref{app:matrix-identities}に示す。$E_1$ と $E_3$ の中間表式には、gauge field と scalar gradient をともに含む scalar
+\begin{equation}
+ Z=\partial_\mu\phi\,F^\mu{}_{\rho}F^\rho{}_{\nu}\,\partial^\nu\phi
+ \label{eq:Z-definition}
+\end{equation}
+を用いる。$Z$ は以下の中間計算にのみ現れる。式\eqref{eq:F-characteristic-main}と式\eqref{eq:rank-one-det-main}を DBI matrix に適用すると
+\begin{align}
+ \Delta^2
+ &=1+\lambda X-2\lambda S
+ +\lambda^2\left(Z-2SX-P^2\right),
+ \label{eq:delta-fields}\\
+ \Delta E_1
+ &=4+3\lambda X-4\lambda S+\lambda^2(Z-2SX),
+ \label{eq:E1-fields}\\
+ \Delta E_3
+ &=(1+\lambda X)(4+\lambda X-4\lambda S)+\lambda^2Z
+ \label{eq:E3-fields}
+\end{align}
+が従う。
+
+一方、式\eqref{eq:action}から
+\begin{equation}
+ \lambda^2Q_\lambda
+ =\Delta-1-\lambda\frac{\partial\Delta}{\partial\lambda}
+ \label{eq:Q-delta}
+\end{equation}
+である。式\eqref{eq:delta-fields}を微分すると
+\begin{equation}
+ 2\Delta\left(1+\lambda^2Q_\lambda\right)
+ =2+\lambda X-2\lambda S
+ \label{eq:Q-field-relation}
+\end{equation}
+となる。また式\eqref{eq:E1-fields}と\eqref{eq:E3-fields}の差を取り、式\eqref{eq:E4}を用いると
+\begin{equation}
+ E_1-E_3
+ =2(1-E_4)\left(1+\lambda^2Q_\lambda\right)
+ \label{eq:undivided-flow}
+\end{equation}
+を得る。この等式は $X=0$ の場合にも成立しており、後の第\ref{sec:null}節でも用いる。
+
+$X\neq0$ では式\eqref{eq:E4}より $E_4\neq1$ であるため、式\eqref{eq:undivided-flow}を $Q_\lambda$ について解くことができる。
+\begin{equation}
+ \lambda^2Q_\lambda
+ =\frac{E_1-E_3+2E_4-2}{2(1-E_4)}.
+ \label{eq:flow-E}
+\end{equation}
+最後に $M=\Id-\lambda T$ を用いて $E_k$ を $T^\mu{}_{\nu}$ の不変量へ戻す。$e_1(T)=\tr T$、$e_4(T)=\det T$ とすると
+\begin{align}
+ E_1&=4-\lambda\tr T,\nonumber\\
+ E_3&=4-3\lambda\tr T+2\lambda^2e_2(T)-\lambda^3e_3(T),\nonumber\\
+ E_4&=1-\lambda\tr T+\lambda^2e_2(T)-\lambda^3e_3(T)+\lambda^4\det T.
+ \label{eq:E-to-T}
+\end{align}
+したがって
+\begin{equation}
+ Q_\lambda
+ =\frac{2\lambda\det T-e_3(T)}
+ {2\left[\tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T\right]}
+ \label{eq:main-flow}
+\end{equation}
+となる。また式\eqref{eq:E4}と\eqref{eq:E-to-T}を比較すれば
+\begin{equation}
+ \tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T=-X
+ \label{eq:denominator-X}
+\end{equation}
+である。式\eqref{eq:main-flow}は $X\neq0$ の領域を表し、$X=0$ では第\ref{sec:null}節の表示を用いる。
+
+最後に弱変形極限を確認する。$X\neq0$ の seed configuration では、式\eqref{eq:main-flow}から
+\begin{equation}
+ Q_0=-\frac{e_3(T_0)}{2\tr T_0}
+ \label{eq:leading-flow}
+\end{equation}
+を得る。ここで $T_0$ は式\eqref{eq:seed}の Maxwell--scalar theory の stress tensor である。
+
+Blair--Lahnsteiner--Obers--Yan は変形パラメータを $t$ と書いている\cite{Blair2025}。彼らの flat worldvolume の DBI Lagrangian において $p=3$、実スカラー場1個とし、$t=\lambda$、$X^{A'}=\phi$ と同定すると、4次元 determinant から $t^{-1}$ をくくり出すことで式\eqref{eq:action}と同じ規格化になる。この規約のもとで、彼らの $p=3$ flow の $t^0$ 項は、mixed matrix $F^\mu{}_{\nu}$ を用いて
+\begin{equation}
+ Q_0
+ =\frac14\tr(T_0^2)-\frac18(\tr T_0)^2
+ -\frac18\left[\tr(F^4)-\frac14\bigl(\tr F^2\bigr)^2\right]
+ \label{eq:blair-leading}
+\end{equation}
+と書ける。Maxwell--scalar stress tensor を代入すると、式\eqref{eq:leading-flow}と式\eqref{eq:blair-leading}は一致する。$X=0$ では式\eqref{eq:main-flow}自体を用いず、第\ref{sec:null}節の表示から弱変形極限を取る。
+
+式\eqref{eq:main-flow}は変形パラメータの全次数にわたる式であり、その $\lambda\to0$ 極限は既知の $p=3$ の摂動的結果と一致する。以上の導出は4次元 DBI Lagrangian だけから得られた。一方、DBI 作用そのものは高次元 Born--Infeld 作用の次元還元から得られる。次節では flow equation に対しても同じ関係が成り立つことを確認する。
+
+\section{5次元 Born--Infeld 理論からの次元還元}
+\label{sec:reduction}
+
+前節では4次元 DBI Lagrangian を $\lambda$ で微分して flow equation を得た。ここでは同じ式を、既知の5次元 Born--Infeld flow から導く。compact direction に沿った gauge potential の成分は4次元から見ると scalar field になるため、5次元 Born--Infeld 作用を1方向に次元還元すると、本稿で扱う4次元 DBI 作用が得られる。以下では、まず作用の次元還元を確認し、その後に5次元の flow equation を4次元へ還元する。
+
+5次元量には hat を付ける。compact coordinate を $y$ とし、$y\sim y+L_y$ とする。本稿で用いるのは一般の Kaluza--Klein 還元ではなく、$\widehat g_{\mu y}=0$、$\widehat g_{yy}=1$ とし、Kaluza--Klein vector と radion の揺らぎを含めない product background 上の zero-mode truncation である。すべての場を $y$ に依存しないものとする。
+
+次元還元の前後で canonical normalization を保つため、5次元の変形パラメータを $\widehat\lambda$ と書き、4次元の zero mode を
+\begin{equation}
+ \lambda=\frac{\widehat\lambda}{L_y},
+ \qquad
+ A_\mu=\sqrt{L_y}\,\widehat A_\mu,
+ \qquad
+ \phi=\sqrt{L_y}\,\widehat A_y
+ \label{eq:reduction-rescaling}
+\end{equation}
+で定義する。従って canonical normalization では
+$[\widehat\lambda]=-5$、$[\lambda]=-4$ であり、
+$\widehat F_{\mu\nu}=F_{\mu\nu}/\sqrt{L_y}$、
+$\widehat F_{\mu y}=\partial_\mu\phi/\sqrt{L_y}$ となる。
+
+metric と BI matrix を
+\begin{equation}
+ \widehat g_{MN}
+ =\begin{pmatrix}g_{\mu\nu}&0\\0&1\end{pmatrix},
+ \qquad
+ \widehat\G_{MN}=\widehat g_{MN}+\sqrt{\widehat\lambda}\,\widehat F_{MN}
+ \label{eq:5d-G}
+\end{equation}
+とする。5次元の作用と determinant factor を
+\begin{equation}
+ \widehat I_{\widehat\lambda}
+ =\int\dd^5x\sqrt{-\widehat g}\,\widehat\Lag_{\widehat\lambda},
+ \qquad
+ \widehat\Lag_{\widehat\lambda}
+ =\frac{1-\widehat\Delta}{\widehat\lambda},
+ \qquad
+ \widehat\Delta=\sqrt{\frac{\det\widehat\G}{\det\widehat g}}
+ \label{eq:5d-action}
+\end{equation}
+で定義する。また、5次元の Hilbert stress tensor は
+\begin{equation}
+ \widehat T_{MN}=-\frac{2}{\sqrt{-\widehat g}}
+ \frac{\delta\widehat I_{\widehat\lambda}}{\delta\widehat g^{MN}},
+ \qquad
+ \widehat T^M{}_{N}=\widehat g^{MP}\widehat T_{PN}
+ \label{eq:5d-stress}
+\end{equation}
+とする。式\eqref{eq:reduction-rescaling}を用いると zero-mode の BI matrix は
+\begin{equation}
+ \widehat\G
+ =\begin{pmatrix}
+ g+\sqrt\lambda F&\sqrt\lambda\,\partial\phi\\
+ -\sqrt\lambda\,(\partial\phi)^{\mathsf T}&1
+ \end{pmatrix}.
+ \label{eq:5d-block}
+\end{equation}
+右下の block が1であるため、次の determinant formula を用いることができる。
+\begin{equation}
+ \det\begin{pmatrix}A&b\\ c^{\mathsf T}&1\end{pmatrix}
+ =\det\left(A-bc^{\mathsf T}\right)
+ \label{eq:schur-explicit}
+\end{equation}
+式\eqref{eq:5d-block}に適用すると
+\begin{equation}
+ \det\widehat\G
+ =\det\left(g+\sqrt\lambda F
+ +\lambda\,\partial\phi\,(\partial\phi)^{\mathsf T}\right)
+ =\det\G
+ \label{eq:schur-action}
+\end{equation}
+となる。$y$ 積分から生じる $L_y$ と
+$\widehat\lambda=L_y\lambda$ を合わせると
+$\widehat I_{\widehat\lambda}=I_\lambda$ となり、式\eqref{eq:action}の4次元作用が得られる。metric variation から4次元 block について
+$T^\mu{}_{\nu}=L_y\,\widehat T^\mu{}_{\nu}$ であり、
+$\widehat\lambda\,\widehat T^\mu{}_{\nu}=\lambda T^\mu{}_{\nu}$ となる。
+
+flow equation の還元では逆行列も必要になる。式\eqref{eq:5d-block}と同じ Schur complement を用いると
+\begin{equation}
+ \widehat\G^{-1}
+ =\begin{pmatrix}
+ \G^{-1} & -\sqrt\lambda\,\G^{-1}\partial\phi\\
+ \sqrt\lambda\,(\partial\phi)^{\mathsf T}\G^{-1}
+ &1-\lambda(\partial\phi)^{\mathsf T}\G^{-1}\partial\phi
+ \end{pmatrix}.
+ \label{eq:5d-block-inverse}
+\end{equation}
+また4次元の場合と同様に
+\begin{equation}
+ \widehat M^M{}_{N}\equiv\delta^M{}_{N}
+ -\widehat\lambda\,\widehat T^M{}_{N}
+ =\widehat\Delta\,(\widehat\G^{-1})^{(MP)}\widehat g_{PN}
+ \label{eq:Mhat-definition}
+\end{equation}
+である。式\eqref{eq:schur-action}より $\widehat\Delta=\Delta$ なので、式\eqref{eq:5d-block-inverse}を用いれば5次元の trace と determinant を4次元量に直接書き下せる。
+
+5次元 BI 理論については、次の stress-tensor flow が知られている\cite{Brizio2026}。
+\begin{equation}
+ \frac{\partial\widehat\Lag_{\widehat\lambda}}{\partial\widehat\lambda}
+ =\frac{1}{4\widehat\lambda^2}
+ -\frac{1}{4\widehat\lambda}\tr\widehat T
+ -\frac{1}{4\widehat\lambda^2}
+ \det(\Id_5-\widehat\lambda\widehat T).
+ \label{eq:5d-flow}
+\end{equation}
+$\Lag_\lambda=L_y\widehat\Lag_{\widehat\lambda}$、
+$\widehat\lambda=L_y\lambda$ であり、$L_y$ と4次元場を固定して微分すれば
+\begin{equation}
+ \lambda^2Q_\lambda
+ =\widehat\lambda^2
+ \frac{\partial\widehat\Lag_{\widehat\lambda}}{\partial\widehat\lambda}
+ \label{eq:dimensionless-flow-reduction}
+\end{equation}
+となる。式\eqref{eq:5d-block-inverse}を式\eqref{eq:Mhat-definition}へ代入し、4次元 stress tensor の式\eqref{eq:stress-dbi}を用いると
+\begin{align}
+ \det(\Id_5-\widehat\lambda\widehat T)&=\Delta,
+ \label{eq:det-Mhat}\\
+ \tr(\Id_5-\widehat\lambda\widehat T)
+ &=E_1+\Delta\left[1-
+ \lambda\,\partial_\mu\phi(\G^{-1})^{(\mu\nu)}\partial_\nu\phi\right].
+ \label{eq:trace-Mhat}
+\end{align}
+従って式\eqref{eq:5d-flow}--\eqref{eq:trace-Mhat}は
+\begin{equation}
+ \lambda^2Q_\lambda
+ =\frac14\left[E_1-4-
+ \Delta\lambda\,\partial_\mu\phi(\G^{-1})^{(\mu\nu)}\partial_\nu\phi\right]
+ \label{eq:reduced-before-elimination}
+\end{equation}
+へ還元される。
+
+式\eqref{eq:reduced-before-elimination}には、まだ $\partial_\mu\phi$ と $\G^{-1}$ を含む scalar が残っている。この量は4次元 stress tensor の不変量を用いて消去できる。式\eqref{eq:E1-fields}、\eqref{eq:E3-fields}、\eqref{eq:E4}を整理すると
+\begin{equation}
+ (E_4-1)\Delta\lambda\,
+ \partial_\mu\phi(\G^{-1})^{(\mu\nu)}\partial_\nu\phi
+ =E_1(1+E_4)-2E_3
+ \label{eq:elimination}
+\end{equation}
+となる。$X\neq0$ では式\eqref{eq:elimination}を式\eqref{eq:reduced-before-elimination}へ代入すると、前節の式\eqref{eq:flow-E}が再び得られる。この導出では4次元 Lagrangian を $\lambda$ で微分する計算を用いていない。したがって、5次元 Born--Infeld flow の次元還元から同じ4次元 flow equation を得る別の導出になっている。
+
+前節と本節では、最終式を得る際に $1-E_4$ で割った。式\eqref{eq:E4}によれば、この操作ができないのは $X=0$ の場合である。次節では、この場合の flow equation を別に求める。
+
+\section{スカラー場の勾配が null の場合}
+\label{sec:null}
+
+前二節で得た式\eqref{eq:flow-E}は $X\neq0$ を仮定していた。式\eqref{eq:E4}から $X=0$ と $E_4=1$ は同値であり、このとき式\eqref{eq:flow-E}の分子と分母はともに0になる。本節では、$1-E_4$ で割る前の関係式\eqref{eq:undivided-flow}と characteristic polynomial を用いて、$X=0$ でも有限な表示を求める。
+
+4次元で実スカラー場が1個の DBI 理論では $M$ の characteristic polynomial が二つの二次式に分解する。詳細は付録\ref{app:matrix-identities}に示す。この因数分解を $X=0$ で用いると、$Q_\lambda$ は
+\begin{equation}
+ \lambda^2Q_\lambda
+ =\frac14\left[E_1+\sqrt{E_1^2-4E_2+8}\right]-1
+ \label{eq:null-E}
+\end{equation}
+と書ける。平方根は $X\neq0$ の DBI 分枝から連続する符号を選ぶ。$E_1,E_2$ を stress tensor の traces に戻せば
+\begin{equation}
+ Q_\lambda
+ =\frac{-\lambda\tr T+
+ \sqrt{4\lambda\tr T+\lambda^2\left[2\tr(T^2)-(\tr T)^2\right]}}
+ {4\lambda^2}
+ \label{eq:null-T}
+\end{equation}
+となる。
+
+さらに $\partial_\mu\phi=0$ とすると4次元 Born--Infeld 理論に戻る。この場合、式\eqref{eq:null-E}は
+\begin{equation}
+ Q_\lambda=-\frac{1}{4\lambda}\tr T
+ \label{eq:pure-BI}
+\end{equation}
+へ簡約される。これは既知の4次元 BI flow と一致する\cite{Ferko2022,Brizio2026}。したがって $X=0$ の場合にも stress tensor の不変量だけによる flow equation が得られ、$\partial_\mu\phi=0$ では既知の Born--Infeld flow に連続的に帰着する。
+
+以上で $X\neq0$ と $X=0$ の両方を扱った。ここまで $E_1,E_2,E_3,E_4$ を4個の変数として用いてきたが、DBI の stress tensor から得られるこれらの量の間には代数関係がある。次節でその関係を導く。
+
+\section{Stress tensor の不変量が満たす代数関係}
+\label{sec:constraint}
+
+前節までの flow equation は $E_k=e_k(\Id-\lambda T)$ を用いて記述した。これら4個の量の間に関係があるかどうかは、stress tensor の不変量だけによる表示を理解するうえで重要である。本節では、$M=\Id-\lambda T$ の characteristic polynomial の因数分解から、$E_k$ が満たす一つの代数関係を導く。
+
+付録\ref{app:matrix-identities}で用いる characteristic polynomial の因数分解から、$E_1,E_2,E_3,E_4$ の間に
+\begin{align}
+ (E_4-1)^2E_2={}&-E_1^2E_4+E_1E_3(E_4+1)-E_3^2\nonumber\\
+ &+E_4^3-E_4^2-E_4+1
+ \label{eq:algebraic-relation}
+\end{align}
+が成り立つ。従って、DBI の場配置から得られる4個の $E_k$ は独立ではない。
+
+式\eqref{eq:algebraic-relation}により、DBI の場配置から得られる $(E_1,E_2,E_3,E_4)$ はこの代数方程式を満たし、4変数を独立に選ぶことはできない。式\eqref{eq:main-flow}は、この制約のもとで $Q_\lambda$ を stress tensor の不変量だけから与える。したがって、利用できる不変量の個数を数えるだけでは、今回の flow equation の存在は導けない。
+式\eqref{eq:algebraic-relation}は、4次元 DBI の stress tensor が取り得る不変量に対する明示的な制約も与えている。また、この代数関係の左辺と右辺の差は DBI の場配置上で恒等的に零になるため、その任意の関数倍を deformation operator の表示に加えても DBI 上での flow は変わらない。したがって、stress tensor の不変量を用いた flow operator の代数表示は、この制約を考慮すると一意ではない。
+
+\section{まとめと議論}
+\label{sec:discussion}
+
+1個の実スカラー場と Abelian gauge field を含む4次元 DBI 理論について、$\partial\Lag_\lambda/\partial\lambda$ を stress tensor の局所的不変量だけで表す式を求めた。$X\neq0$ では式\eqref{eq:main-flow}が成り立ち、4次元 DBI Lagrangian からの直接計算と、5次元 Born--Infeld flow の次元還元の双方から同じ式が得られる。$X=0$ の場合には式\eqref{eq:null-T}が有限な表示を与え、Born--Infeld 極限は既知の4次元 Born--Infeld flow に帰着する。
+
+今回の結果の直接的な意義は、4次元における stress-tensor flow の構造を調べるための具体的な例を与えることにある。4次元 NLED では、stress tensor を用いた flow が electromagnetic duality を保つ理論族を整理する手段として用いられている\cite{Ferko2023Duality,Ferko2023Birefringence}。本研究は、gauge field と worldvolume scalar が同時に存在する場合にも、少なくとも4次元で実スカラー場が1個の DBI 理論では stress tensor の不変量だけによる記述が成立することを示している。この意味で、ref.~\cite{Ferko2024DBI} で今後の課題として挙げられた gauge-plus-scalar DBI flow に対する4次元 single-scalar の具体例を与えている。$\lambda=0$ の seed theory は Maxwell 理論と自由な質量ゼロスカラー場であるため、式\eqref{eq:main-flow}と式\eqref{eq:seed}の初期条件、および $X=0$ における表示を与えたときに、適切な局所 Lagrangian のクラスの中で DBI 理論が一意に再構成されるかを調べることは自然な次の問題である。一意性が示されれば、今回の flow equation は stress tensor を用いた DBI 理論の別の特徴付けを与えることになる。
+
+次元還元による導出にも一般化の余地がある。Brizio らは一般次元の Born--Infeld 理論、および2次元と3次元の DBI 理論について stress-tensor flow を導いている\cite{Brizio2026}。本研究の5次元から4次元への還元は、高次元 Born--Infeld flow が低次元 DBI flow へ移る別の具体例であるが、その際には field strength への明示的な依存を stress tensor の不変量へ消去できることが必要であった。したがって、高次元理論からの次元還元を手掛かりとして、どの次元・場の内容で stress tensor だけの表示が可能になるかを分類することが考えられる。式\eqref{eq:algebraic-relation}の代数関係もこの問題に関係する。DBI の場配置上で零になる関係式だけ異なる stress-tensor expression は同じ flow を与えるため、候補となる flow operator を比較するときにはこのような代数関係を考慮する必要がある。
+
+複数の worldvolume scalar を含む場合には本稿で用いた rank-one 構造が失われ、他の時空次元では二形式の代数構造も変化する。この二点はいずれも、$F_{\mu\nu}$ を明示的に含む不変量の消去を妨げ得る。そのため、multi-scalar DBI や他次元で stress-tensor-only の flow が成立する条件を系統的に調べることは具体的な拡張である。また、4次元 NLED では stress-tensor flow と electromagnetic duality、supersymmetric extension の関係が調べられているため\cite{Ferko2023Birefringence,Ferko2023Duality}、今回の bosonic flow が gauge sector の duality とどのように両立するか、あるいは supersymmetric DBI の current multiplet を用いた flow に埋め込めるかも検討できる。
+
+数値探索の観点では、今回の4次元 single-scalar DBI は、数値探索から exact relation に到達できることが分かっている制御されたテストケースとして利用できる。より複雑な DBI 理論について、まず deformation parameter 微分が stress tensor の不変量の関数として一価に近いかを数値的に調べ、その後に解析的な消去可能性を検討する、という手順を同じ形で適用できる。本稿の結果は、そのような探索が exact relation に到達し得る一例を与えている。
+
+本稿で扱ったのは古典 Lagrangian の flow である。4次元においてこの関係に有用な量子的解釈が存在するかどうかは別の問題である。
+
+\section*{謝辞}
+\paragraph{生成AIの利用に関する申告.} 本研究では OpenAI ChatGPT を、研究方針の探索、数値計算および記号計算コードの作成補助、文献検索、ならびに原稿の構成と推敲に使用した。科学的主張に用いた解析計算、数値計算および引用は著者が検証しており、本稿の内容に関する責任は著者にある。
+
+\section*{データの利用可能性}
+本研究では外部の実験データまたは観測データを使用していない。数値計算によって生成した検証データは、以下のコードリポジトリに収録している。
+
+\section*{コードの利用可能性}
+数値探索、解析式の検証、および5次元から4次元への次元還元の検算に用いたコードと数値出力は、\url{https://github.com/ryos-physrockme/dbi-stress-tensor-flow} で公開している。リポジトリの \texttt{code/} 以下のコードには MIT License を適用する。
+
+\appendix
+
+\section{ニューラルネットワークによる数値探索}
+\label{app:numerical-search}
+
+解析計算に先立ち、$Q_\lambda$ を stress tensor の不変量だけから予測できるかを数値的に調べた。flat metric $\eta=\mathrm{diag}(-1,1,1,1)$ 上で
+\begin{equation}
+ a_\mu=\sqrt\lambda\,\partial_\mu\phi,
+ \qquad
+ b_{\mu\nu}=\sqrt\lambda\,F_{\mu\nu}
+ \label{eq:dimensionless-fields-nn}
+\end{equation}
+と無次元化する。timelike scalar gradient の領域では Lorentz transformation により $a_\mu=(a,0,0,0)$ とでき、残る空間回転を用いて $b_{\mu\nu}$ の独立な成分を3個に減らせる。本探索では
+\begin{equation}
+ b_{01}=e,\qquad b_{23}=p,\qquad b_{31}=b
+\end{equation}
+を非零成分として用いた。sample は一様分布
+\begin{equation}
+ a\in[0.18,0.72],\quad
+ e\in[-0.42,0.42],\quad
+ p,b\in[-0.52,0.52]
+ \label{eq:nn-sampling-range}
+\end{equation}
+から生成した。DBI の平方根が実数となる分枝に限定し、$\Delta<0.30$、$|1-E_4|<5\times10^{-3}$、または $|\lambda^2Q_\lambda|>2$ となる点は、最初の回帰を安定に行うため training sample から除いた。
+
+各場配置について DBI Lagrangian と stress tensor を直接計算し、
+\begin{equation}
+ \bm{x}=(E_1,E_2,E_3,E_4)\in\mathbb R^4,
+ \qquad
+ y=\lambda^2Q_\lambda\in\mathbb R
+ \label{eq:nn-data}
+\end{equation}
+を作った。ニューラルネットワークが表す写像は
+\begin{equation}
+ f_\theta:\mathbb R^4\longrightarrow\mathbb R,
+ \qquad
+ (E_1,E_2,E_3,E_4)\longmapsto f_\theta(E_1,E_2,E_3,E_4)\simeq\lambda^2Q_\lambda
+ \label{eq:nn-map}
+\end{equation}
+である。入力と target は training set の平均と標準偏差で標準化した。標準化後の第 $n$ sample を $\widetilde{\bm{x}}_n,\widetilde y_n$ とすると、training で最小化した loss は
+\begin{equation}
+ \mathcal J(\theta)
+ =\frac1{N_{\mathrm{train}}}
+ \sum_{n\in\mathcal D_{\mathrm{train}}}
+ \left[f_\theta(\widetilde{\bm{x}}_n)-\widetilde y_n\right]^2
+ \label{eq:nn-loss}
+\end{equation}
+という平均二乗誤差である。既知の flow equation や解析候補は loss に加えていない。
+
+Network は $4$--$64$--$64$--$64$--$1$ の fully connected network とし、hidden layer の activation に $\tanh$ を用いた。18,000個の場配置の80\%を training、20\%を test に分け、Adam optimizer、learning rate $2\times10^{-3}$、batch size 512、260 epochs で学習した。test set における RMS error は $7.31\times10^{-4}$、相対 $L^2$ 誤差は $1.37\times10^{-2}$ であった。
+
+NNの結果から解析式を読み取るため、training data とは独立に生成した12,000個の同じ canonical-frame configurations に対し、最初の単純な候補として numerator と denominator がともに $E_k$ の affine function である
+\begin{equation}
+ y=\frac{a_0+a_1E_1+a_2E_2+a_3E_3+a_4E_4}
+ {b_0+b_1E_1+b_2E_2+b_3E_3+b_4E_4}
+ \label{eq:rational-ansatz}
+\end{equation}
+を調べた。分母を払うと係数 $a_i,b_i$ に関する homogeneous linear system になるため、その最小 singular value に対応する vector を求めると、全体規格化を除いて式\eqref{eq:flow-E}の係数が得られた。
+
+この候補を得た後、canonical frame を用いず、$a_\mu$ の4成分と $b_{\mu\nu}$ の6独立成分をランダムに生成した30,000個の場配置で式\eqref{eq:flow-E}を検証した。最終的な主張はこの数値検証ではなく、本文および付録\ref{app:matrix-identities}の解析導出に基づく。数値探索と検証に用いたコードおよび出力は、本稿末尾の code availability statement に示す repository に収録している。
+
+\section{補助的な行列計算}
+\label{app:matrix-identities}
+
+\subsection{4次元の determinant identities}
+
+付録内の計算を短く書くため、ここだけで
+\begin{equation}
+ C_\pm{}^\mu{}_{\nu}
+ =\delta^\mu{}_{\nu}\pm\sqrt\lambda F^\mu{}_{\nu}
+ +\lambda\,\partial^\mu\phi\,\partial_\nu\phi
+ \label{eq:Cpm-app}
+\end{equation}
+と置く。式\eqref{eq:dbi-matrix}より $\det C_+=\det C_-=\Delta^2$ である。stress tensor の式\eqref{eq:stress-dbi}は
+\begin{equation}
+ M=\frac\Delta2(C_+^{-1}+C_-^{-1})
+ =\Delta C_-^{-1}\left(\Id+\lambda\,\partial\phi\otimes\partial\phi\right)C_+^{-1}
+ \label{eq:M-factor-app}
+\end{equation}
+と変形できる。ここで用いる matrix determinant lemma は
+\begin{equation}
+ \det(A+uv^{\mathsf T})=\det A\left(1+v^{\mathsf T}A^{-1}u\right)
+ \label{eq:detlemma-app}
+\end{equation}
+である。これを式\eqref{eq:M-factor-app}に適用すると
+\begin{equation}
+ \det M=1+\lambda X
+\end{equation}
+が従う。
+
+$E_1$ を求めるには、実数 $a$ に対して
+\begin{equation}
+ D(a)=\det\!\left(a\Id+\sqrt\lambda F
+ +\lambda\,\partial\phi\otimes\partial\phi\right)
+ \label{eq:Da-app}
+\end{equation}
+を考える。4次元の antisymmetric matrix $F^\mu{}_{\nu}$ は
+\begin{equation}
+ (\sqrt\lambda F)^4-2\lambda S(\sqrt\lambda F)^2-\lambda^2P^2\Id=0
+ \label{eq:F-CH-app}
+\end{equation}
+を満たす。matrix determinant lemma を併用すると
+\begin{equation}
+ D(a)=a^4+\lambda Xa^3-2\lambda Sa^2
+ +\lambda^2(Z-2SX)a-\lambda^2P^2.
+ \label{eq:D-polynomial-app}
+\end{equation}
+Jacobi formula
+\begin{equation}
+ \frac{\dd}{\dd a}\det B(a)
+ =\det B(a)\,\tr\!\left(B(a)^{-1}\frac{\dd B(a)}{\dd a}\right)
+ \label{eq:jacobi-app}
+\end{equation}
+から $D'(1)=\det C_+\,\tr C_+^{-1}$ が従い、$\det C_+=\Delta^2$ と合わせて式\eqref{eq:E1-fields}を得る。$E_3$ の計算では、rank-one update の逆行列
+\begin{equation}
+ (A+uv^{\mathsf T})^{-1}
+ =A^{-1}-\frac{A^{-1}uv^{\mathsf T}A^{-1}}
+ {1+v^{\mathsf T}A^{-1}u}
+ \label{eq:sherman-morrison-app}
+\end{equation}
+を用いる。$E_3=\det M\,\tr M^{-1}$ に式\eqref{eq:M-factor-app}を代入すると式\eqref{eq:E3-fields}が得られる。
+
+\subsection{Characteristic polynomial の因数分解}
+
+第\ref{sec:null}節と第\ref{sec:constraint}節で用いた因数分解を示す。ここだけで scalar gradient を
+\begin{equation}
+ v_\mu\equiv\partial_\mu\phi
+\end{equation}
+と略記し、
+\begin{equation}
+ h_{\mu\nu}=g_{\mu\nu}+\lambda v_\mu v_\nu,
+ \qquad
+ r\equiv\frac{\det h}{\det g}=1+\lambda X
+ \label{eq:h-r-app}
+\end{equation}
+を導入する。以下の導出ではまず $r\neq0$ として $h_{\mu\nu}$ の逆行列を用いる。最終的に得られる characteristic polynomial の関係は $r$ に関する多項式恒等式なので、DBI Lagrangian が定義される範囲で $r=0$ へも連続的に延長できる。さらに
+\begin{equation}
+ J^\mu{}_{\nu}=\sqrt\lambda\,h^{\mu\rho}F_{\rho\nu}
+ \label{eq:J-app}
+\end{equation}
+と置くと、$J$ は metric $h_{\mu\nu}$ に関して antisymmetric であり、$\G=h(\Id+J)$ である。従って
+\begin{equation}
+ \Delta^2=r\det(\Id+J).
+ \label{eq:Delta-J-app}
+\end{equation}
+$J$ の $h$ に関する antisymmetry を用いると、$h^{-1}\G=\Id+J$ であることから symmetric inverse は
+\begin{equation}
+ (\G^{-1})^{(\mu\rho)}h_{\rho\nu}
+ =\frac12\left[(\Id+J)^{-1}+(\Id-J)^{-1}\right]^\mu{}_{\nu}
+ =(\Id-J^2)^{-1\,\mu}{}_{\nu}.
+ \label{eq:symmetric-inverse-app}
+\end{equation}
+また、rank-one inverse formula から
+\begin{equation}
+ (h^{-1}g)^\mu{}_{\nu}
+ =\delta^\mu{}_{\nu}-\frac{\lambda}{r}v^\mu v_\nu.
+ \label{eq:hinvg-app}
+\end{equation}
+これらを式\eqref{eq:stress-dbi}へ代入すると
+\begin{equation}
+ M=U\left(\Id-\frac{R}{r}\right),
+ \qquad
+ U\equiv\Delta(\Id-J^2)^{-1},
+ \qquad
+ R^\mu{}_{\nu}\equiv\lambda v^\mu v_\nu.
+ \label{eq:M-U-R-app}
+\end{equation}
+ここで $\tr R=\lambda X=r-1$ である。
+
+4次元の antisymmetric matrix $J$ の eigenvalues は符号の反対な pair を作るため、$J^2$ は二つの eigenvalues をそれぞれ二重に持つ。従って $U$ も二つの eigenvalues をそれぞれ二重に持つ。一方、$\det(\Id-J)=\det(\Id+J)$ と式\eqref{eq:Delta-J-app}から
+\begin{equation}
+ \det U=r^2
+\end{equation}
+である。$\lambda=0$ から連続な分枝を取ると、$U$ の二つの固有値の積は $r$ であるため、ある係数 $\alpha$ を用いて
+\begin{equation}
+ U^2-\alpha U+r\Id=0.
+ \label{eq:U-quadratic-app}
+\end{equation}
+従って $q(z)=z^2-\alpha z+r$ と置けば
+\begin{equation}
+ \det(z\Id-U)=q(z)^2,
+ \qquad
+ (z\Id-U)^{-1}U=\frac{zU-r\Id}{q(z)}.
+ \label{eq:U-resolvent-app}
+\end{equation}
+
+式\eqref{eq:M-U-R-app}は $U$ に対する rank-one update なので、matrix determinant lemma を使うと
+\begin{align}
+ \det(z\Id-M)
+ &=q(z)^2\left[1+\frac1r\tr\!\left(R(z\Id-U)^{-1}U\right)\right]\nonumber\\
+ &=q(z)\left[q(z)+\frac{\tr(RU)}{r}z-\tr R\right].
+ \label{eq:char-factor-intermediate-app}
+\end{align}
+$\tr R=r-1$ を用い、
+\begin{equation}
+ \beta\equiv\alpha-\frac{\tr(RU)}{r}
+\end{equation}
+と定義すると
+\begin{equation}
+ \det(z\Id-M)
+ =(z^2-\alpha z+r)(z^2-\beta z+1).
+ \label{eq:char-factor-app}
+\end{equation}
+式\eqref{eq:E4}より $r=E_4$ である。係数を比較すれば
+\begin{equation}
+ E_1=\alpha+\beta,
+ \qquad
+ E_2=1+E_4+\alpha\beta,
+ \qquad
+ E_3=\alpha+E_4\beta.
+ \label{eq:factor-coefficients-app}
+\end{equation}
+が得られる。
+
+$E_4\neq1$ では式\eqref{eq:undivided-flow}から
+\begin{equation}
+ \beta=\frac{E_1-E_3}{1-E_4}=2(1+\lambda^2Q_\lambda).
+ \label{eq:beta-app}
+\end{equation}
+$E_4\to1$ で連続な DBI 分枝を取ると、式\eqref{eq:factor-coefficients-app}より
+\begin{equation}
+ \beta=\frac12\left[E_1+\sqrt{E_1^2-4E_2+8}\right]
+\end{equation}
+となり、式\eqref{eq:null-E}を得る。平方根の中身はこの因数分解上で $(\alpha-\beta)^2$ に等しいため、実 DBI 分枝では非負である。$\alpha,\beta$ を式\eqref{eq:factor-coefficients-app}から消去すると式\eqref{eq:algebraic-relation}が従う。
+
+\small
+\begin{thebibliography}{99}
+
+\bibitem{BornInfeld1934}
+M.~Born and L.~Infeld,
+``Foundations of the New Field Theory,''
+Proc. Roy. Soc. Lond. A \textbf{144} (1934) 425--451.
+
+\bibitem{SmirnovZamolodchikov2016}
+F.~A.~Smirnov and A.~B.~Zamolodchikov,
+``On space of integrable quantum field theories,''
+Nucl. Phys. B \textbf{915} (2017) 363--383,
+\href{https://arxiv.org/abs/1608.05499}{arXiv:1608.05499 [hep-th]}.
+
+\bibitem{Taylor2018}
+M.~Taylor,
+``$T\overline T$ deformations in general dimensions,''
+Adv. Theor. Math. Phys. \textbf{24} (2020) 37--63,
+\href{https://arxiv.org/abs/1805.10287}{arXiv:1805.10287 [hep-th]}.
+
+\bibitem{Bandos2020}
+I.~Bandos, K.~Lechner, D.~Sorokin and P.~K.~Townsend,
+``A non-linear duality-invariant conformal extension of Maxwell's equations,''
+Phys. Rev. D \textbf{102} (2020) 121703,
+\href{https://arxiv.org/abs/2007.09092}{arXiv:2007.09092 [hep-th]}.
+
+\bibitem{Sorokin2021}
+D.~P.~Sorokin,
+``Introductory Notes on Non-linear Electrodynamics and its Applications,''
+Fortsch. Phys. \textbf{70} (2022) 2200092,
+\href{https://arxiv.org/abs/2112.12118}{arXiv:2112.12118 [hep-th]}.
+
+\bibitem{Babaei2022}
+H.~Babaei-Aghbolagh, K.~Babaei Velni, D.~M.~Yekta and H.~Mohammadzadeh,
+``Emergence of non-linear electrodynamic theories from $T\overline T$-like deformations,''
+Phys. Lett. B \textbf{829} (2022) 137079,
+\href{https://arxiv.org/abs/2202.11156}{arXiv:2202.11156 [hep-th]}.
+
+\bibitem{Ferko2022}
+C.~Ferko, L.~Smith and G.~Tartaglino-Mazzucchelli,
+``On Current-Squared Flows and ModMax Theories,''
+SciPost Phys. \textbf{13} (2022) 012,
+\href{https://arxiv.org/abs/2203.01085}{arXiv:2203.01085 [hep-th]}.
+
+\bibitem{Conti2022}
+R.~Conti, J.~Romano and R.~Tateo,
+``Metric approach to a $T\overline T$-like deformation in arbitrary dimensions,''
+JHEP \textbf{09} (2022) 085,
+\href{https://arxiv.org/abs/2206.03415}{arXiv:2206.03415 [hep-th]}.
+
+\bibitem{Ferko2023Birefringence}
+C.~Ferko, L.~Smith and G.~Tartaglino-Mazzucchelli,
+``Stress Tensor Flows, Birefringence in Non-Linear Electrodynamics, and Supersymmetry,''
+SciPost Phys. \textbf{15} (2023) 198,
+\href{https://arxiv.org/abs/2301.10411}{arXiv:2301.10411 [hep-th]}.
+
+\bibitem{Ferko2023Duality}
+C.~Ferko, S.~M.~Kuzenko, L.~Smith and G.~Tartaglino-Mazzucchelli,
+``Duality-Invariant Non-linear Electrodynamics and Stress Tensor Flows,''
+Phys. Rev. D \textbf{108} (2023) 106021,
+\href{https://arxiv.org/abs/2309.04253}{arXiv:2309.04253 [hep-th]}.
+
+
+\bibitem{Ferko2024DBI}
+C.~Ferko, Y.~Hu, Z.~Huang, K.~Koutrolikos and G.~Tartaglino-Mazzucchelli,
+``$T\overline T$-like flows and $3d$ nonlinear supersymmetry,''
+SciPost Phys. \textbf{16} (2024) 038,
+\href{https://arxiv.org/abs/2302.10410}{arXiv:2302.10410 [hep-th]}.
+
+\bibitem{Blair2025}
+C.~D.~A.~Blair, J.~Lahnsteiner, N.~A.~Obers and Z.~Yan,
+``Matrix Theory Reloaded: A BPS Road to Holography,''
+JHEP \textbf{02} (2025) 024,
+\href{https://arxiv.org/abs/2410.03591}{arXiv:2410.03591 [hep-th]}.
+
+\bibitem{Brizio2026}
+N.~Brizio, M.~Kade, A.~Sfondrini and D.~P.~Sorokin,
+``More on $T\overline T$-like deformations in higher dimensions,''
+JHEP \textbf{06} (2026) 262,
+\href{https://arxiv.org/abs/2602.24058}{arXiv:2602.24058 [hep-th]}.
+
+\end{thebibliography}
+
+\end{document}
