@@ -1,9 +1,10 @@
-# Manuscript
+# Manuscripts
 
-The Japanese manuscript is currently under public review in the working conversation and will be synchronized to this directory once the present revision is frozen.
+This directory contains the current manuscript sources and compiled PDFs.
 
-The manuscript is intended as a self-contained analytic paper. The neural-network exploration is presented as the discovery route, while the final flow equations are derived analytically.
+- `paper.tex` / `paper.pdf` — English manuscript intended as the preprint/submission version.
+- `paper_ja.tex` / `paper_ja.pdf` — Japanese companion manuscript used for detailed internal checking of notation and presentation.
 
-An English preprint/submission version will be prepared after the Japanese manuscript is finalized.
+The paper gives a self-contained analytic derivation of the four-dimensional single-scalar DBI stress-tensor flow. The neural-network calculation is presented as the discovery route; the final scientific claims are established analytically.
 
-For reproducibility code and numerical outputs, see `../code/` and `../data/`.
+For detailed derivations, see `../notes/`. For reproducibility code and numerical outputs, see `../code/` and `../data/`.
