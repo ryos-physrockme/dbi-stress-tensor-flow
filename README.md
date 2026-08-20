@@ -6,8 +6,8 @@ The project combines an exploratory neural-network search with analytic derivati
 
 ## Repository structure
 
-- `paper/` — manuscript status and submission-related material. The current Japanese manuscript source will be synchronized after the public-review draft is frozen.
-- `notes/` — detailed calculation-note material and documentation.
+- `paper/` — English manuscript (`paper.tex`, `paper.pdf`) and Japanese companion version (`paper_ja.tex`, `paper_ja.pdf`).
+- `notes/` — detailed Japanese calculation notes (`calculation_note_ja.tex`, `calculation_note_ja.pdf`) with intermediate algebra and background explanations.
 - `code/` — neural-network exploration, exact symbolic checks, and independent numerical validation.
 - `data/` — numerical outputs used to validate the exploratory and analytic calculations.
 
@@ -21,9 +21,11 @@ The repository contains code for:
 - independent numerical validation on generic field configurations;
 - the five-dimensional Born--Infeld to four-dimensional DBI reduction checks.
 
+By default, the scripts write outputs to the repository-level `data/` directory. This can be overridden with the `DBI_OUTPUT_DIR` environment variable.
+
 ## Status
 
-Work in progress. The Japanese manuscript is undergoing public review before preparation of an English preprint/submission version.
+Work in progress. The English manuscript and the detailed calculation notes are publicly available in this repository and are being prepared for preprint/submission.
 
 ## Author
 
@@ -33,4 +35,4 @@ Graduate School of Science and Engineering, Saitama University
 
 ## Licensing
 
-This repository uses a mixed licensing scheme. See `LICENSE` for details. In brief, source code under `code/` is released under the MIT License. Manuscript and calculation-note text remain copyright Ryosuke Suda unless a separate license is stated in a future preprint release.
+This repository uses a mixed licensing scheme. See `LICENSE` for details. Source code under `code/` is released under the MIT License. Manuscript and calculation-note text remain copyright Ryosuke Suda unless a separate license is stated in a future preprint release.
