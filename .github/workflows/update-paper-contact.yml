@@ -1,0 +1,71 @@
+name: One-shot paper contact update
+
+on:
+  push:
+    paths:
+      - .github/workflows/update-paper-contact.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Update title-page contact layout
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('paper/paper.tex')
+          s = p.read_text(encoding='utf-8')
+          old_author = r'''{\large Ryosuke Suda\par}
+          \vspace{4mm}
+          {\normalsize
+          Graduate School of Science and Engineering, Saitama University,\\
+          255 Shimo-Okubo, Sakura-ku, Saitama 338-8570, Japan\\[1mm]
+          \texttt{r.suda.813@ms.saitama-u.ac.jp}\par}'''.replace('          ', '')
+          new_author = r'''{\large Ryosuke Suda\footnotemark\par}
+          \vspace{4mm}
+          {\normalsize
+          Graduate School of Science and Engineering, Saitama University,\\
+          255 Shimo-Okubo, Sakura-ku, Saitama 338-8570, Japan\par}'''.replace('          ', '')
+          if old_author not in s:
+              raise SystemExit('author block not found')
+          s = s.replace(old_author, new_author, 1)
+          old_footer = r'''\begin{center}
+          Draft --- August 2026
+          \end{center}
+          \end{titlepage}'''.replace('          ', '')
+          new_footer = r'''\begin{center}
+          Draft --- August 2026
+          \end{center}
+
+          \footnotetext{E-mail: \texttt{r.suda.813 [at] ms.saitama-u.ac.jp}}
+          \end{titlepage}'''.replace('          ', '')
+          if old_footer not in s:
+              raise SystemExit('footer block not found')
+          s = s.replace(old_footer, new_footer, 1)
+          p.write_text(s, encoding='utf-8')
+
+      - name: Compile paper with LuaLaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: paper/paper.tex
+          latexmk_use_lualatex: true
+          work_in_root_file_dir: true
+          texlive_version: 2026
+          os: debian
+
+      - name: Commit updated TeX and PDF
+        shell: bash
+        run: |
+          rm -f .github/workflows/update-paper-contact.yml
+          git config user.name "Ryosuke Suda"
+          git config user.email "84566919+ryos-physrockme@users.noreply.github.com"
+          git add paper/paper.tex paper/paper.pdf
+          git add -u .github/workflows/update-paper-contact.yml
+          git commit -m "Update title-page contact layout"
+          git push
