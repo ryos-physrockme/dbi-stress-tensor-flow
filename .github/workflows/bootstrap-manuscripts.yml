@@ -1,9 +1,9 @@
 name: Bootstrap manuscript files
 
 on:
-  push:
-    paths:
-      - .github/workflows/bootstrap-manuscripts.yml
+  pull_request:
+    branches: [main]
+    types: [opened]
 
 permissions:
   contents: write
@@ -12,8 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out pull-request branch
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Restore manuscript sources
         shell: bash
@@ -40,11 +42,12 @@ jobs:
         run: |
           rm -rf .github/bootstrap
           rm -f .github/workflows/bootstrap-manuscripts.yml
+          rm -f .bootstrap-manuscripts-trigger
           git config user.name "Ryosuke Suda"
           git config user.email "84566919+ryos-physrockme@users.noreply.github.com"
           git add paper/paper_en.tex paper/paper_en.pdf \
                   paper/paper_ja.tex paper/paper_ja.pdf \
                   notes/calculation_note_ja.tex notes/calculation_note_ja.pdf
-          git add -A .github
+          git add -A .github .bootstrap-manuscripts-trigger
           git commit -m "Add manuscript sources and compiled PDFs"
           git push
