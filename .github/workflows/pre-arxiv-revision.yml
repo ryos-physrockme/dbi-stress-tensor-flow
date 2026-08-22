@@ -1,0 +1,53 @@
+name: Pre-arXiv referee revision
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out revision branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Restore revised files
+        shell: bash
+        run: |
+          cat .github/pre_arxiv/revision.part*.b64 | base64 -d > /tmp/revision.tar.gz
+          echo "f6ab67d336be01b4eb1d8178f058684a1fbb5ec22df3ec1aa15ebb6d6f1de69d  /tmp/revision.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/revision.tar.gz
+
+      - name: Compile manuscripts with LuaLaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: |
+            paper/paper.tex
+            paper/paper_ja.tex
+            notes/calculation_note_ja.tex
+          latexmk_use_lualatex: true
+          work_in_root_file_dir: true
+          texlive_version: 2026
+          os: debian
+
+      - name: Commit final revision
+        shell: bash
+        run: |
+          rm -rf .github/pre_arxiv
+          rm -f .github/workflows/pre-arxiv-revision.yml
+          git config user.name "Ryosuke Suda"
+          git config user.email "84566919+ryos-physrockme@users.noreply.github.com"
+          git add -- paper/paper.tex paper/paper.pdf \
+                     paper/paper_ja.tex paper/paper_ja.pdf \
+                     notes/calculation_note_ja.tex notes/calculation_note_ja.pdf \
+                     code/nn_closure_search.py code/coordinate_free_validation.py \
+                     requirements.txt data/coordinate_free_validation.csv
+          git add -u -- .github/pre_arxiv .github/workflows/pre-arxiv-revision.yml
+          git commit -m "Address pre-arXiv referee revision"
+          git push
