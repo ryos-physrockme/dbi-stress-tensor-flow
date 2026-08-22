@@ -130,6 +130,8 @@ Hilbert stress tensor を
 \end{equation}
 に等しい。したがって式\eqref{eq:main-flow-note}が $0/0$ 型へ退化する場所は、まさに scalar gradient が null になる $X=0$ である。
 
+ここでの ``flow'' は DBI の1パラメータ族に沿う exact differential identity という意味である。後で示すように DBI が実現する stress-tensor invariants は代数的制約を満たすため、その locus の外へ deformation operator を延長する方法は一意ではない。また Maxwell--scalar seed を初期条件として一般の Lagrangian 空間でこの微分方程式を解いたとき、DBI が一意な solution になることは本ノートでも証明していない。この uniqueness problem は今回の結果を DBI の stress-tensor characterization へ発展させる際の次の問題である。
+
 \section{本ノートの構成}
 
 本ノートは次の順に読むとよい。
@@ -1254,13 +1256,42 @@ $X=0$ では $E_4=1$。式\eqref{eq:factor-goal}は
  =\frac{E_1\mp\sqrt{E_1^2-4E_2+8}}{2}.
  \label{eq:alphabeta-null}
 \end{equation}
-$E_4\neq1$ から連続に $E_4\to1$ とした DBI 分枝では、式\eqref{eq:beta-flow}に接続するのは大きい方の根である。従って
+どちらの根が $\beta$ かは local な field algebra だけで決められる。$X=0$ では式\eqref{eq:E1-field}と式\eqref{eq:Q-field-simple}から
+\begin{equation}
+ \beta=2(1+\lambda^2Q_\lambda)
+ =\frac{2(1-\lambda S)}{\Delta}
+ \label{eq:beta-null-field-note}
+\end{equation}
+であり、$E_1=\alpha+\beta$ を使えば
+\begin{equation}
+ \alpha=\frac{2-2\lambda S+\lambda^2Z}{\Delta},
+ \qquad
+ \beta-\alpha=-\frac{\lambda^2Z}{\Delta}
+ \label{eq:alpha-beta-null-note}
+\end{equation}
+となる。非零の null vector $v_\mu$ に対して
+\begin{equation}
+ w_\mu\equiv F_{\mu\nu}v^\nu
+\end{equation}
+と置く。antisymmetry から $w_\mu v^\mu=0$ である。Lorentzian signature $(-,+,+,+)$ では、非零 null vector に直交する vector は spacelike または null なので $w^2\ge0$ である。一方
+\begin{equation}
+ Z=v_\mu F^\mu{}_{\rho}F^\rho{}_{\nu}v^\nu=-w_\mu w^\mu\le0.
+ \label{eq:Z-null-sign-note}
+\end{equation}
+従って $\Delta>0$ branch では $\beta\ge\alpha$ であり、$\beta$ は式\eqref{eq:alphabeta-null}の大きい方の根である。$v_\mu=0$ なら $Z=0$ で二根は一致する。よって
 \begin{equation}
  \lambda^2Q_\lambda
  =\frac14\left[E_1+\sqrt{E_1^2-4E_2+8}\right]-1
  \label{eq:null-flow-E}
 \end{equation}
-となる。平方根の中身は因数分解上で $(\alpha-\beta)^2$ に等しいため、実 DBI 分枝では非負である。
+となる。平方根の中身は $(\alpha-\beta)^2$ なので非負である。
+
+さらに direct DBI expansion から
+\begin{equation}
+ Q_0\big|_{X=0}=\frac12(S^2+P^2-Z)
+ \label{eq:null-weak-note}
+\end{equation}
+を得る。これは Maxwell--scalar seed を Blair らの $p=3$ perturbative flow に代入した結果とも一致する。
 
 $E_1,E_2$ を $T$ の traces に戻すと
 \begin{equation}
@@ -1271,6 +1302,41 @@ $E_1,E_2$ を $T$ の traces に戻すと
  \label{eq:null-flow-T}
 \end{equation}
 である。square root は $\lambda=0$ から連続な実数値を与える分枝を選ぶ。
+
+\section{Scalar DBI limit}
+
+逆に gauge field を消して $F_{\mu\nu}=0$ とすると、
+\begin{equation}
+ \Lag_\lambda^{(\phi)}=\frac{1-\Delta_\phi}{\lambda},
+ \qquad
+ \Delta_\phi=\sqrt{1+\lambda X}
+ \label{eq:scalar-dbi-note}
+\end{equation}
+という one-scalar DBI (Dirac) theory になる。Sherman--Morrison formula を使うと
+\begin{equation}
+ T^\mu{}_{\nu}
+ =\Lag_\lambda^{(\phi)}\delta^\mu{}_{\nu}
+ +\frac{1}{\Delta_\phi}v^\mu v_\nu
+ \label{eq:scalar-T-note}
+\end{equation}
+である。この matrix は $v$ に直交する3方向で固有値 $\Lag_\lambda^{(\phi)}$、$v$ 方向で固有値 $(1-\Delta_\phi^{-1})/\lambda$ を持つ。これらを generic stress-tensor formula に代入すると
+\begin{equation}
+ Q_\lambda^{(\phi)}
+ =\frac{(\Delta_\phi-1)^2}{2\lambda^2\Delta_\phi}
+ \label{eq:scalar-Q-note}
+\end{equation}
+を得る。
+
+Ferko--Hu--Huang--Koutrolikos--Tartaglino-Mazzucchelli は、任意次元の free scalar から scalar DBI を生成する stress-tensor flow を与えている\cite{Ferko2024DBI}。彼らの規約では $x_1=(\partial\varphi)^2$ かつ seed $\Lag_0=-x_1$ なので、本ノートとの対応は $\varphi=\phi/\sqrt2$、すなわち
+\begin{equation}
+ x_1=\frac X2.
+\end{equation}
+彼らの stress-tensor operator は scalar ansatz 上で
+\begin{equation}
+ \partial_\lambda\Lag=-\frac12\Lag^2+\Lag x_1\partial_{x_1}\Lag
+ \label{eq:Ferko-scalar-note}
+\end{equation}
+へ簡約される。式\eqref{eq:scalar-dbi-note}では $\partial_{x_1}\Lag=-1/\Delta_\phi$ なので、式\eqref{eq:Ferko-scalar-note}の右辺は式\eqref{eq:scalar-Q-note}に完全に一致する。従って今回の4次元 gauge-plus-scalar formula は、$F=0$ で既知の scalar DBI flow、$v=0$ で次節の4次元 Born--Infeld flow という二つの既知境界を同時に含む。
 
 \section{Born--Infeld limit}
 
@@ -1419,7 +1485,14 @@ NN の training 後に行った有理式探索は、network weights や network 
  \begin{pmatrix}\bm a\\\bm b\end{pmatrix}=0
  \label{eq:nn-homogeneous-system}
 \end{equation}
-という homogeneous linear equation を与える。全 data を縦に並べた matrix の singular-value decomposition を行い、最小 singular value に対応する右 singular vector を係数候補とした。
+という homogeneous linear equation を与える。全 data を縦に並べた matrix の singular-value decomposition を行い、最小 singular value に対応する右 singular vector を係数候補とした。実際、最小二つの singular values は
+\begin{equation}
+ \sigma_{\min}=3.7120\times10^{-14},
+ \qquad
+ \sigma_{\mathrm{next}}=2.4078\times10^{-3}
+ \label{eq:nn-svd-gap-note}
+\end{equation}
+であり、明瞭な1次元 numerical null direction がある。得られた affine-over-affine relation の RMS residual は $1.7329\times10^{-14}$ であった。
 
 この手順から
 \begin{equation}
@@ -1632,7 +1705,7 @@ Blair らの $p=3$ perturbative expression との $\lambda\to0$ check も10,000 
  r\equiv\det H=1+\lambda X
  \label{eq:app-r}
 \end{equation}
-と定義する。以下ではまず $r\neq0$ として $H^{-1}$ を用いる。最終的に得られる characteristic polynomial の関係は $r$ に関する多項式恒等式なので、DBI Lagrangian が定義される範囲では $r=0$ へ連続的に延長できる。$R^2=(r-1)R$ なので、直接掛け算すれば
+と定義する。以下ではまず $r\neq0$ かつ $\Delta\neq0$ として $H^{-1}$ と DBI matrix の逆行列を用いる。$\lambda=0$ から連続な nonsingular real branch をこの parametrization で追う限り、$r$ は $1$ から始まり $r=0$ の $H$-singularity を横切れないため $r>0$ である。最後に得られる characteristic polynomial の因数分解は original DBI variables に戻すと多項式恒等式として書けるので、恒等式自体は適切な limiting locus へ代数的に延長できる。ただし、この formal continuation と $r=0$ を physical な $H$-invertible branch の点として扱うことは区別する。$R^2=(r-1)R$ なので、直接掛け算すれば
 \begin{equation}
  H^{-1}=\Id-\frac{R}{r}
  \label{eq:app-Hinv}
@@ -1694,35 +1767,74 @@ $J$ の characteristic polynomial は even polynomial なので、
  \label{eq:app-detB}
 \end{align}
 
-4次元の antisymmetric matrix $J$ の eigenvalues は、複素化した tangent space 上で符号の反対な pair を作る。そのため $J^2$ は二つの eigenvalues をそれぞれ二重に持ち、$B$ も二つの eigenvalues $b_+$ と $b_-$ をそれぞれ二重に持つ。式\eqref{eq:app-detB}と $\lambda=0$ から連続な分枝を選ぶことにより $b_+b_-=1$ である。従って、ある scalar $\tau=b_++b_-$ を用いて
-\begin{equation}
- B^2-\tau B+\Id=0
- \label{eq:app-B-quadratic}
-\end{equation}
-と書ける。
+ここで重要なのは、固有値の multiplicity だけから $B$ や $U$ の二次方程式を推論しないことである。Jordan block が存在する一般の行列では、その推論は十分ではない。以下では Cayley--Hamilton 恒等式と determinant identity から直接示す。
 
-ここで
+$J$ が4次元で $h$-antisymmetric であることから characteristic polynomial は even polynomial であり、
 \begin{equation}
- U\equiv\sqrt r\,B,
- \qquad
- \alpha\equiv\sqrt r\,\tau
+ \chi_J(t)=\det(t\Id-J)=t^4+c_2t^2+c_0
+ \label{eq:app-J-even-char}
 \end{equation}
-と置く。式\eqref{eq:app-B-quadratic}は
+と書ける。従って Cayley--Hamilton 恒等式は
 \begin{equation}
- U^2-\alpha U+r\Id=0
+ J^4+c_2J^2+c_0\Id=0
+ \label{eq:app-J-CH-even}
+\end{equation}
+である。
+
+式\eqref{eq:app-M-effective}の pure-BI 型部分を
+\begin{equation}
+ U\equiv\Delta(\Id-J^2)^{-1}
+ \label{eq:app-U-def-rigorous}
+\end{equation}
+と定義する。すると $J^2=\Id-\Delta U^{-1}$ なので、式\eqref{eq:app-J-CH-even}へ代入して $U^2$ を掛けると
+\begin{equation}
+ (1+c_2+c_0)U^2-\Delta(2+c_2)U+\Delta^2\Id=0
+ \label{eq:app-U-prequadratic}
+\end{equation}
+を得る。一方、evenness から
+\begin{equation}
+ 1+c_2+c_0
+ =\chi_J(1)
+ =\det(\Id-J)
+ =\det(\Id+J)
+ =\frac{\Delta^2}{r}
+ \label{eq:app-char-one}
+\end{equation}
+である。従って
+\begin{equation}
+ U^2-\alpha U+r\Id=0,
+ \qquad
+ \alpha\equiv\frac{r(2+c_2)}{\Delta}
  \label{eq:app-U-quadratic}
 \end{equation}
-となる。従って
+が直接従う。この証明は $J$ や $U$ の diagonalizability を仮定していない。
+
+characteristic polynomial の二重性も determinant から直接確認できる。形式変数 $y$ に対して
+\begin{align}
+ \det(y\Id-J^2)
+ &=\det(\sqrt y\Id-J)\det(\sqrt y\Id+J)\nonumber\\
+ &=\chi_J(\sqrt y)\chi_J(-\sqrt y)
+ =\left(y^2+c_2y+c_0\right)^2
+ \label{eq:app-J2-square}
+\end{align}
+である。平方根は中間的な書き方に過ぎず、最後の式は $y$ の多項式恒等式である。これを使うと
+\begin{align}
+ \det(z\Id-U)
+ &=\frac{\det\!\left(z(\Id-J^2)-\Delta\Id\right)}{\det(\Id-J^2)}\nonumber\\
+ &=\left(z^2-\alpha z+r\right)^2.
+ \label{eq:app-U-char}
+\end{align}
+従って
 \begin{equation}
  q(z)\equiv z^2-\alpha z+r
  \label{eq:app-q}
 \end{equation}
-と定義すれば
+と置けば $\det(z\Id-U)=q(z)^2$ であり、さらに式\eqref{eq:app-U-quadratic}から
 \begin{equation}
- \det(z\Id-U)=q(z)^2
- \label{eq:app-U-char}
+ (z\Id-U)^{-1}U=\frac{zU-r\Id}{q(z)}
+ \label{eq:app-U-resolvent-rigorous}
 \end{equation}
-である。
+を得る。
 
 次に scalar gradient による rank-one factor を戻す。式\eqref{eq:app-Hinv}と\eqref{eq:app-M-effective}から
 \begin{equation}
