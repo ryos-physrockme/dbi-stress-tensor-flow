@@ -11,7 +11,6 @@ The script uses float64 matrix algebra in Minkowski signature (-,+,+,+). It test
 Dimensionless variables u=sqrt(lambda) d phi and B=sqrt(lambda) F are sampled directly.
 """
 from __future__ import annotations
-
 import os
 import math
 from pathlib import Path
@@ -22,8 +21,8 @@ import matplotlib.pyplot as plt
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('DBI_OUTPUT_DIR', REPO_ROOT / 'data')).resolve()
 OUT.mkdir(parents=True, exist_ok=True)
-CSV=OUT/'dbi_4d_coordinate_free_validation.csv'
-FIG=OUT/'dbi_4d_coordinate_free_validation_errors.png'
+CSV=OUT/'coordinate_free_validation.csv'
+FIG=OUT/'coordinate_free_validation_errors.png' 
 ETA=np.diag([-1.0,1.0,1.0,1.0])
 I4=np.eye(4)
 

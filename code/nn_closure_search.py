@@ -18,7 +18,7 @@ at fixed physical fields.
 The program:
   * generates generic random field configurations;
   * trains a neural network O_theta(E1,E2,E3,E4) as a scout;
-  * performs rational SVD readout of the neural target;
+  * performs rational SVD readout using independent direct DBI targets;
   * validates an exact closed-form candidate on independent samples;
   * checks an algebraic identity among EMT invariants;
   * checks the Jacobian rank in a canonical Lorentz frame;
@@ -33,7 +33,6 @@ where Ek = e_k(M).
 from __future__ import annotations
 
 import os
-
 from pathlib import Path
 import json
 import math
@@ -49,8 +48,8 @@ torch.set_default_dtype(torch.float32)
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('DBI_OUTPUT_DIR', REPO_ROOT / 'data')).resolve()
 OUT.mkdir(parents=True, exist_ok=True)
-CSV_SUMMARY = OUT / 'dbi_4d_single_scalar_validation.csv'
-CSV_LAMBDA = OUT / 'dbi_4d_single_scalar_error_by_lambda.csv'
+CSV_SUMMARY = OUT / 'nn_closure_validation.csv'
+CSV_LAMBDA = OUT / 'nn_closure_error_by_lambda.csv' 
 FIG_SCATTER = OUT / 'dbi_4d_nn_scout_scatter.png'
 FIG_LAMBDA = OUT / 'dbi_4d_exact_formula_error_vs_lambda.png'
 FIG_SV = OUT / 'dbi_4d_jacobian_singular_values.png'
