@@ -152,13 +152,7 @@ metric $g_{\mu\nu}$、field strength $F_{\mu\nu}$、および scalar gradient $\
  =z^4-e_1(N)z^3+e_2(N)z^2-e_3(N)z+e_4(N)
  \label{eq:elementary-definition}
 \end{equation}
-によって定義し、$M$ に対しては $E_k=e_k(M)$ と略記する。特に stress tensor 自身について
-\begin{align}
- e_2(T)&=\frac12\left[(\tr T)^2-\tr(T^2)\right],\nonumber\\
- e_3(T)&=\frac16\left[(\tr T)^3-3\tr T\,\tr(T^2)+2\tr(T^3)\right]
- \label{eq:e2e3-explicit}
-\end{align}
-である。
+によって定義し、$M$ に対しては $E_k=e_k(M)$ と略記する。
 
 これらの量を用いた数値探索では、$X\neq0$ かつ scalar gradient が timelike である領域を対象とし、ランダムに生成した DBI 場配置から $(E_1,E_2,E_3,E_4)$ と $\lambda^2Q_\lambda$ を計算し、
 \begin{equation}
@@ -252,7 +246,13 @@ $X\neq0$ では式\eqref{eq:E4}より $E_4\neq1$ であるため、式\eqref{eq:
  {2\left[\tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T\right]}
  \label{eq:main-flow}
 \end{equation}
-となる。また式\eqref{eq:E4}と\eqref{eq:E-to-T}を比較すれば
+となる。ここで明示的には
+\begin{align}
+ e_2(T)&=\frac12\left[(\tr T)^2-\tr(T^2)\right],\nonumber\\
+ e_3(T)&=\frac16\left[(\tr T)^3-3\tr T\,\tr(T^2)+2\tr(T^3)\right]
+ \label{eq:e2e3-explicit}
+\end{align}
+である。また式\eqref{eq:E4}と\eqref{eq:E-to-T}を比較すれば
 \begin{equation}
  \tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T=-X
  \label{eq:denominator-X}

@@ -160,12 +160,7 @@ For a four-dimensional matrix $N$, define the elementary symmetric polynomials $
  =z^4-e_1(N)z^3+e_2(N)z^2-e_3(N)z+e_4(N),
  \label{eq:elementary-definition}
 \end{equation}
-and write $E_k=e_k(M)$. In particular, for the stress tensor itself,
-\begin{align}
- e_2(T)&=\frac12\left[(\tr T)^2-\tr(T^2)\right],\nonumber\\
- e_3(T)&=\frac16\left[(\tr T)^3-3\tr T\,\tr(T^2)+2\tr(T^3)\right].
- \label{eq:e2e3-explicit}
-\end{align}
+and write $E_k=e_k(M)$.
 
 The numerical search was carried out in the region where $X\neq0$ and the scalar gradient is timelike. Random DBI field configurations were used to compute $(E_1,E_2,E_3,E_4)$ and $\lambda^2Q_\lambda$, and a neural network was trained to regress the map
 \begin{equation}
@@ -260,6 +255,12 @@ It follows that
  {2\left[\tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T\right]}.
  \label{eq:main-flow}
 \end{equation}
+Here, explicitly,
+\begin{align}
+ e_2(T)&=\frac12\left[(\tr T)^2-\tr(T^2)\right],\nonumber\\
+ e_3(T)&=\frac16\left[(\tr T)^3-3\tr T\,\tr(T^2)+2\tr(T^3)\right].
+ \label{eq:e2e3-explicit}
+\end{align}
 Moreover, comparing eqs.~\eqref{eq:E4} and \eqref{eq:E-to-T} gives
 \begin{equation}
  \tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T=-X.
