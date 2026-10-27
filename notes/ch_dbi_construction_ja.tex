@@ -1,0 +1,280 @@
+% Courant--Hilbert construction and the single-scalar DBI flow.
+% Included by calculation_note_ja.tex. The main file defines \Lag, \G, \tr, \dd.
+\chapter{Courant--Hilbert 構成と4次元 DBI}
+\label{chap:ch-dbi}
+
+\section{対象と記号}
+
+この章では4次元の Courant--Hilbert (CH) 構成\cite{Pezhman2026}と、1個の実スカラー場を含む DBI flow の関係を調べる。CH 構成の直接の対象は、固定した4次元計量に関する electromagnetic self-duality を満たす non-linear electrodynamics である。DBI の worldvolume scalar に対しては、誘導計量を介してこの構成を使う。誘導計量が変形パラメータに依存するため、pure Born--Infeld (BI) の flow equation をそのまま DBI の flow equation に読み替えることはできない。
+
+計量の符号は $(-,+,+,+)$ とし、実スカラー場 $\phi$ の勾配を $v_\mu=\partial_\mu\phi$ と書く。以下で
+\begin{equation}
+ X=g^{\mu\nu}v_\mu v_\nu
+ \label{eq:ch-scalar-X}
+\end{equation}
+はスカラー勾配の Lorentz norm を表す。一方、CH 文献では stress tensor の二次不変量を $X,Y$ と表すことがある。混同を避けるため、この章では後者に $\mathcal X_{\mathrm{CH}},\mathcal Y_{\mathrm{CH}}$ を用いる。
+
+\section{Pure Born--Infeld 理論の CH 構成}
+
+最初に計量 $h_{\mu\nu}$ を固定して pure NLED を考える。$h_{\mu\nu}$ の Hodge dual で定義した Lorentz scalar を
+\begin{equation}
+ S_h=-\frac14 F_{\mu\nu}F_{\rho\sigma}h^{\mu\rho}h^{\nu\sigma},
+ \qquad P_h=-\frac14F_{\mu\nu}\widetilde F_h^{\mu\nu}
+ \label{eq:ch-SP}
+\end{equation}
+とし、
+\begin{equation}
+ U=\frac{\sqrt{S_h^2+P_h^2}-S_h}{2},\qquad
+ V=\frac{\sqrt{S_h^2+P_h^2}+S_h}{2}
+ \label{eq:ch-UV}
+\end{equation}
+を導入する。すると $U,V\geq0$, $V-U=S_h$ である。CH 方程式は
+\begin{equation}
+ \frac{\partial\Lag}{\partial U}\,
+ \frac{\partial\Lag}{\partial V}=-1
+ \label{eq:ch-pde}
+\end{equation}
+であり、その解を1変数関数 $\ell(\tau;\lambda)$ によって
+\begin{equation}
+ \Lag=\ell(\tau;\lambda)-\frac{2U}{\ell'(\tau;\lambda)},
+ \qquad
+ \tau=V+\frac{U}{\ell'(\tau;\lambda)^2}
+ \label{eq:ch-implicit}
+\end{equation}
+と表せる。$\ell'$ は $\tau$ 微分を意味する。この表示は $\ell'\neq0$ の正則な枝で用いる。
+
+変形パラメータの質量次元が $[\lambda]=-4$ であり、
+\begin{equation}
+ \ell(\tau;\lambda)=\frac{f(z)}{\lambda},\qquad z=\lambda\tau,
+ \qquad a(z)=zf'(z),\qquad b(z)=f(z)-zf'(z)
+ \label{eq:ch-one-scale}
+\end{equation}
+と書ける場合を考える。ここで $f'$ は $z$ 微分を表す。$U,V$ を固定して式\eqref{eq:ch-implicit}を微分すると、$\tau$ の $\lambda$ 依存から出る項は相殺し、
+\begin{equation}
+ \left.\frac{\partial\Lag}{\partial\lambda}\right|_{U,V}
+ =\left.\frac{\partial\ell}{\partial\lambda}\right|_\tau
+ =-\frac{b(z)}{\lambda^2}
+ \label{eq:ch-one-scale-derivative}
+\end{equation}
+が得られる。具体的に第1等号は、$p=\ell'$ と置いて $\tau=V+U/p^2$ を微分し、$\partial_\lambda(\ell-2U/p)$ に代入すれば確認できる。
+
+$h_{\mu\nu}$ に関する Hilbert stress tensor を $\Theta_h^{\mu\nu}$ とする。$h_{\mu\nu}$ で添字を下げ、
+\begin{equation}
+ \mathcal X_{\mathrm{CH}}=\Theta_{h\,\mu\nu}\Theta_h^{\mu\nu},
+ \qquad
+ \mathcal Y_{\mathrm{CH}}=(h_{\mu\nu}\Theta_h^{\mu\nu})^2
+ \label{eq:ch-invariants}
+\end{equation}
+と定義する。CH 解についての公式\cite{Pezhman2026}は
+\begin{equation}
+ \mathcal X_{\mathrm{CH}}=\frac{4(a^2+b^2)}{\lambda^2},
+ \qquad \mathcal Y_{\mathrm{CH}}=\frac{16b^2}{\lambda^2},
+ \qquad h_{\mu\nu}\Theta_h^{\mu\nu}=\frac{4b}{\lambda}
+ \label{eq:ch-invariants-ab}
+\end{equation}
+である。従って真空点以外では
+\begin{equation}
+ \left.\partial_\lambda\Lag\right|_{h,F}
+ =\mathcal X_{\mathrm{CH}}
+ \left[-\frac{b(z)}{4(a(z)^2+b(z)^2)}\right]
+ \label{eq:ch-general-flow}
+\end{equation}
+となる。$\mathcal Y_{\mathrm{CH}}/\mathcal X_{\mathrm{CH}}$ から $z$ を一価に復元できる枝でのみ、右辺を変形パラメータを陽に含まない関数として書き直せる。符号の情報を復元する際には $\tr_h\Theta_h$ も必要になり得る。
+
+BI に対しては
+\begin{equation}
+ \ell_{\mathrm{BI}}(\tau;\lambda)
+ =\frac{1-\sqrt{1-2\lambda\tau}}{\lambda},
+ \qquad f(z)=1-\sqrt{1-2z}
+ \label{eq:ch-ell-bi}
+\end{equation}
+を用いる。$s=\sqrt{1-2z}>0$ と置くと
+\begin{equation}
+ a=\frac{1-s^2}{2s},\qquad
+ b=-\frac{(1-s)^2}{2s},\qquad
+ -\frac{b}{4(a^2+b^2)}=\frac{s}{4(1+s^2)}.
+ \label{eq:ch-ab-bi}
+\end{equation}
+さらに $r=-b/a=(1-s)/(1+s)$ とすると、
+\begin{equation}
+ \frac{s}{4(1+s^2)}
+ =\frac{1-r^2}{8(1+r^2)},\qquad
+ \frac{\mathcal Y_{\mathrm{CH}}}{\mathcal X_{\mathrm{CH}}}
+ =\frac{4r^2}{1+r^2}.
+ \label{eq:ch-r-bi}
+\end{equation}
+よって BI の CH flow は
+\begin{equation}
+ Q_{\mathrm{BI}}^{(h)}
+ \equiv\left.\frac{\partial\Lag_{\mathrm{BI}}^{(h)}}{\partial\lambda}\right|_{h,F}
+ =\frac18\left[\Theta_{h\,\mu\nu}\Theta_h^{\mu\nu}
+ -\frac12(h_{\mu\nu}\Theta_h^{\mu\nu})^2\right]
+ =-\frac{h_{\mu\nu}\Theta_h^{\mu\nu}}{4\lambda}.
+ \label{eq:ch-bi-flow}
+\end{equation}
+最後の等号は、式\eqref{eq:ch-one-scale-derivative}と\eqref{eq:ch-invariants-ab}からも直接従う。ここではスカラー場の勾配をまだ導入していない。
+
+\section{補助場形式との対応}
+
+CH 解に対応する補助場形式\cite{Pezhman2026}を
+\begin{equation}
+ \Lag_{\mathrm{aux}}(U,V;\varphi)
+ =-e^{-\varphi}U+e^\varphi V-W(\varphi)
+ \label{eq:ch-aux-L}
+\end{equation}
+と定義する。補助場 $\varphi$ と DBI の物理的スカラー場 $\phi$ は異なる。辞書は
+\begin{equation}
+ e^\varphi=\ell'(\tau),\qquad
+ W(\varphi)=\tau\ell'(\tau)-\ell(\tau),\qquad
+ W'(\varphi)=\tau\ell'(\tau)
+ \label{eq:ch-aux-dictionary}
+\end{equation}
+である。実際、補助場の運動方程式は
+\begin{equation}
+ 0=\frac{\partial\Lag_{\mathrm{aux}}}{\partial\varphi}
+ =e^{-\varphi}U+e^\varphi V-W'(\varphi)
+ =e^\varphi\left(V+Ue^{-2\varphi}-\tau\right)
+ \label{eq:ch-aux-eom}
+\end{equation}
+となり、式\eqref{eq:ch-implicit}の $\tau$ に関する条件を与える。これを式\eqref{eq:ch-aux-L}に戻せば $\ell-2U/\ell'$ が再現される。従って補助場の運動方程式が選ぶのは、CH 方程式を満たすラグランジアンに対応する代数的な関係である。
+
+BI の場合は $e^\varphi=1/s$ なので
+\begin{equation}
+ W_{\mathrm{BI}}(\varphi)=\frac{\cosh\varphi-1}{\lambda},
+ \qquad W'_{\mathrm{BI}}(\varphi)=\frac{\sinh\varphi}{\lambda}.
+ \label{eq:ch-bi-potential}
+\end{equation}
+この符号は、式\eqref{eq:ch-aux-L}が $-W$ を含むことから固定される。$+W$ に変更すると、式\eqref{eq:ch-aux-eom}は CH の陰的表示と一致しない。
+
+\section{誘導計量による DBI Lagrangian の分解}
+
+元の DBI では $g_{\mu\nu},F_{\mu\nu},v_\mu$ を固定して $\lambda$ を微分する。誘導計量と determinant を
+\begin{align}
+ h_{\mu\nu}&=g_{\mu\nu}+\lambda v_\mu v_\nu,
+ &q&=\sqrt{\frac{\det h}{\det g}},\nonumber\\
+ \G_{\mu\nu}&=h_{\mu\nu}+\sqrt\lambda F_{\mu\nu},
+ &B&=\sqrt{\frac{\det\G}{\det h}},\qquad
+ \Delta=\sqrt{\frac{\det\G}{\det g}}
+ \label{eq:ch-dbi-decomposition}
+\end{align}
+と定義する。Rank-one determinant lemma により
+\begin{equation}
+ q^2=1+\lambda X,
+ \qquad\Delta=qB,
+ \qquad
+ \Lag_{\mathrm{BI}}^{(h)}=\frac{1-B}{\lambda}
+ \label{eq:ch-qB}
+\end{equation}
+を得る。以下では $\lambda>0$, $1+\lambda X>0$, $\Delta>0$ を仮定し、平方根は正の枝を用いる。この条件の下で $h_{\mu\nu}$ は非退化な Lorentz 計量となる。$1+\lambda X=0$ で誘導計量が退化する場合は、この分解を使わない。
+
+DBI の Lagrangian と Lagrangian density は厳密に
+\begin{align}
+ \Lag_{\mathrm{DBI}}
+ &=\frac{1-q}{\lambda}+q\Lag_{\mathrm{BI}}^{(h)},
+ \label{eq:ch-dbi-L}\\
+ \sqrt{-g}\Lag_{\mathrm{DBI}}
+ &=\frac{\sqrt{-g}-\sqrt{-h}}{\lambda}
+ +\sqrt{-h}\Lag_{\mathrm{BI}}^{(h)}
+ \label{eq:ch-dbi-density}
+\end{align}
+と書ける。従って、$h_{\mu\nu}$ を与えられた計量とみなした gauge sector は pure BI の CH 構成に従う。ただし $h_{\mu\nu}$ と $q$ 自身が $\lambda$ に依存する。
+
+\section{二つの stress tensor の関係}
+
+$\Theta_h^{\mu\nu}$ は $h_{\mu\nu}$ に関する pure BI の Hilbert stress tensor とし、$T^{\mu\nu}$ は元の計量 $g_{\mu\nu}$ に関する full DBI のものとする。固定した $\lambda,F$ での計量変分は
+\begin{equation}
+ \delta\!\left(\sqrt{-h}\Lag_{\mathrm{BI}}^{(h)}\right)
+ =\frac12\sqrt{-h}\,\Theta_h^{\mu\nu}\delta h_{\mu\nu},
+ \qquad
+ \Theta_h^{\mu\nu}=\frac1\lambda
+ \left[h^{\mu\nu}-B(\G^{-1})^{(\mu\nu)}\right].
+ \label{eq:ch-theta}
+\end{equation}
+$g_{\mu\nu}$ を変分するときは $v_\mu$ を固定するので $\delta h_{\mu\nu}=\delta g_{\mu\nu}$ である。式\eqref{eq:ch-dbi-density}を変分し、$\sqrt{-h}=q\sqrt{-g}$ を用いれば
+\begin{equation}
+ T^{\mu\nu}=\frac{g^{\mu\nu}}{\lambda}
+ +q\left(\Theta_h^{\mu\nu}-\frac{h^{\mu\nu}}{\lambda}\right)
+ \label{eq:ch-stress-relation}
+\end{equation}
+を得る。実際、右辺に式\eqref{eq:ch-theta}を代入すると、既存の DBI stress tensor
+\begin{equation}
+ T^{\mu\nu}=\frac1\lambda
+ \left[g^{\mu\nu}-\Delta(\G^{-1})^{(\mu\nu)}\right]
+ \label{eq:ch-stress-direct}
+\end{equation}
+へ戻る。CH の二次不変量に現れる $\Theta_h$ と、既存の4次元 DBI flow の $T$ を同一視してはいけない。
+
+\section{変形パラメータ微分の連鎖律}
+
+元の計量、field strength、スカラー勾配を固定すると
+\begin{equation}
+ \left.\frac{\dd h_{\mu\nu}}{\dd\lambda}\right|_{g,F,v}
+ =v_\mu v_\nu,\qquad
+ \left.\frac{\dd q}{\dd\lambda}\right|_{g,F,v}
+ =\frac{X}{2q}.
+ \label{eq:ch-h-derivatives}
+\end{equation}
+また式\eqref{eq:ch-theta}の定義から、pure BI の scalar Lagrangian に対する計量変分は
+\begin{equation}
+ \left.\delta\Lag_{\mathrm{BI}}^{(h)}\right|_{\lambda,F}
+ =\frac12\left(\Theta_h^{\mu\nu}
+ -h^{\mu\nu}\Lag_{\mathrm{BI}}^{(h)}\right)\delta h_{\mu\nu}
+ \label{eq:ch-bi-L-metric-variation}
+\end{equation}
+である。式\eqref{eq:ch-dbi-L}を微分すると、次の一般式が得られる。
+\begin{align}
+ Q_{\mathrm{DBI}}\equiv
+ \left.\frac{\partial\Lag_{\mathrm{DBI}}}{\partial\lambda}\right|_{g,F,v}
+ ={}&\frac{q-1}{\lambda^2}
+ +\frac{X}{2q}\left(\Lag_{\mathrm{BI}}^{(h)}-\frac1\lambda\right)
+ \nonumber\\
+ &+\frac q8\left[\Theta_{h\,\mu\nu}\Theta_h^{\mu\nu}
+ -\frac12(h_{\mu\nu}\Theta_h^{\mu\nu})^2\right]
+ \nonumber\\
+ &+\frac q2\,v_\mu v_\nu
+ \left(\Theta_h^{\mu\nu}-h^{\mu\nu}\Lag_{\mathrm{BI}}^{(h)}\right).
+ \label{eq:ch-dbi-chain-flow}
+\end{align}
+ここで第2行だけが、計量 $h_{\mu\nu}$ を固定した BI の CH flow である。それ以外の項は、$q$ と誘導計量の $\lambda$ 依存から現れる。
+
+独立な確認として、Jacobi formula を使って元の determinant を直接微分する。$\G_{\mu\nu}'=v_\mu v_\nu+F_{\mu\nu}/(2\sqrt\lambda)$ と書けば
+\begin{equation}
+ Q_{\mathrm{DBI}}
+ =\frac{\Delta-1}{\lambda^2}
+ -\frac{\Delta}{2\lambda}\,
+ \tr\!\left[\G^{-1}
+ \left(vv^{\mathsf T}+\frac{F}{2\sqrt\lambda}\right)\right].
+ \label{eq:ch-dbi-direct-derivative}
+\end{equation}
+ここで行列 $vv^{\mathsf T}$ の成分は $v_\mu v_\nu$、$F$ の成分は $F_{\mu\nu}$ である。式\eqref{eq:ch-dbi-chain-flow}と\eqref{eq:ch-dbi-direct-derivative}は代数的に一致する。確認に必要なのは
+\begin{align}
+ \Theta_h^{\mu\nu}-h^{\mu\nu}\Lag_{\mathrm{BI}}^{(h)}
+ &=\frac{B}{\lambda}\left[h^{\mu\nu}-(\G^{-1})^{(\mu\nu)}\right],
+ \nonumber\\
+ \frac{q'}q&=\frac12h^{\mu\nu}v_\mu v_\nu,\qquad
+ \left.\frac{\partial B}{\partial\lambda}\right|_{h,F}
+ =\frac{B}{4\sqrt\lambda}\tr(\G^{-1}F)
+ \label{eq:ch-dbi-algebra-check}
+\end{align}
+である。これらを式\eqref{eq:ch-dbi-chain-flow}に代入すると、$h^{\mu\nu}v_\mu v_\nu$ を含む項が相殺し、式\eqref{eq:ch-dbi-direct-derivative}になる。
+
+\section{Null gradient と pure BI limit}
+
+$X=0$ の場合には $q=1$, $q'=0$ なので、式\eqref{eq:ch-dbi-chain-flow}は
+\begin{equation}
+ \left.Q_{\mathrm{DBI}}\right|_{X=0}
+ =Q_{\mathrm{BI}}^{(h)}
+ +\frac12v_\mu v_\nu
+ \left(\Theta_h^{\mu\nu}-h^{\mu\nu}\Lag_{\mathrm{BI}}^{(h)}\right),
+ \qquad h_{\mu\nu}=g_{\mu\nu}+\lambda v_\mu v_\nu.
+ \label{eq:ch-dbi-null}
+\end{equation}
+これは $h_{\mu\nu}$ が非退化で $\Delta>0$ の領域で正則である。$X=0$ であっても $v_\mu\neq0$ なら $h_{\mu\nu}\neq g_{\mu\nu}$ であり、第2項は一般に消えない。この表示は $v_\mu$ を陽に含むので、既存ノートで得た null sector の stress-tensor-only 表示とは区別する。
+
+$v_\mu=0$ まで制限すると $h_{\mu\nu}=g_{\mu\nu}$, $q=1$, $T^{\mu\nu}=\Theta_g^{\mu\nu}$ となる。式\eqref{eq:ch-dbi-chain-flow}は pure BI flow\eqref{eq:ch-bi-flow}へ帰着する。従って CH の quadratic flow と既存の $-\tr T/(4\lambda)$ は、pure BI の場配置上で同じ式である。
+
+\section{検算と残る問題}
+
+上記の恒等式を \texttt{code/ch\_dbi\_sympy.py} で検算する。CH 方程式、BI に対する二次 stress-tensor flow と trace flow、および BI の補助場辞書については SymPy による記号計算を行う。DBI については、成分が有理数の4次元場配置を用い、determinant の直接微分、式\eqref{eq:ch-dbi-chain-flow}、および既存の stress-tensor-only flow を比較する。scalar gradient が timelike、spacelike、null の場合と、$F_{\mu\nu}=0$、$v_\mu=0$ の場合を含め、すべて exact arithmetic で確かめる。
+
+この章で解析的に確立したのは、$1+\lambda X>0$ の領域における induced-metric BI 分解、stress tensor の関係式\eqref{eq:ch-stress-relation}、および連鎖律\eqref{eq:ch-dbi-chain-flow}である。一方、CH による表示だけから、full DBI flow が元の計量 $g_{\mu\nu}$ の stress tensor の二次不変量だけに依存するとは結論できない。今後は式\eqref{eq:ch-dbi-chain-flow}から $h_{\mu\nu}$、$v_\mu$、$\Theta_h^{\mu\nu}$ を消去し、既存の4次元有理式が独立に導かれるか、また $\lambda$ を陽に含まない flow 表示が可能かを調べる。
