@@ -1,0 +1,65 @@
+{
+  "status": "all_passed",
+  "source_commit": "c304d28526e7ed1b8deff80890eb1f7ac060f712",
+  "python": "3.12.14",
+  "sympy": "1.14.0",
+  "exact_residuals": {
+    "constraint_six_pair_factorization": "0",
+    "reciprocal_pair": "0",
+    "flow_pair": "0",
+    "flow_polynomial_symmetry": "0",
+    "flow_polynomial_pair_product": "0",
+    "BI_repeated_constraint": "0",
+    "BI_repeated_flow": "0",
+    "physical_point_constraint": "0",
+    "physical_point_autonomous_polynomial": "0",
+    "timelike_same_full_T": "0",
+    "timelike_direct_Q": "0",
+    "timelike_same_L": "0",
+    "timelike_Delta": "0",
+    "timelike_autonomous_polynomial": "0",
+    "spacelike_same_full_T": "0",
+    "spacelike_direct_Q": "0",
+    "spacelike_same_L": "0",
+    "spacelike_Delta": "0",
+    "spacelike_autonomous_polynomial": "0"
+  },
+  "H_lambda": "e1**2*e4 - e1*e2*e3 + e3**2 + 3*e3*e4**2*lambda**5 - e4**3*lambda**6 + lambda**4*(-2*e2*e4**2 - 3*e3**2*e4) + lambda**3*(4*e2*e3*e4 + e3**3) + lambda**2*(-e1*e3*e4 - e2**2*e4 - 2*e2*e3**2 + 4*e4**2) + lambda*(e1*e3**2 + e2**2*e3 - 4*e3*e4)",
+  "K_Q": "Q**6 + Q**5*e2/2 + Q**4*(e1*e3/4 - e4/4) + Q**3*(e1**2*e4/8 - e2*e4/4 + e3**2/8) + Q**2*(e1*e3*e4/16 - e4**2/16) + Q*e2*e4**2/32 + e4**3/64",
+  "physical_point": {
+    "lambda": "1",
+    "h_det_ratio": "3569/3600",
+    "G_det_ratio": "91938023/90720000",
+    "H_derivative_nonzero": "-373334762753*(-4504963127 + 178275*sqrt(643566161))/3682269057210237913325760000",
+    "H_derivative_numeric": "-1.78695607843948e-9",
+    "K_derivative_nonzero": "12043056863*(-1441571244630029477923 + 56825109692978681*sqrt(643566161))/116119404284976227005009795174760640000",
+    "K_derivative_numeric": "2.65874641025876e-13",
+    "Q_direct": "-1 + 178275*sqrt(643566161)/4504963127"
+  },
+  "counterexample": {
+    "timelike": {
+      "lambda": "3/2",
+      "v_cov": "Matrix([[1/2, 0, 0, 0]])",
+      "F01": "sqrt(6)/4",
+      "r_lambda": "-(lambda - 4)/4",
+      "Delta_squared_lambda": "-(5*lambda - 8)/8",
+      "T_mixed": "Matrix([[-2, 0, 0, 0], [0, -1, 0, 0], [0, 0, 1/2, 0], [0, 0, 0, 1/2]])",
+      "L": "1/2",
+      "Q": "1/2",
+      "physical_interval_verified": true
+    },
+    "spacelike": {
+      "lambda": "1",
+      "v_cov": "Matrix([[0, sqrt(2)/2, 0, 0]])",
+      "F01": "sqrt(5)/2",
+      "r_lambda": "(lambda + 2)/2",
+      "Delta_squared_lambda": "-(3*lambda - 4)/4",
+      "T_mixed": "Matrix([[-2, 0, 0, 0], [0, -1, 0, 0], [0, 0, 1/2, 0], [0, 0, 0, 1/2]])",
+      "L": "1/2",
+      "Q": "1/4",
+      "physical_interval_verified": true
+    }
+  },
+  "conclusion": "Branch-local autonomous Q exists at simple roots. Two physical configurations with identical full mixed T and L but different Q rule out a single global T-only autonomous function covering both timelike and spacelike scalar sectors. No no-go for a restricted sector is claimed.",
+  "elapsed_seconds": 1.054
+}

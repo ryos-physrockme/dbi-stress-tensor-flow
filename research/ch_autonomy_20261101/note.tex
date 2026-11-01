@@ -1,0 +1,309 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 0.05em minus 0.01em
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{tt}
+\hypersetup{pdftitle={DBI 流れの局所自律化と大域的な分枝の非一意性},pdfauthor={Algebraic assessment note}}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\linespread{1.05}
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\sym}{\operatorname{sym}}
+\newcommand{\Id}{\mathbf{1}}
+\newcommand{\Tmix}{\mathsf T}
+\newcommand{\ee}{\boldsymbol e}
+\begin{document}
+\begin{center}
+{\Large\bfseries DBI 流れの局所自律化と大域的な分枝の非一意性}\par
+\vspace{4pt}
+{\large 結合定数の消去と同一応力を持つ二つの物理配置}\par
+\vspace{4pt}
+2026 年 11 月 1 日\quad 限定的な代数評価
+\end{center}
+\noindent\textbf{要旨}\quad
+四次元単一実スカラー DBI の既知の特性因数分解から、流れ $Q$ と混合応力の
+四不変量だけの六次多項式を得る。実際の物理点で $Q$ が単純根なら、実解析的陰関数定理により
+$\lambda$ を陽に含まない分枝局所的な流れが存在する。
+したがって結合定数の消去を次元勘定だけで不可能とはいえない。
+一方、同じ完全な混合応力を持ちながら $Q$ が異なる二つの実 DBI 配置を示し、
+時間的・空間的スカラー勾配を合わせた全物理領域を覆う単一の応力のみの自律関数を排除する。
+固定した勾配符号の領域や二つの二次不変量だけを使う CH 形の分類は扱わない。
+既知結果の簡潔な代数的帰結と厳密検査であり、新規性は主張しない。
+
+\section{規約と既知の特性因数分解}
+実 Lorentz 計量の符号は $(-,+,+,+)$、$F^{\mathsf T}=-F$ とし、
+$v=(v_\mu)$ は共変勾配 $v_\mu=\partial_\mu\phi$ の列とし、
+$g,F,v$ を固定して $\lambda$ を微分する。
+$\sym A=(A+A^{\mathsf T})/2$ とする。
+\begin{equation}\label{eq:def}
+\begin{gathered}
+h=g+\lambda vv^{\mathsf T},\quad G=h+\sqrt\lambda F,\quad
+\Delta=\sqrt{\det G/\det g}>0,\quad L=(1-\Delta)/\lambda,\\
+Q=\partial_\lambda L,\quad X=v^{\mathsf T}g^{-1}v,\quad
+T=\frac{g^{-1}-\Delta\sym(G^{-1})}{\lambda},\\
+\Tmix=Tg,\qquad M=\Id-\lambda\Tmix
+\end{gathered}
+\end{equation}
+$T$ は元の DBI 作用の Hilbert 応力
+$T^{\mu\nu}=g^{\mu\nu}L+2\partial L/\partial g_{\mu\nu}$、
+$\Tmix$ は混合応力であり、改良項は加えない。以下、$\lambda\ne0$、主に
+$\lambda>0,\det h/\det g>0,\Delta>0$ の非退化な実 DBI 配置を扱う。
+$e_k=e_k(\Tmix)$、$E_k=e_k(M)$ を区別し、$\ee=(e_1,e_2,e_3,e_4)$ と書く。
+基本対称式は $\det(z\Id-\Tmix)=z^4-e_1z^3+e_2z^2-e_3z+e_4$ で定義する。
+
+固定原稿の \texttt{eq:char-factor-app} と \texttt{eq:beta-app} を入力とする。
+\begin{equation}\label{eq:factor}
+\chi_M(z)=(z^2-\alpha z+r)(z^2-\beta z+1),\qquad
+r=E_4=1+\lambda X,\qquad \beta=2(1+\lambda^2Q)
+\end{equation}
+$\beta$ の原稿中の比表示 $(E_1-E_3)/(1-E_4)$ は $X\ne0$ に対する式である。
+本ノートの局所存在の実例も非 null 点に置く。null 部分では既知の物理枝の指定が別途必要であり、
+この比で割らない。
+
+混合応力の固有値を代数的重複度込みで $t_1,\ldots,t_4$ とすると、
+$M$ の固有値は $m_i=1-\lambda t_i$。固有値は $\mathbb C$ 上で扱い、
+すべて実と仮定せず、対角化も必要としない。
+定数項 1 の因子に属する二根 $m_i,m_j$ は
+\begin{equation}\label{eq:pair}
+(1-\lambda t_i)(1-\lambda t_j)=1,
+\qquad \lambda t_it_j=t_i+t_j
+\end{equation}
+を満たす。$\beta=2-\lambda(t_i+t_j)$ を使うと、$Q=-t_it_j/2$ には積での除算が不要である。
+$t_it_j\ne0$ の場合の結合定数の再構成と合わせて
+\begin{equation}\label{eq:pair-flow}
+\boxed{\lambda=\frac{t_i+t_j}{t_it_j},\qquad
+Q=\frac{\beta-2}{2\lambda^2}
+=-\frac{t_i+t_j}{2\lambda}=-\frac{t_it_j}{2}}
+\end{equation}
+である。どの対が物理的な因子に属するかは、無標識の固有値だけでは一意に決まらない。
+
+\newpage
+\section{対称多項式による結合定数の消去}
+原稿の \texttt{eq:algebraic-relation} を左辺に集めた多項式を
+\begin{equation}\label{eq:C}
+\begin{split}
+C(E)={}&(E_4-1)^2E_2+E_1^2E_4-E_1E_3(E_4+1)+E_3^2\\
+ &-E_4^3+E_4^2+E_4-1
+\end{split}
+\end{equation}
+とすると、DBI 配置では $C(E)=0$ である。$M=\Id-\lambda\Tmix$ より
+\begin{equation}\label{eq:transform}
+\begin{gathered}
+E_1=4-\lambda e_1,\qquad E_2=6-3\lambda e_1+\lambda^2e_2,\\
+E_3=4-3\lambda e_1+2\lambda^2e_2-\lambda^3e_3,\\
+E_4=1-\lambda e_1+\lambda^2e_2-\lambda^3e_3+\lambda^4e_4
+\end{gathered}
+\end{equation}
+であり、代入と整理は
+\begin{equation}\label{eq:H}
+C(E(\lambda,\ee))=\lambda^6H(\lambda;\ee),\qquad
+H(\lambda;\ee)=-\prod_{1\leq i<j\leq4}
+ (\lambda t_it_j-t_i-t_j)
+\end{equation}
+を与える。右辺は $t_i$ の置換で不変なので $e_k$ の多項式に書ける。
+$\lambda$ について一般には六次だが、$e_4=0$ などでは次数が下がり得る。
+$\lambda\ne0$ では $H=0$。代入で現れた因子 $\lambda^6$ を、物理的な
+$\lambda=0$ 分枝の証拠として扱ってはならない。
+
+次に、実現した物理対の $Q=-t_it_j/2$ を含むすべての対をまとめ、
+\begin{equation}\label{eq:K-product}
+K(Q;\ee):=\prod_{1\leq i<j\leq4}\left(Q+\frac{t_it_j}{2}\right)
+\end{equation}
+とする。これも対称式なので、展開して基本対称式で書き直すと
+\begin{equation}\label{eq:K}
+\boxed{\begin{aligned}
+K(Q;\ee)={}&Q^6+\frac{e_2}{2}Q^5+\frac{e_1e_3-e_4}{4}Q^4\\
+&+\frac{e_1^2e_4-2e_2e_4+e_3^2}{8}Q^3
+ +\frac{e_1e_3e_4-e_4^2}{16}Q^2\\
+&+\frac{e_2e_4^2}{32}Q+\frac{e_4^3}{64}
+\end{aligned}}
+\end{equation}
+を得る。よって実際の流れは $K(Q;\ee)=0$ を満たす。
+結合定数はこの式から陽に消えているが、六つの候補根のうち物理的なものを
+一意に選んだ式ではない。
+
+導出は \eqref{eq:pair-flow} による物理対の選択と、
+全対の積を取ることで選択情報を落とす段階を分けている。
+後者は、固有値が複素でも実係数 $e_k$ を使う多項式恒等式として有効である。
+スクリプトは \eqref{eq:H} の因数分解と、\eqref{eq:K-product} と
+\eqref{eq:K} の一致を厳密に検査する。
+
+\newpage
+\section{分枝局所的な自律形とその限界}
+実際の実 DBI 点で得られた流れと不変量を $(Q_*,\ee_*)$ とする。
+\begin{equation}\label{eq:IFT-condition}
+K(Q_*;\ee_*)=0,\qquad \partial_QK(Q_*;\ee_*)\ne0
+\end{equation}
+なら、実解析的陰関数定理により $\ee_*$ の近傍に一意な実解析関数が存在し、
+\begin{equation}\label{eq:autonomy}
+Q=f(\ee),\qquad f(\ee_*)=Q_*,\qquad K(f(\ee);\ee)=0
+\end{equation}
+となる。これは $\lambda$ を陽に含まない\textbf{分枝局所的な自律形}である。
+近傍の物理配置で $Q$ がこの根の近くを連続的に動く限り、その流れは同じ $f$ に一致する。
+全四不変量を使う結論であり、CH 非線形電磁気学の二つの二次不変量だけの形へ
+還元したことも、理論クラス全体の自律化を証明したことも意味しない。
+
+別の十分条件は、実際の点で
+\begin{equation}\label{eq:H-IFT}
+H(\lambda_*;\ee_*)=0,\quad \partial_\lambda H(\lambda_*;\ee_*)\ne0
+\quad\Longrightarrow\quad \lambda=\Lambda(\ee)
+\end{equation}
+と再構成する方法である。$X\ne0$ の既存有理流れ
+\begin{equation}\label{eq:old-flow}
+Q=\frac{2\lambda e_4-e_3}
+ {2(e_1-\lambda e_2+\lambda^2e_3-\lambda^3e_4)},\qquad
+ e_1-\lambda e_2+\lambda^2e_3-\lambda^3e_4=-X
+\end{equation}
+に $\Lambda(\ee)$ を代入すれば、分母が非零の近傍で自律形を得る。
+$H$ 法と $K$ 法の単純根条件は、どちらも十分条件として述べている。
+
+\paragraph{重根は不可能性を意味しない}
+純 BI の固有値を $(a,a,b,b)$ とすれば、交差する対の根が四重になり
+\begin{equation}\label{eq:BI}
+K(Q)=(Q+a^2/2)(Q+b^2/2)(Q+ab/2)^4
+\end{equation}
+となる。物理的な交差対の根 $Q=-ab/2$ では $\partial_QK=0$ であり、
+この多項式への陰関数定理の単純根判定は使えない。
+しかし純 BI には既知の自律的な二次応力流れがある。
+従って「判定が失敗」と「自律形が存在しない」は別である。
+
+\paragraph{退化と物理的な枝}
+$t_it_j=0$ なら、\eqref{eq:pair} と $\lambda\ne0$ より $t_i=t_j=0$。
+この場合 $\beta=2,Q=0$ となり、\eqref{eq:pair-flow} では割らない。
+また $K$ や $H$ の実根であることだけでは DBI 配置としての実現可能性は保証されない。
+少なくとも $\lambda>0,\det h/\det g>0,\Delta>0$ と、既知因子への物理対の割り当てが必要である。
+次頁では全物理領域における一価性を実際の二配置で否定する。
+制限した領域での分枝分類や重根をまたぐ継続は行わない。
+
+\newpage
+\section{同一応力と異なる流れを持つ二つの実配置}
+数値の比較には\textbf{共通の固定質量尺度} $\mu$ を用いる。
+\begin{equation}\label{eq:units}
+\begin{gathered}
+\widehat\lambda=\lambda\mu^4,\quad \widehat v=v/\mu^2,\quad \widehat F=F/\mu^2,\\
+\widehat T=T/\mu^4,\quad \widehat L=L/\mu^4,\quad \widehat Q=Q/\mu^8
+\end{gathered}
+\end{equation}
+以下は帽子を省略した無次元値である。二状態ごとに単位を取り直すのではない。
+どちらも $g=\operatorname{diag}(-1,1,1,1)$ とし、独立な場成分は次表以外を零とする。
+各行で $v,F$ を固定し、その行の $\lambda_*$ で流れを評価する。
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & 配置 A & 配置 B\\
+\midrule
+$\lambda_*$ & $3/2$ & $1$\\
+$v_\mu$ & $(1/2,0,0,0)$ & $(0,1/\sqrt2,0,0)$\\
+$X$ & $-1/4$ & $1/2$\\
+$F_{01}$ & $\sqrt{3/8}$ & $\sqrt5/2$\\
+$\det h/\det g$ & $1-\lambda/4$ & $1+\lambda/2$\\
+$\Delta^2$ & $1-5\lambda/8$ & $1-3\lambda/4$\\
+$\Delta(\lambda_*)$ & $1/4$ & $1/2$\\
+$L(\lambda_*)$ & $1/2$ & $1/2$\\
+$Q(\lambda_*)$ & $1/2$ & $1/4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+行列から求めた\textbf{完全な混合応力}は両者で同じである。
+\begin{equation}\label{eq:same-T}
+\Tmix_A=\Tmix_B=\operatorname{diag}(-2,-1,1/2,1/2),\qquad Q_A\ne Q_B
+\end{equation}
+従って全応力不変量も等しい。$L$ を加えても、この二配置は区別できない。
+$Q$ は、場を固定した $L=(1-\sqrt{1-c\lambda})/\lambda$ の直接微分で確認する。
+ここで $c_A=5/8,c_B=3/4$ であり、$\lambda_*$ まで場を変えて微分するのではない。
+
+配置 A では $0\leq\lambda\leq3/2$ で
+$\det h/\det g\geq5/8>0$、$\Delta^2\geq1/16>0$。
+配置 B では $0\leq\lambda\leq1$ で
+$\det h/\det g\geq1>0$、$\Delta^2\geq1/4>0$。
+どちらも弱結合極限から端点まで正の平方根の枝に連結し、$h,G$ は非退化である。
+したがって単に代数的候補根を二つ挙げた例ではなく、実際の物理配置である。
+
+\paragraph{結論の正確な範囲}
+全 $\lambda>0$ と両方の $X$ 符号を含むこの正則な物理領域上に、単一の
+$Q=f(e_1,e_2,e_3,e_4)$、さらに完全な $\Tmix$ だけの単一関数は存在しない。
+ここで正則とは $h,G$ の非退化を指し、スペクトルの単純根条件ではない。
+これは同じ $\lambda$ での衝突でも、固定場の時間発展の非一意性でもない。
+固定した $X$ 符号、単純根だけの部分集合、追加の分枝ラベルを用いる場合への不可能性は示さない。
+前節の分枝局所的な存在とも矛盾しない。
+結合定数の規格化も共通であり、場に依存する再パラメータ化や改良応力は対象外である。
+ここで用いる実 DBI 枝では $h$ は Lorentz 計量である。
+動力学的・因果的安定性や有限全エネルギーを主張するものではなく、局所的な一定場で十分である。
+
+\newpage
+\section{厳密な実点と検査記録}
+単純根条件が空虚でないことを、次の一つの実 DBI 点で検査する。
+\begin{equation}\label{eq:point}
+\begin{gathered}
+\lambda=1,\quad g=\operatorname{diag}(-1,1,1,1),\quad
+v=(1/3,1/4,0,1/5)^{\mathsf T},\\
+F_{01}=1/5,\quad F_{02}=1/7,\quad F_{12}=1/6,\quad F_{23}=1/4
+\end{gathered}
+\end{equation}
+他の独立成分は零とする。厳密な行列式比は
+\begin{equation}\label{eq:point-branch}
+X=-\frac{31}{3600}\ne0,\quad
+\frac{\det h}{\det g}=\frac{3569}{3600}>0,\quad
+\frac{\det G}{\det g}=\frac{91938023}{90720000}>0
+\end{equation}
+である。$d=\sqrt{643566161}$ と置くと、直接流れは
+$Q_*=-1+178275d/4504963127$。この点で $H(1;\ee_*)=K(Q_*;\ee_*)=0$ を確認し、
+微分はそれぞれ
+\begin{equation}\label{eq:Hp}
+\left.\partial_\lambda H\right|_*
+=\frac{-373334762753(-4504963127+178275d)}
+ {3682269057210237913325760000}
+\simeq-1.78695607843948\times10^{-9}\ne0
+\end{equation}
+および
+\begin{equation}\label{eq:Kp}
+\begin{split}
+\left.\partial_QK\right|_*
+&=\frac{12043056863(-1441571244630029477923+56825109692978681d)}
+ {116119404284976227005009795174760640000}\\
+&\simeq2.65874641025876\times10^{-13}\ne0
+\end{split}
+\end{equation}
+となる。非零性は数値丸めではなく厳密式で判定した。
+小さい近似値から数値的な条件の良さや大域的安定性は推論しない。
+
+同梱の \texttt{check.py} は \textbf{厳密零の残差 19 件}と、これらとは別の
+\textbf{微分が非零という assertion 2 件}、および反例の区間正性などを検査する。
+零残差は、制約の六対因数分解、逆数対、流れの対表示、対称式剰余、
+$K$ の全対積、BI の二つの重根恒等式、実点での $H$ と $K$ の 9 件に、各反例の完全応力・$Q$・$L$・$\Delta$・$K$ の 5 件ずつを加えたものである。
+Python 3.12.14、SymPy 1.14.0、CPU 上での記録時間は 1.054 秒。
+一回の環境依存の記録であり、性能保証ではない。
+\texttt{results.json} のキー \texttt{H\_lambda} と \texttt{K\_Q} は
+\textbf{多項式そのもの}を表し、微分値は \texttt{physical\_point} 内の別キーに記録する。
+スクリプトは出典 blob の検証や前段階の再実行をしない。
+別の \texttt{metric\_variation\_check.py} は対角計量の直接変分から応力対角成分を求め、
+完全混合応力行列と固定場の $Q$ も照合する。
+
+\subsection*{固定出典と結論}
+\small
+\noindent
+\begin{tabular}{@{}ll@{}}
+コミット & \texttt{c304d28526e7ed1b8deff80890eb1f7ac060f712}\\
+上流原稿 & \texttt{paper/paper.tex}
+\end{tabular}\par
+\noindent
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/blob/c304d28526e7ed1b8deff80890eb1f7ac060f712/paper/paper.tex}{固定原稿へのリンク}\par
+使用した既知結果は \texttt{eq:char-factor-app}、\texttt{eq:beta-app}、
+\texttt{eq:algebraic-relation}。本ノートはそれらの代数的帰結を整理したものである。
+結合定数の明示的消去は単純根の近傍では可能だが、全物理領域を覆う単一関数は
+二つの実配置により否定される。制限領域での分枝分類や、より狭い CH 自律形の条件は未検討である。
+文献との比較は別紙に分け、新規性を主張しない。
+\end{document}

@@ -1,0 +1,43 @@
+{
+  "status": "all_passed",
+  "source_commit": "62e0d609e6d5109675834b0d5f14e5afdfc47550",
+  "source_blob_sha1": "8f5056aa25bc51d10f03e1aea3d64df2ae435d37",
+  "python": "3.12.14",
+  "sympy": "1.14.0",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "baseline_stdout": "PASS: CH equation, BI flow, and auxiliary-field dictionary\nPASS: symbolic pure BI quadratic and trace flows\nPASS: timelike scalar gradient with gauge field\nPASS: spacelike scalar gradient with gauge field\nPASS: nonzero null scalar gradient with gauge field\nPASS: pure scalar DBI\nPASS: pure Born--Infeld\nAll Courant--Hilbert / DBI exact checks passed.\n",
+  "exact_residuals": {
+    "null_norm": "0",
+    "null_induced_determinant": "0",
+    "determinant_polynomial": "0",
+    "null_chain_rule": "0",
+    "nonzero_metric_correction": "0",
+    "directional_contraction": "0",
+    "trace_plus_directional_flow": "0",
+    "null_discriminant": "0",
+    "null_invariant_flow_positive_branch": "0",
+    "pure_BI_limit": "0",
+    "pure_scalar_chain": "0",
+    "pure_scalar_rationalized": "0",
+    "generic_chain_cancellation": "0",
+    "generic_trace_directional_identity": "0",
+    "weak_coupling_limit": "0",
+    "aligned_determinant": "0",
+    "aligned_directional_contraction": "0",
+    "aligned_metric_correction": "0"
+  },
+  "null_family": {
+    "det_ratio": "-a**2*e**2*lambda**2 - e**2*lambda + 1",
+    "metric_correction": "a**2*e**2/(2*sqrt(-a**2*e**2*lambda**2 - e**2*lambda + 1))",
+    "Tvv": "a**2*e**2/sqrt(-a**2*e**2*lambda**2 - e**2*lambda + 1)",
+    "discriminant": "-a**4*e**4*lambda**4/(a**2*e**2*lambda**2 + e**2*lambda - 1)",
+    "branch": "lambda>0, a>0, e>0, 1-lambda*e^2-lambda^2*a^2*e^2>0",
+    "sample_metric_correction": "sqrt(881)/13215"
+  },
+  "limitations": [
+    "No new general original-EMT invariant closure proved",
+    "Null invariant formula already exists in source; this independently verifies and derives its root in a restricted family",
+    "Targeted primary-literature comparison is recorded in LITERATURE.md; no literature novelty claim"
+  ],
+  "elapsed_seconds": 5.204
+}
