@@ -1,0 +1,378 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 0.05em minus 0.01em
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{tt}
+\hypersetup{pdftitle={DBI の CH 構成と null 勾配の追試},pdfauthor={Symbolic follow-up note}}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\linespread{1.05}
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\sym}{\operatorname{sym}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Id}{\mathbf{1}}
+\newcommand{\Tmix}{\mathsf{T}}
+\newcommand{\Thmix}{\mathsf{H}}
+\newcommand{\Qbi}{Q_{\mathrm{BI}}}
+\newcommand{\Cmet}{C_{\mathrm{met}}}
+\newcommand{\Lbi}{L_{\mathrm{BI}}}
+\begin{document}
+\begin{center}
+{\Large\bfseries DBI の CH 構成と null 勾配の追試}\par
+\vspace{5pt}
+{\large 計量の連鎖律と制限族における平方根の枝}\par
+\vspace{5pt}
+2026 年 11 月 1 日\quad 固定コミットに対する計算ノート
+\end{center}
+\vspace{3pt}
+\noindent\textbf{要旨}\quad
+誘導計量による Born--Infeld（BI）表現から、元の計量に関する
+Dirac--Born--Infeld（DBI）流れを整理する。
+一般の非退化配置では、流れは応力テンソルのトレースだけでなく、
+スカラー勾配方向の収縮を含む。null 勾配では誘導計量の行列式比が
+1 でも計量変化の項は一般には消えない。電場一成分の制限族でこの項を厳密に計算し、
+固定ソースに\textbf{既にある}不変量根式の正の枝を再導出する。
+元の EMT だけによる公式はソースに既存だが、その一般的な CH からの独立導出や
+$\lambda$ を陽に含まない自律形を得た結果ではない。文献との比較は別紙に分け、本ノートでは新規性を主張しない。
+
+\section{規約と固定する量}
+時空は四次元、計量 $g_{\mu\nu}$ は符号 $(-,+,+,+)$、
+$F^{\mathsf T}=-F$ とする。列 $v=(v_\mu)$ は共変成分
+$v_\mu=\partial_\mu\phi$ を並べたものであり、流れの微分では
+$g,F,v$ を固定する。行列積と転置で添字を明示的に管理し、
+\begin{equation}\label{eq:definition}
+\begin{gathered}
+\lambda>0,\quad X=v^{\mathsf T}g^{-1}v,\quad
+h=g+\lambda vv^{\mathsf T},\quad G=h+\sqrt\lambda F,\\
+\Delta=\sqrt{\frac{\det G}{\det g}}>0,\quad
+L=\frac{1-\Delta}{\lambda},\qquad
+Q=\left.\frac{\partial L}{\partial\lambda}\right|_{g,F,v}
+\end{gathered}
+\end{equation}
+と定める。以下は $\det h/\det g>0$ かつ $\det G/\det g>0$ の枝で扱い、
+$h,G$ の逆行列が存在すると仮定する。$\lambda=0$ は式の代入点ではなく、
+存在する場合の連続極限である。
+
+計量の\textbf{共変成分}を変分する規約を採る。
+$S=\sym(G^{-1})=(G^{-1}+G^{-\mathsf T})/2$ とおくと、
+\begin{equation}\label{eq:stress}
+T^{\mu\nu}=g^{\mu\nu}L+2\frac{\partial L}{\partial g_{\mu\nu}},
+\qquad T=\frac{g^{-1}-\Delta S}{\lambda},\qquad
+\Tmix=Tg
+\end{equation}
+である。$\tr\Tmix=T^{\mu\nu}g_{\nu\mu}$ と
+$v^{\mathsf T}Tv=v_\mu T^{\mu\nu}v_\nu$ は別の収縮である。
+実際、$\delta\Delta=\Delta\tr[(G^{-1}-g^{-1})\delta g]/2$ を
+$\delta L$ に代入すれば \eqref{eq:stress} が得られる。
+
+行列式補題と Sherman--Morrison 公式は
+\begin{equation}\label{eq:q}
+q=\sqrt{\frac{\det h}{\det g}}=\sqrt{1+\lambda X}>0,
+\qquad h^{-1}=g^{-1}-\frac{\lambda g^{-1}vv^{\mathsf T}g^{-1}}
+ {1+\lambda X}
+\end{equation}
+を与える。$X=0$ と $v=0$ は同値でない。この区別が null 配置で重要になる。
+
+\newpage
+\section{BI 表現と計量の連鎖律}
+行列式の BI 因子を $B=\Delta/q$ とし、方向収縮との記号の衝突を避ける。
+誘導計量を背景とする量を
+\begin{equation}\label{eq:bi-definition}
+B=\sqrt{\frac{\det G}{\det h}},\qquad
+\Lbi=\frac{1-B}{\lambda},\qquad
+\Theta=\frac{h^{-1}-BS}{\lambda},\qquad \Thmix=\Theta h
+\end{equation}
+とおくと、分解と応力テンソルの関係は
+\begin{equation}\label{eq:factorization}
+L=q\Lbi+\frac{1-q}{\lambda},\qquad
+T=\frac{g^{-1}}\lambda+q\left(\Theta-\frac{h^{-1}}\lambda\right)
+\end{equation}
+となる。$\Theta$ は $h$ に関する反変応力であり、$T$ と同じものではない。
+
+固定ソースが用いる CH の BI 解は、変数 $U,V$ と
+$R=\sqrt{(1+2\lambda U)(1-2\lambda V)}>0$ に対し
+\begin{equation}\label{eq:ch}
+\mathcal L=\frac{1-R}{\lambda},\quad
+\mathcal L_U=-\frac{1-2\lambda V}{R},\quad
+\mathcal L_V=\frac{1+2\lambda U}{R},\quad
+\mathcal L_U\mathcal L_V=-1
+\end{equation}
+を満たす。対応する固定 $h$ の BI 流れとしてソースは
+\begin{equation}\label{eq:bi-flow}
+\Qbi=\left.\frac{\partial\Lbi}{\partial\lambda}\right|_{h,F}
+=\frac18\left\{\tr(\Thmix^2)-\frac12(\tr\Thmix)^2\right\}
+\end{equation}
+を検査する。本ノートではこの CH 二次形式と、次頁の独立な
+Jacobi 表式を区別する。後者による連鎖律の整理は CH の一般証明を必要としない。
+
+$h'=vv^{\mathsf T}$ であるから、$\delta\Lbi=
+\tr[(\Theta-h^{-1}\Lbi)\delta h]/2$ と
+\eqref{eq:factorization} の微分により
+\begin{equation}\label{eq:chain}
+\begin{split}
+Q={}&\frac{q-1}{\lambda^2}
+ +q'\left(\Lbi-\frac1\lambda\right)+q\Qbi+\Cmet,\\
+\Cmet={}&\frac q2 v^{\mathsf T}(\Theta-h^{-1}\Lbi)v,
+\qquad q'=\frac{X}{2q}
+\end{split}
+\end{equation}
+を得る。ここで $\Qbi$ は固定 $h$ の偏微分である。
+$q\Qbi$ だけを DBI 流れと同定すると、$q'$ の項と
+$\Cmet$ の両方を落としてしまう。
+特に $X=0$ なら $q=1,q'=0$ だが、非零の $v$ に対して
+$h'=vv^{\mathsf T}$ は消えない。
+
+\newpage
+\section{一般配置での消去と方向収縮}
+連鎖律の各項を、独立な三つの収縮
+\begin{equation}\label{eq:contractions}
+A=v^{\mathsf T}h^{-1}v=\frac{X}{1+\lambda X},\qquad
+J=v^{\mathsf T}Sv,\qquad K=\tr(G^{-1}F)
+\end{equation}
+で記す。$q'=qA/2$ および $qB=\Delta$ を用いれば、
+\begin{equation}\label{eq:metric-cancellation}
+\Cmet=\frac{\Delta}{2\lambda}(A-J),\qquad
+q'\left(\Lbi-\frac1\lambda\right)=-\frac{\Delta A}{2\lambda}
+\end{equation}
+となる。第一式は $1/\lambda-\Lbi=B/\lambda$ を
+\eqref{eq:bi-definition} に代入するだけで得られる。
+
+固定 $h$ では $G'=F/(2\sqrt\lambda)$ なので、Jacobi 公式から
+\begin{equation}\label{eq:fixed-jacobi}
+\left.\frac{\partial\Lbi}{\partial\lambda}\right|_{h,F}
+=\frac{B-1}{\lambda^2}-\frac{BK}{4\lambda\sqrt\lambda}
+\end{equation}
+である。これを \eqref{eq:chain} に入れると $A$ の項が消去される。
+一方、元の変数を固定した場合には
+$G'=vv^{\mathsf T}+F/(2\sqrt\lambda)$ であるから、両経路とも
+\begin{equation}\label{eq:direct}
+\Delta'=\frac\Delta2\left(J+\frac{K}{2\sqrt\lambda}\right),
+\qquad
+Q=\frac{\Delta-1}{\lambda^2}-\frac{\Delta J}{2\lambda}
+ -\frac{\Delta K}{4\lambda\sqrt\lambda}
+\end{equation}
+を与える。これは連鎖律の補正を含む、一般配置の恒等式である。
+
+次に $g=G-\lambda vv^{\mathsf T}-\sqrt\lambda F$ と
+$\tr(Sg)=\tr(G^{-1}g)$ を用いる。四次元であることから
+\begin{equation}\label{eq:trace}
+\tr(Sg)=4-\lambda J-\sqrt\lambda K,\qquad
+\tr\Tmix=\frac{4-\Delta(4-\lambda J-\sqrt\lambda K)}{\lambda}
+\end{equation}
+となる。\eqref{eq:direct} と組み合わせると $K$ が消え、
+\begin{equation}\label{eq:main}
+\boxed{\displaystyle
+Q=-\frac{\tr\Tmix}{4\lambda}-\frac{\Delta J}{4\lambda}
+=-\frac{\tr\Tmix}{4\lambda}-\frac{X}{4\lambda}
+ +\frac14v^{\mathsf T}Tv }
+\end{equation}
+を得る。最後の等号は $v^{\mathsf T}Tv=(X-\Delta J)/\lambda$ による。
+この結果は $X$ で割らず、null 勾配でも正則である。
+ただし $v^{\mathsf T}Tv$ を残すため、$\Tmix$ の固有値不変量だけで
+閉じた式の証明ではない。$v=0$ なら BI のトレース流れ
+$Q=-\tr\Tmix/(4\lambda)$ に戻る。
+
+\newpage
+\section{電場一成分を持つ非零 null 勾配}
+検査する制限族は
+\begin{equation}\label{eq:null-family}
+g=\operatorname{diag}(-1,1,1,1),\quad
+v=(a,a,0,0)^{\mathsf T},\quad F_{02}=e=-F_{20},\quad
+\lambda,a,e>0
+\end{equation}
+であり、他の $F$ 成分は零とする。$X=0,\ q=1$ である。
+$r=\lambda e^2,\ t=\lambda a^2$ とおくと
+\begin{equation}\label{eq:null-matrix}
+G=\begin{pmatrix}
+-1+t&t&\sqrt\lambda e&0\\
+t&1+t&0&0\\
+-\sqrt\lambda e&0&1&0\\
+0&0&0&1
+\end{pmatrix},\qquad
+D^2=\frac{\det G}{\det g}=1-r-t\,r=:d>0
+\end{equation}
+となる。以下 $D=\sqrt d>0$ はこの族での $\Delta=B$ である。
+正の行列式比という条件は $\lambda$ の許容領域を制限する。
+
+$G$ の逆行列の対称部分は
+\begin{equation}\label{eq:null-S}
+S=\frac1d\begin{pmatrix}
+-(1+t)&t&0&0\\
+t&1-t-r&0&0\\
+0&0&1&0\\
+0&0&0&d
+\end{pmatrix},\qquad
+J=-\frac{\lambda a^2e^2}{d}
+\end{equation}
+である。$A=0$ だが $J\ne0$ なので、\eqref{eq:metric-cancellation} は
+\begin{equation}\label{eq:null-correction}
+\boxed{\displaystyle
+\Cmet=\frac{a^2e^2}{2D},\qquad
+v^{\mathsf T}Tv=\frac{a^2e^2}{D},\qquad
+Q=\Qbi+\Cmet }
+\end{equation}
+を与える。従って $q=1$ から「純 BI と同じ流れ」と結論することはできない。
+たとえば $(\lambda,a,e)=(1/2,1/3,1/5)$ では
+$d=881/900$、$\Cmet=\sqrt{881}/13215>0$ である。
+
+$L=(1-D)/\lambda$ の直接微分も
+\begin{equation}\label{eq:null-direct}
+\begin{split}
+Q&=\frac{D-1}{\lambda^2}
+ +\frac{e^2+2\lambda a^2e^2}{2\lambda D},\\
+\Qbi&=\frac{(D-1)^2}{2\lambda^2D},\qquad
+Q=\frac{(D-1)^2+t\,r}{2\lambda^2D}
+\end{split}
+\end{equation}
+となり、補正の符号と係数を確認する。最後の $t\,r$ は変数 $t$ と $r$ の積であり、
+トレース演算 $\tr$ ではない。
+
+対照として同じ $v$ のまま電場を $F_{01}=e=-F_{10}$ に揃え、
+他の成分を零にすると、$1-\lambda e^2>0$ の枝で
+\begin{equation}\label{eq:aligned}
+\Delta_{\parallel}^2=1-\lambda e^2,\qquad
+v^{\mathsf T}T_{\parallel}v=0,\qquad
+C_{\mathrm{met},\parallel}=0
+\end{equation}
+となる。非零 null 勾配があれば常に補正が非零なのではなく、
+ゲージ場と勾配の相対的配置が重要である。
+
+\newpage
+\section{不変量根式の枝と極限}
+元の応力から
+\begin{equation}\label{eq:invariants}
+M=\Id-\lambda\Tmix=DSg,\qquad
+E_1=\tr M,\qquad E_2=\frac{(\tr M)^2-\tr(M^2)}2
+\end{equation}
+を作る。\eqref{eq:null-S} より、$DM$ は左上の
+$P=\left(\begin{smallmatrix}1+t&t\\-t&1-t-r\end{smallmatrix}\right)$ と
+残りの対角成分 $1,d$ からなるブロック行列である。
+$\tr P=2-r,\det P=d$ なので、固有値を解かずに
+\begin{equation}\label{eq:E12}
+E_1=\frac{3-r+d}{D}=\frac{4-2r-t\,r}{D},\qquad
+E_2=\frac{2d+(2-r)(1+d)}{d}=4-r+\frac{2-r}{d}
+\end{equation}
+と得られる。したがって、判別式とその\textbf{正の}平方根は
+\begin{equation}\label{eq:discriminant}
+\begin{split}
+Z:=E_1^2-4E_2+8
+ &=\frac{(3-r+d)^2-4(2-r)(1+d)}{d}\\
+ &=\frac{(1-r-d)^2}{d}
+ =\frac{\lambda^4a^4e^4}{D^2},\qquad
+\sqrt Z=\frac{\lambda^2a^2e^2}{D}
+\end{split}
+\end{equation}
+である。$\sqrt{u^2}=u$ を無条件に使ったのではない。
+\eqref{eq:null-family} と $D>0$ により右辺が正と確定している。
+これと \eqref{eq:main}、$\tr\Tmix=(4-E_1)/\lambda$ から
+\begin{equation}\label{eq:null-root}
+\boxed{\displaystyle
+Q=\frac{E_1+\sqrt{E_1^2-4E_2+8}-4}{4\lambda^2} }
+\end{equation}
+を得る。この式は固定ソースの null 分岐に既にある。
+ここで与えたのは一成分制限族での独立な再導出であり、
+任意の null 配置に対する判別式恒等式や枝の大域的証明ではない。
+
+\paragraph{純 BI 極限}
+$a\to0$ を $d>0$ の範囲で取ると $\Cmet,v^{\mathsf T}Tv,Z$ は零となり、
+$Q=\Qbi=-\tr\Tmix/(4\lambda)$ に一致する。
+これは同じ族内の連続極限である。
+元の横方向電場族では、$\lambda\to0^+$ に対し
+\begin{equation}\label{eq:weak}
+Q\longrightarrow\frac{a^2e^2}{2}+\frac{e^4}{8}
+\end{equation}
+となる。第一項は計量補正の極限であり、第二項だけを残す純 BI の極限とは異なる。
+
+\paragraph{純スカラー極限}
+独立に $F=0$、$X$ を実数として $q=\sqrt{1+\lambda X}>0$ とする。
+$\Delta=q$ を直接微分し、$\lambda X=q^2-1$ を使うと
+\begin{equation}\label{eq:scalar}
+Q=\frac{q-1}{\lambda^2}-\frac{X}{2\lambda q}
+=\frac{(q-1)^2}{2\lambda^2q}
+=\frac{X^2}{2q(q+1)^2}
+\end{equation}
+となる。$X=0$ でも正則で $Q=0$、$\lambda\to0$ では $Q\to X^2/8$。
+ただし非零 null 勾配では、$L=0$ から応力テンソル自体が零とはいえない。
+
+\newpage
+\section{検査結果と残された範囲}
+\texttt{check.py} は最初にソースの Git blob SHA-1 を検証し、
+固定ソースをそのまま実行してから追試の恒等式を検査する。
+保存済み \texttt{results.json} では、ベースラインの CH 方程式、
+BI 流れ、補助場辞書、timelike・spacelike・非零 null の各配置、
+純スカラー、純 BI がすべて通過した。
+これは表示上 7 群のベースライン PASS に対応する。
+それとは別に、追試の厳密残差 18 件もすべて文字列 \texttt{0} である。
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.64\linewidth}r@{}}
+\toprule
+追試の検査群 & 件数\\
+\midrule
+null ノルム・誘導行列式・$D^2$ 多項式 & 3\\
+連鎖律・非零計量補正・方向収縮・トレース流れ & 4\\
+null 判別式・正の枝・純 BI 極限 & 3\\
+純スカラーの微分形と有理化形 & 2\\
+一般連鎖律の相殺・一般トレース恒等式 & 2\\
+横方向族の弱結合極限・整列電場の対照 & 4\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+記録された実行は CPU 上の記号計算であり、Python 3.12.14、
+SymPy 1.14.0、Linux 6.18.57 x86\_64、glibc 2.41、所要時間 5.204 秒である。
+時間はこの一回の環境依存の記録であり、性能保証ではない。
+残差の厳密零は浮動小数点近似ではないが、有限個の配置の検査だけで
+任意配置の恒等式や物理的安定性を証明したことにもならない。
+
+元の混合応力 $\Tmix$ の基本対称式を $e_k$ とする固定ソースには、
+非 null 配置で検査する有理式
+\begin{equation}\label{eq:old-rational}
+\mathcal D_T=e_1-\lambda e_2+\lambda^2e_3-\lambda^3e_4,
+\qquad Q_{\mathrm{old}}=\frac{2\lambda e_4-e_3}{2\mathcal D_T}
+\end{equation}
+もある。ソースは例示配置で $\mathcal D_T=-X$ を検査するため、
+この分母を null 配置でそのまま割ることはできない。
+本追試は \eqref{eq:old-rational} の一般証明を追加していない。
+未解決なのは元の EMT だけによる既存公式の存在ではなく、
+CH 連鎖律から方向依存収縮を独立に消去する一般恒等式と、
+$\lambda$ を陽に含まない自律形の構成である。
+
+次に着手すべき具体的検査は、独立なゲージ成分を二つ持つ null 族で
+\eqref{eq:discriminant} の拡張候補と平方根の符号を確かめることである。
+その後、一般 null 配置の不変量恒等式と連結な物理枝上での符号を証明する。
+今回の一成分計算を、その証明や文献新規性の確認に読み替えてはならない。
+
+\subsection*{出典と再現性}
+\small
+\noindent
+\begin{tabular}{@{}ll@{}}
+ブランチ & \texttt{feature/ch-dbi-construction}\\
+コミット & \texttt{62e0d609e6d5109675834b0d5f14e5afdfc47550}\\
+Git blob SHA-1 & \texttt{8f5056aa25bc51d10f03e1aea3d64df2ae435d37}\\
+上流ソース & \texttt{code/ch\_dbi\_sympy.py}\\
+同梱の固定コピー & \texttt{source\_ch\_dbi\_sympy.py}
+\end{tabular}\par
+上流ソースは改変していない。\par
+\noindent
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/pull/5}{PR 5}\quad
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/blob/62e0d609e6d5109675834b0d5f14e5afdfc47550/code/ch_dbi_sympy.py}{固定コミットの検査ソース}\par
+\noindent
+参照箇所は固定ソースの CH 検査（28--67 行）、純 BI 記号検査（70--90 行）、
+DBI 配置検査（113--183 行）である。追試の定義と結果は同梱の
+\texttt{check.py} と \texttt{results.json} に記録した。
+一次文献との対象・適用範囲の比較と研究評価は同梱の
+\texttt{LITERATURE.md} に記録した。計算ノートの式は固定ソースと独立検算に基づく。
+ビルド方法と制限は \texttt{README.md} を参照されたい。
+\end{document}
