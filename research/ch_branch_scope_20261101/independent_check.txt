@@ -1,0 +1,3 @@
+A: lambda=(u + w)/(q*(q + u + w)), v_squared=q*w/(q + u + w), electric_squared=q*(2*q + u)/(q + u + w), Q=q*(q + u + w)/2, limits=[0, 0, 2*q, q**2/2, 1]
+B: lambda=u/(q*(q + u)), v_squared=q*w/(q + u), electric_squared=q*(2*q + u + w)/(q + u), Q=q*(q + u)/2, limits=[0, 0, 2*q, q**2/2, 1]
+PASS: 43 exact residuals; direct diagonal metric variation, full T, fixed-field lambda derivative, interval positivity, and limits.
