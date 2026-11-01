@@ -1,0 +1,322 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{DejaVu Sans Mono}[Scale=0.80]
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 0.05em minus 0.01em
+\usepackage{amsmath,amssymb,mathtools,booktabs,array}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{tt}
+\hypersetup{pdftitle={空間的勾配セクター内における DBI 流れの多価性},pdfauthor={DBI algebraic research note}}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\linespread{1.03}
+\setlength{\abovedisplayskip}{7pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{7pt plus 2pt minus 2pt}
+\newcommand{\sym}{\operatorname{sym}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Id}{\mathbf 1}
+\newcommand{\Tmix}{\mathsf T}
+\newcommand{\dd}{\mathrm d}
+\begin{document}
+\begin{center}
+{\Large\bfseries 空間的勾配セクター内における DBI 流れの多価性}\par
+\vspace{5pt}
+{\large 単純応力スペクトルを持つ二つの実分枝と開近傍への延長}\par
+\vspace{5pt}
+2026 年 11 月 1 日
+\end{center}
+\noindent\textbf{要旨}\quad
+四次元の単一実スカラーを含む DBI 系で、勾配がともに厳密に空間的であり、完全な混合応力とラグランジアンが一致する一方、固定場での結合定数微分が異なる二配置を厳密に構成する。応力の四固有値はすべて異なる。さらに再構成公式により、二配置の重なりが四つのスペクトル変数、従って四つの独立な応力不変量の開近傍で持続することを示す。これは単一の符号セクター内でも、分枝を指定しない自律形 $Q=f(\Tmix)$、さらには $Q=f(\Tmix,L)$ が成立しないことを意味する。結合定数を引数に残す関係への反例ではなく、各分枝上の局所的な関数表示とも矛盾しない。
+
+\section{定義と主張の対象}
+$g=\diag(-1,1,1,1)$ とし、$v=(\partial_\mu\phi)$ は共変勾配の列、$F^{\mathsf T}=-F$ は共変電磁場とする。正の平方根を取り、
+\begin{equation}\label{eq:def}
+\begin{gathered}
+h=g+\lambda vv^{\mathsf T},\qquad G=h+\sqrt\lambda F,\qquad
+\Delta=\sqrt{\det G/\det g},\\
+L=\frac{1-\Delta}{\lambda},\qquad
+Q=\left.\frac{\partial L}{\partial\lambda}\right|_{g,F,v},\qquad
+X=v^{\mathsf T}g^{-1}v
+\end{gathered}
+\end{equation}
+と定める。$X>0$ を空間的勾配セクターと呼ぶ。$X$ 自体を二配置で同じ値に固定するのではなく、その\textbf{符号を固定}する。
+元の作用 $S=\int\sqrt{-\det g}\,L\,\dd^4x$ の Hilbert 応力を用い、改良項は加えない。$\delta S=\frac12\int\sqrt{-\det g}\,T^{\mu\nu}\delta g_{\mu\nu}\,\dd^4x$ より、
+\begin{equation}\label{eq:stress}
+T=\frac{g^{-1}-\Delta\sym(G^{-1})}{\lambda},\qquad
+\Tmix=Tg,\qquad M=\Id-\lambda\Tmix=\Delta\sym(G^{-1})g .
+\end{equation}
+ここで $T$ は反変応力の行列、$\Tmix$ は混合応力、$\sym A=(A+A^{\mathsf T})/2$ である。式 \eqref{eq:stress} は $\delta G=\delta g$ と行列式の変分から直接従う。
+
+比較には共通の固定質量尺度 $\mu$ を用い、
+\begin{equation}\label{eq:units}
+\widehat\lambda=\lambda\mu^4,\quad
+(\widehat v,\widehat F)=(v,F)/\mu^2,\quad
+(\widehat T,\widehat L)=(T,L)/\mu^4,\quad
+\widehat Q=Q/\mu^8
+\end{equation}
+と無次元化した後、帽子を省略する。状態別の単位変更は行わない。
+
+本稿でいう実分枝は、$\lambda=0$ から当該配置まで $\Delta>0$、$h$ が Lorentz 計量である分枝を指す。以下ではこの全経路を検査するが、摂動安定性や追加の因果性条件までは主張しない。
+
+\newpage
+\section{同一応力を持つ厳密な二配置}
+独立な電磁場成分を $F_{01}=e>0$ のみとし、他は反対称性で定める。二配置を
+\begin{equation}\label{eq:exact-fields}
+\begin{aligned}
+\mathrm A:\quad&\lambda_{\mathrm A}=\frac{23}{21},&
+ v_{\mathrm A}&=\left(\sqrt{\frac{361}{238}},\ 0,\ \sqrt{\frac{98}{51}},\ 0\right)^{\!\mathsf T},&
+ e_{\mathrm A}^{2}&=\frac{51}{140},\\[4pt]
+\mathrm B:\quad&\lambda_{\mathrm B}=\frac{13}{14},&
+ v_{\mathrm B}&=\left(0,\ \sqrt{\frac{1665}{2212}},\ \sqrt{\frac{28}{79}},\ 0\right)^{\!\mathsf T},&
+ e_{\mathrm B}^{2}&=\frac{79}{56}
+\end{aligned}
+\end{equation}
+と置く。A は時間成分を持つが、その勾配全体は空間的である。
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lcc@{}}\toprule
+量 & 配置 A & 配置 B\\\midrule
+$X$ & $17/42>0$ & $31/28>0$\\
+$\Delta$ & $19/42$ & $15/28$\\
+$L$ & $1/2$ & $1/2$\\
+$Q$ & $21/20$ & $7/10$\\\bottomrule
+\end{tabular}
+\end{center}
+元の座標系で式 \eqref{eq:stress} を直接計算すると、
+\begin{equation}\label{eq:TrawA}
+\Tmix_{\mathrm A}=\begin{pmatrix}
+-91/17&0&-14\sqrt{21}/17&0\\
+0&-2&0&0\\
+14\sqrt{21}/17&0&519/170&0\\
+0&0&0&1/2
+\end{pmatrix},
+\end{equation}
+\begin{equation}\label{eq:TrawB}
+\Tmix_{\mathrm B}=\begin{pmatrix}
+-3&0&0&0\\
+0&-126/79&28\sqrt{185}/395&0\\
+0&28\sqrt{185}/395&233/790&0\\
+0&0&0&1/2
+\end{pmatrix}.
+\end{equation}
+これらは同じ行列ではない。しかし付録で明示する Lorentz 正規直交フレーム $E_{\mathrm A},E_{\mathrm B}$ は、それぞれ
+\begin{equation}\label{eq:alignment}
+E^{\mathsf T}gE=g,\qquad \Tmix E=E\Tmix_*,\qquad
+\Tmix_* =\diag\left(-3,-2,\frac12,\frac7{10}\right)
+\end{equation}
+を満たす。従って $v'=E^{\mathsf T}v$、$F'=E^{\mathsf T}FE$ と場全体を変換すると、同じ $g$ において\textbf{完全な混合応力が一致}する。固有値の一致だけに頼る比較ではない。$-3$ の固有ベクトルは時間的であり、残る三つは空間的である。
+
+$L,Q$ はこの固定した Lorentz 変換に対してスカラーなので、整列後も
+\begin{equation}\label{eq:gap}
+\boxed{\Tmix'_{\mathrm A}=\Tmix'_{\mathrm B}=\Tmix_*,\quad
+L_{\mathrm A}=L_{\mathrm B}=\tfrac12,\quad Q_{\mathrm A}-Q_{\mathrm B}=\tfrac7{20}\ne0 .}
+\end{equation}
+結合定数は異なる。この差異は自律形への反例として有効だが、固定した同一 $\lambda$ での非一意性を意味しない。
+
+\newpage
+\section{固定場の実経路と直接行列計算}
+端点の結合定数と区別して、場を固定して変える結合定数を $t$ と書く。二つの ansatz
+\begin{equation}\label{eq:ansatz}
+\mathrm A:\ v=(a,0,b,0)^{\mathsf T},\quad X=b^2-a^2;\qquad
+\mathrm B:\ v=(0,a,b,0)^{\mathsf T},\quad X=a^2+b^2
+\end{equation}
+で、共通して
+\begin{equation}\label{eq:paths}
+R(t)=\frac{\det h(t)}{\det g}=1+tX,\qquad
+P(t)=\frac{\det G(t)}{\det g}=1+tX-te^2-t^2b^2e^2
+\end{equation}
+を得る。端点の $\Delta$ を $D=\sqrt{P(\lambda)}$ と略記する。式 \eqref{eq:stress} の逆行列計算から、A の $(0,2)$ 部分と B の $(1,2)$ 部分は
+\begin{equation}\label{eq:blocks}
+\begin{aligned}
+M_{\mathrm A}|_{02}&=\frac1D\begin{pmatrix}
+1+\lambda b^2&\lambda ab\\
+-\lambda ab&1-\lambda(a^2+e^2)
+\end{pmatrix},\\
+M_{\mathrm B}|_{12}&=\frac1D\begin{pmatrix}
+1+\lambda b^2&-\lambda ab\\
+-\lambda ab&1+\lambda(a^2-e^2)
+\end{pmatrix}.
+\end{aligned}
+\end{equation}
+A の残りの軸は $M_{11}=R/D$、$M_{33}=D$、B では $M_{00}=R/D$、$M_{33}=D$ である。両部分行列の行列式とトレースは
+\begin{equation}\label{eq:block-invariants}
+\det M_{\rm blk}=\frac{P(\lambda)}{D^2}=1,\qquad
+\operatorname{tr}M_{\rm blk}=\frac{1+R-\lambda e^2}{D} .
+\end{equation}
+A の 対象の $2\times2$ ブロックは Lorentz 平面、B のそれは Euclid 平面に作用する。
+
+式 \eqref{eq:exact-fields} では、経路の行列式が厳密に
+\begin{equation}\label{eq:exact-paths}
+\begin{aligned}
+P_{\mathrm A}(t)&=-\frac{(6t+7)(49t-60)}{420},&R_{\mathrm A}(t)&=1+\frac{17t}{42},\\
+P_{\mathrm B}(t)&=-\frac{(4t+7)(7t-8)}{56},&R_{\mathrm B}(t)&=1+\frac{31t}{28}
+\end{aligned}
+\end{equation}
+となる。$P(0)=1$、$P_{\mathrm A}(23/21)=(19/42)^2$、$P_{\mathrm B}(13/14)=(15/28)^2$ はすべて正であり、$P''_{\mathrm A}=-7/5$、$P''_{\mathrm B}=-1$ である。凹関数は両端を結ぶ弦以上なので、各区間全体で $P>0$ が保たれる。さらに $X>0$ より $R>0$。$h(0)=g$ から非退化のまま連続変形するため、$h$ の Lorentz 符号数も保たれる。
+
+固定場微分は、端点を代入する\textbf{前}に $P(t)$ を微分して
+\begin{equation}\label{eq:Q}
+Q=\frac{D-1}{\lambda^2}-\frac{P'(\lambda)}{2\lambda D}
+\end{equation}
+と評価する。これが前頁の $Q$ を与える。$L$ は $t=0$ で可除な極限を持つ。ここで証明した実経路の存在は、別途の安定性解析を代用しない。
+
+\newpage
+\section{一般の単純スペクトルからの再構成}
+目標の混合応力を
+\begin{equation}\label{eq:targetgeneral}
+\Tmix_* =\diag(-\rho,-s,p,q),\qquad
+(\rho,s,p,q)\ \text{は}\ (3,2,\tfrac12,\tfrac7{10})\ \text{の近傍}
+\end{equation}
+とする。A では $(c,o,\sigma)=(\rho,s,-1)$、B では $(c,o,\sigma)=(s,\rho,+1)$ を用いる。対象の $2\times2$ ブロックに応力固有値 $(-c,q)$ を割り当てると、対応する $M$ 固有値の逆数対条件は
+\begin{equation}\label{eq:reciprocal}
+(1+\lambda c)(1-\lambda q)=1
+\quad\Longrightarrow\quad
+\lambda=\frac{c-q}{cq}\quad(\lambda\ne0).
+\end{equation}
+残る二軸を応力固有値 $-o,p$ に合わせる条件から $D$ と $R$ が定まる。
+\begin{equation}\label{eq:reconstruction}
+\boxed{\begin{aligned}
+\lambda&=\frac{c-q}{cq},&D&=1-\lambda p,&R&=D(1+\lambda o),\\
+X&=\frac{R-1}{\lambda},&
+e^2&=\frac{1+R-D\{2+\lambda(c-q)\}}{\lambda},\\
+b^2&=\frac{R-\lambda e^2-D^2}{\lambda^2e^2},&
+a^2&=\sigma(X-b^2).
+\end{aligned}}
+\end{equation}
+$a,b,e$ は正の平方根とする。式 \eqref{eq:ansatz} の場を用いれば、$X=b^2+\sigma a^2$ は定義通りである。$b^2$ の式は $P(\lambda)=D^2$ を、$e^2$ の式は
+\begin{equation}\label{eq:trace-target}
+\operatorname{tr}M_{\rm blk}=2+\lambda(c-q)
+=(1+\lambda c)+(1-\lambda q)
+\end{equation}
+を実現する。式 \eqref{eq:block-invariants} と逆数対条件を合わせると、対象の $2\times2$ ブロックの二固有値は $1+\lambda c,1-\lambda q$。残る二軸は $R/D=1+\lambda o,D=1-\lambda p$ だから、$\Tmix$ は指定した四固有値を持つ。
+
+A では $-\rho$ 固有ベクトルが基準点で時間的であることを第 2 節の厳密配置が保証し、その性質は近傍でも保たれる。B の時間軸は初めから $-\rho$ に対応する。この因果的な割り当ても含めて、二配置を式 \eqref{eq:targetgeneral} に Lorentz 整列できる。
+
+さらに $L=(1-D)/\lambda=p$ である。$Q$ は再構成曲面に沿う微分でなく式 \eqref{eq:Q} で求める。実際、
+\begin{align}
+\lambda P'(\lambda)
+ &=R-1-\lambda e^2-2\lambda^2b^2e^2\notag\\
+ &=2D^2-R-1+\lambda e^2
+ =2D^2-D\{2+\lambda(c-q)\},\label{eq:derivative-id}
+\end{align}
+なので、式 \eqref{eq:Q} への代入は
+\begin{equation}\label{eq:generalQ}
+Q=\frac{c-q}{2\lambda}=\frac{cq}{2}
+\quad\Longrightarrow\quad
+Q_{\mathrm A}=\frac{\rho q}{2},\quad Q_{\mathrm B}=\frac{sq}{2},\quad
+Q_{\mathrm A}-Q_{\mathrm B}=\frac{q(\rho-s)}2
+\end{equation}
+を与える。これで場、完全な応力、$L,Q$ を結ぶ構成が閉じる。
+
+\newpage
+\section{開近傍での重なりと局所分枝の区別}
+基準点において式 \eqref{eq:reconstruction} の分母は非零であり、$\lambda,D,R,X,e^2,a^2,b^2$ はすべて厳密に正である。四固有値は異なり、時間的固有ベクトルのノルムも非零である。従って十分小さな共通の開近傍 $U\subset\mathbb R^4$ 上で、次が同時に成立する。
+\begin{enumerate}
+\item 再構成量は実解析的で、正の平方根から実解析的な場を選べる。A と B はともに $X>0$ のままである。
+\item 単純スペクトルと固有ベクトルの因果型が保たれ、Lorentz 正規直交固有フレームを局所的に選べる。両者の完全な応力を同一の $\Tmix_*$ へ整列できる。
+\item $P''(t)=-2b^2e^2<0$、$P(0)=1$、$P(\lambda)=D^2>0$ だから、各配置は固定場で $0\leq t\leq\lambda$ の実分枝に留まる。$R(t)=1+tX>0$ も保たれる。
+\item $q(\rho-s)/2\ne0$ が保たれるため、同じ $L=p$ と同じ完全な応力に対し二つの $Q$ は異なる。
+\end{enumerate}
+従ってこれは単独の有理数点の偶然ではなく、\textbf{空間的勾配セクター内における二つの分枝の開いた重なり}である。ここで開いているのは四つのスペクトル変数の集合であり、任意の場配置の分類や、任意の一点の全場近傍での不可能性を意味しない。
+
+\paragraph{不変量空間でも開いている}
+$t_0=-\rho,t_1=-s,t_2=p,t_3=q$ とし、$I_k$ を四固有値の第 $k$ 基本対称式とする。写像 $(t_0,t_1,t_2,t_3)\mapsto(I_1,I_2,I_3,I_4)$ の Jacobian は符号を除いて
+\begin{equation}\label{eq:vandermonde}
+\prod_{i<j}(t_i-t_j)
+\end{equation}
+であり、基準点で非零である。よって $U$ を縮めれば独立な応力不変量の開近傍へ局所的に可逆である。この同じ不変量近傍の上に、$Q_{\mathrm A}$ と $Q_{\mathrm B}$ という異なる解析関数が存在する。
+
+\paragraph{陰関数定理とは矛盾しない}
+対積の候補値をまとめる対称多項式を
+\begin{equation}\label{eq:K}
+K(Q;I)=\prod_{0\leq i<j\leq3}\left(Q+\frac{t_it_j}{2}\right)
+\end{equation}
+とする。本構成では、A は対 $(-\rho,q)$、B は対 $(-s,q)$ を選ぶため、いずれも $K=0$ を満たす。基準点では
+\begin{equation}\label{eq:Kderivatives}
+K_Q\big|_{Q=21/20}=\frac{916839}{3200000}\ne0,\qquad
+K_Q\big|_{Q=7/10}=\frac{1813}{160000}\ne0 .
+\end{equation}
+従って陰関数定理は\textbf{それぞれの根の近傍で} $Q=f_{\mathrm A}(I)$、$Q=f_{\mathrm B}(I)$ を与える。根を指定した局所的な一意性は、二根を含む領域で単一の関数が存在することを意味しない。
+
+本結果は $Q=f(\lambda,\Tmix,L)$ を排除せず、同一 $\lambda$ での閉包失敗も示さない。時間的勾配 $X<0$ の一般的なセクター分類は依然として未解決であり、本結果には不要である。
+
+\newpage
+\appendix
+\section{完全な応力を一致させる明示的フレーム}
+列が正規化固有ベクトルである次の行列を用いる。
+\begin{equation}\label{eq:EA}
+E_{\mathrm A}=\frac1{\sqrt{629}}\begin{pmatrix}
+-7\sqrt{21}&0&0&-20\\
+0&\sqrt{629}&0&0\\
+20&0&0&7\sqrt{21}\\
+0&0&\sqrt{629}&0
+\end{pmatrix},
+\end{equation}
+\begin{equation}\label{eq:EB}
+E_{\mathrm B}=\frac1{\sqrt{2133}}\begin{pmatrix}
+\sqrt{2133}&0&0&0\\
+0&-7\sqrt{37}&0&8\sqrt5\\
+0&8\sqrt5&0&7\sqrt{37}\\
+0&0&\sqrt{2133}&0
+\end{pmatrix}.
+\end{equation}
+これらは式 \eqref{eq:alignment} を成分ごとに満たす。A の表示では時間方向が反転するが、$O(1,3)$ として正当なフレームである。時間向きと向きをともに保つ必要があれば、A の第 1 列と第 2 列の符号を同時に反転すればよい。対角化と結論は変わらない。
+
+表示した $E$ のまま変換した共変場は
+\begin{equation}\label{eq:vprime}
+\begin{aligned}
+v'_{\mathrm A}&=\left(-\frac7{\sqrt{222}},\ 0,\ 0,\ \frac{18}{\sqrt{518}}\right)^{\!\mathsf T},\\
+v'_{\mathrm B}&=\left(0,\ -\frac{\sqrt{105}}{18},\ 0,\ \frac{2\sqrt{777}}{63}\right)^{\!\mathsf T} .
+\end{aligned}
+\end{equation}
+非零の独立電磁場成分は
+\begin{equation}\label{eq:Fprime}
+\begin{aligned}
+\mathrm A:\quad&F'_{01}=-\frac{21\sqrt{185}}{370},&F'_{13}&=\frac{2\sqrt{3885}}{259},\\
+\mathrm B:\quad&F'_{01}=-\frac{\sqrt{1554}}{36},&F'_{03}&=\frac{2\sqrt{210}}{63} .
+\end{aligned}
+\end{equation}
+他の成分は反対称性に従うか、零である。従ってこれらの変換後の場と各 $\lambda$ を直接用いるだけでも、同一の $g$ の下で式 \eqref{eq:gap} を再現できる。
+
+変換則は $G'=E^{\mathsf T}GE$、$T'=E^{-1}T(E^{-1})^{\mathsf T}$、$\Tmix'=E^{-1}\Tmix E$ である。$E^{\mathsf T}gE=g$ により $\det G/\det g$ と $L$ は不変である。$Q$ を比較するときには、各端点で選んだ $E$ を\textbf{固定して} $t$ を微分する。再構成パラメータに依存する固有フレームを族に沿って微分するのではない。この固定変換の下では、$g,F,v$ を固定する操作と微分が可換なので $Q$ も不変となる。
+
+\paragraph{同じ連結な実正則領域に属すること}
+固定した $\lambda,v$ で純電場の振幅を零まで下げると、$P=R-\lambda e^2(1+\lambda b^2)$ は増加する。A からこの操作で $F=0$ へ移り、そこで正の $\lambda$ と空間的な $v$ を連続に変えて B の値へ結ぶ。$F=0$ では $P=R=1+\lambda X>0$ であり、最後に B の電場を増やしても $P$ は正の端点の間を保つ。従って連結性だけでも二配置は分離されない。ただし、この経路は応力固有値の退化を通り得る。全経路で四固有値が単純な部分集合の同一連結成分に属するとは主張しない。
+
+
+\newpage
+\section{文献上の位置と検算の範囲}
+\paragraph{今回の追加結果}
+従来の時間的・空間的勾配をまたぐ比較や二重固有値を持つ比較から進み、\textbf{同じ $X>0$ セクター、四つの単純固有値、開いた不変量近傍}を同時に実現した点が本構成の強化である。DBI の行列式、Hilbert 応力、逆数対構造そのものを新結果とはしない。
+
+\paragraph{純粋電磁場の逆問題との違い}
+Poletti の Born--Infeld に対する Rainich 型解析 \href{https://www.numdam.org/item/AIHPA_1965__3_1_111_0.pdf}{[1]} は、純粋 Born--Infeld 電磁場の応力からの逆問題を扱う。第 3 節および第 6 節の p.~119 に現れる二組の二重固有値、第 7 節の双対性位相の自由度は重要な先行構造である。本稿は非零スカラー勾配を含み、四固有値が単純である。したがって純粋電磁場の位相非一意性を、そのまま今回の二つの $Q$ の非一意性と同一視はできない。
+
+\paragraph{流れの局所表示と自律化の違い}
+純粋な非線形電磁気学を扱う \href{https://arxiv.org/abs/2610.33887v1}{[2]} 第 2.2--2.3 節の可逆分枝の議論、および \href{https://arxiv.org/abs/2610.35135v1}{[3]} 第 4 節の局所性と大域的単射性の区別は、本稿に近い論点である。ただし本稿はスカラーを含む場から具体的な二分枝を再構成し、その両方が同じ空間的勾配セクターで実現することを示す。
+\href{https://arxiv.org/abs/2309.04253v4}{[4]} 第 5 節の定理 3 は $\lambda$ 依存を許す枠組みであり、\href{https://arxiv.org/abs/2602.24058v2}{[5]} 第 5.2 節の式 (119) の後にある四次元単一スカラー DBI の問いも $f(T;\lambda)$ である。異なる $\lambda$ を使う本稿は、これらの主張や問いを反証していない。
+
+以上は確認できた近接文献に対する範囲比較であり、先取性の絶対的な証明ではない。文献全体に対する優先権の確定や、既存論文すべての否定は主張しない。
+
+\paragraph{再現可能な検算}
+同梱の \texttt{check.py} は元の $G$ から行列式と逆行列を計算し、二配置について $\Delta,L,Q$、特性多項式、および各 $E$ の Lorentz 正規直交性と完全な応力対角化を検査する。\texttt{results.json} の厳密零残差は 72 件であり、経路の正値性は別途 assertion で検査した。
+\texttt{reconstruction.py} は再構成の行列式、対象の $2\times2$ ブロックのトレースと行列式、逆数対、残りの軸、$L$、直接微分による $Q$ を記号的に検査し、\texttt{reconstruction\_results.json} に厳密零恒等式 16 件と非零の $K_Q$ を記録する。
+
+独立実装 \texttt{independent\_check.py} は、対称計量の独立 10 成分それぞれについて、行列式で定めた作用密度を直接変分する。各配置の Hilbert 応力、固定場微分、固有ベクトルの因果型、実経路を再検査した結果は、\texttt{independent\_results.txt} に記録されている。一般再構成についても符号と恒等式の対応、および開近傍への連続性の論理を別途確認した。これらは物理的安定性や文献上の新規性を計算で証明するものではない。
+
+\paragraph{到達点}
+本稿の結論は、実 DBI 分枝の $X>0$ セクターにおいてさえ、分枝を指定しない応力のみの自律化が、単純スペクトルの開近傍で阻まれるという構成的結果である。各分枝の局所表示、陽な $\lambda$ 依存を許す表示、および他セクターの分類は、区別して扱う必要がある。
+
+\paragraph{参照文献の識別情報}
+\begingroup\small
+[1] P. Poletti, \textup{Le problème de Rainich pour un schéma électromagnétique non linéaire}, Ann. Inst. H. Poincaré A \textbf{3} (1965), 111--126.\par\noindent
+[2] Z. Pezhman et al., \textup{Exact Stress Tensor flows in Causal Electrodynamics: Courant-Hilbert Approach}, arXiv:2610.33887v1.\par\noindent
+[3] Z. Pezhman et al., \textup{Exact Stress Tensor Flows in Causal Electrodynamics: Auxiliary Field Formalism}, arXiv:2610.35135v1.\par\noindent
+[4] C. Ferko et al., \textup{Duality-Invariant Non-linear Electrodynamics and Stress Tensor Flows}, arXiv:2309.04253v4.\par\noindent
+[5] N. Brizio et al., \textup{More on TbarT-like deformations in higher dimensions}, arXiv:2602.24058v2.
+\endgroup
+\end{document}
