@@ -8,6 +8,7 @@ This directory contains the exploratory and verification code used in the four-d
 - `coordinate_free_sympy.py` — exact symbolic checks of the four-dimensional matrix identities.
 - `coordinate_free_validation.py` — independent float64 validation in timelike, spacelike, null, and pure Born--Infeld sectors.
 - `reduction_5d_to_4d_sympy.py` — exact and numerical checks of the five-dimensional Born--Infeld to four-dimensional DBI reduction, including the compactification-length normalization.
+- `ch_dbi_sympy.py` — symbolic CH equation, pure BI quadratic and trace flows, auxiliary-field dictionary, and exact rational tests of the induced-metric chain rule.
 
 ## Role of the neural network
 
@@ -22,6 +23,14 @@ DBI_OUTPUT_DIR=/tmp/dbi-output python code/coordinate_free_sympy.py
 ```
 
 The scripts use fixed random seeds where stochastic sampling is involved.
+
+Run the Courant--Hilbert checks from the repository root:
+
+```bash
+python code/ch_dbi_sympy.py
+```
+
+All CH tests use exact SymPy arithmetic; no generic autonomous flow for the full DBI theory is claimed.
 
 ## License
 

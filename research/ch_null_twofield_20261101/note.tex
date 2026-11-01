@@ -1,0 +1,315 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 0.05em minus 0.01em
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{tt}
+\hypersetup{pdftitle={二成分ゲージ場と一般 null 勾配の CH 流れ},pdfauthor={Symbolic verification note}}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\linespread{1.05}
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\sym}{\operatorname{sym}}
+\newcommand{\Id}{\mathbf{1}}
+\newcommand{\Tmix}{\mathsf{T}}
+\newcommand{\Thmix}{\mathsf{H}}
+\newcommand{\Sinv}{\mathcal S}
+\newcommand{\Qbi}{Q_{\mathrm{BI}}}
+\newcommand{\Cmet}{C_{\mathrm{met}}}
+\newcommand{\Lbi}{L_{\mathrm{BI}}}
+\newcommand{\Pem}{P_{\mathrm{em}}}
+\begin{document}
+\begin{center}
+{\Large\bfseries 二成分ゲージ場と一般 null 勾配の CH 流れ}\par
+\vspace{4pt}
+{\large 既知の行列恒等式を用いた方向収縮の消去}\par
+\vspace{4pt}
+2026 年 11 月 1 日\quad 固定原稿に対する記号計算ノート
+\end{center}
+\noindent\textbf{要旨}\quad
+二成分族 $F_{02}=e,F_{12}=b$ の厳密検査を行い、さらに固定原稿の行列式と
+特性多項式の恒等式を\textbf{既知の入力}として、一般 null 勾配の CH 連鎖律から
+方向収縮を消去する。最終根式も出発点のトレース関係も原稿に既存であり、
+新公式や全行列代数の独立証明ではない。
+
+\section{規約と null 勾配の CH 連鎖律}
+四次元の実 Lorentz 計量は符号 $(-,+,+,+)$、$F^{\mathsf T}=-F$ とする。
+$v=(v_\mu)$ は共変スカラー勾配であり、$g,F,v$ を固定して微分する。
+\begin{equation}\label{eq:def}
+\begin{gathered}
+\lambda>0,\quad X=v^{\mathsf T}g^{-1}v=0,\quad
+h=g+\lambda vv^{\mathsf T},\quad G=h+\sqrt\lambda F,\\
+\Delta=\sqrt{\det G/\det g}>0,\qquad
+L=(1-\Delta)/\lambda,\qquad Q=\left.\partial_\lambda L\right|_{g,F,v}
+\end{gathered}
+\end{equation}
+$h,G$ は非退化とし、正の平方根を取る。$\lambda=0$ は代入点でなく連続極限とする。
+逆行列の対称部分、反変応力、混合応力を
+\begin{equation}\label{eq:stress}
+\Sinv=\sym(G^{-1}),\qquad
+T=\frac{g^{-1}-\Delta\Sinv}{\lambda},\qquad \Tmix=Tg,\qquad J=v^{\mathsf T}\Sinv v
+\end{equation}
+と書く。規約は $T^{\mu\nu}=g^{\mu\nu}L+2\partial L/\partial g_{\mu\nu}$。
+$\tr\Tmix$ と $v^{\mathsf T}Tv$ は異なる収縮である。
+
+$X=0$ では $\det h/\det g=1$ だが $h'=vv^{\mathsf T}$ は一般に非零である。
+固定 $h$ の BI 表現に対し
+\begin{equation}\label{eq:CH}
+\begin{gathered}
+\Lbi=\frac{1-\sqrt{\det G/\det h}}\lambda=L,\quad
+\Theta=\frac{h^{-1}-\Delta\Sinv}{\lambda},\quad \Thmix=\Theta h,\\
+\Qbi=\left.\partial_\lambda\Lbi\right|_{h,F}
+=\frac18\left\{\tr(\Thmix^2)-\frac12(\tr\Thmix)^2\right\}
+\end{gathered}
+\end{equation}
+とする。値が $\Lbi=L$ でも、固定する変数が異なれば微分は異なる。
+$\delta\Lbi=\tr[(\Theta-h^{-1}\Lbi)\delta h]/2$、
+$v^{\mathsf T}h^{-1}v=0$ より CH 連鎖律は
+\begin{equation}\label{eq:chain}
+Q=\Qbi+\Cmet,\qquad
+\Cmet=\frac12v^{\mathsf T}(\Theta-h^{-1}\Lbi)v
+=-\frac{\Delta J}{2\lambda}=\frac12v^{\mathsf T}Tv
+\end{equation}
+となる。Jacobi 公式と $K=\tr(G^{-1}F)$ を使うと
+\begin{equation}\label{eq:trace-step}
+Q=\frac{\Delta-1}{\lambda^2}-\frac{\Delta J}{2\lambda}
+ -\frac{\Delta K}{4\lambda\sqrt\lambda},\quad
+\tr(\Sinv g)=4-\lambda J-\sqrt\lambda K
+\end{equation}
+なので $K$ を消去して
+\begin{equation}\label{eq:trace-directional}
+\boxed{Q=-\frac{\tr\Tmix}{4\lambda}+\frac14v^{\mathsf T}Tv}
+\end{equation}
+を得る。同じ関係は原稿の \texttt{eq:reduced-before-elimination} にも既存である。
+
+\newpage
+\section{二成分族の直接行列計算}
+以下の制限族では逆行列と応力を直接構成する。
+\begin{equation}\label{eq:twofield}
+\begin{gathered}
+g=\operatorname{diag}(-1,1,1,1),\quad v=(a,a,0,0)^{\mathsf T},\quad
+F_{02}=e,\quad F_{12}=b,\quad \lambda,a>0,\quad e,b\in\mathbb R,\\
+u=\lambda a^2,\qquad c=b^2-e^2,\qquad k=a^2(e-b)^2\geq0
+\end{gathered}
+\end{equation}
+他の独立成分は零、残りは反対称性で定める。DBI 行列は
+\begin{equation}\label{eq:G-twofield}
+G=\begin{pmatrix}
+-1+u&u&\sqrt\lambda e&0\\
+u&1+u&\sqrt\lambda b&0\\
+-\sqrt\lambda e&-\sqrt\lambda b&1&0\\
+0&0&0&1
+\end{pmatrix},\qquad
+R:=\frac{\det G}{\det g}=1+\lambda c-\lambda^2k>0
+\end{equation}
+である。$\Delta=\sqrt R>0$ とする。スクリプトではこの $R$ を
+\texttt{P} と命名するが、本ノートでは電磁擬スカラー不変量との混同を避ける。
+
+余因子を対称化すると
+\begin{equation}\label{eq:S-twofield}
+\Sinv=\frac1R\begin{pmatrix}
+-(1+u+\lambda b^2)&u+\lambda eb&0&0\\
+u+\lambda eb&1-u-\lambda e^2&0&0\\
+0&0&1&0\\
+0&0&0&R
+\end{pmatrix},\qquad
+J=-\frac{\lambda k}{R}
+\end{equation}
+を得る。従って
+\begin{equation}\label{eq:Tvv-twofield}
+\boxed{v^{\mathsf T}Tv=\frac{k}{\Delta},\qquad
+\Cmet=\frac{k}{2\Delta},\qquad Q=\Qbi+\Cmet}
+\end{equation}
+である。$e\ne b$ なら補正は正、$e=b$ なら零となる。
+$\det h/\det g=1$ であっても補正が一般に残ることを示す。
+
+$L=(1-\Delta)/\lambda$ を元の変数を固定して直接微分すると
+\begin{equation}\label{eq:Q-twofield}
+\begin{split}
+Q&=\frac{\Delta-1}{\lambda^2}-\frac{c-2\lambda k}{2\lambda\Delta}
+ =\frac{(\Delta-1)^2+\lambda^2k}{2\lambda^2\Delta},\\
+\Qbi&=\frac{(\Delta-1)^2}{2\lambda^2\Delta}
+\end{split}
+\end{equation}
+となる。最後の式は直接微分から \eqref{eq:Tvv-twofield} の補正を引いたものと、
+\eqref{eq:CH} の応力二次式の双方で検査する。
+これは固定 $h$ の偏微分と、$h(\lambda)$ を通じた計量依存を区別する比較である。
+
+\paragraph{二成分と不変量の対応}
+後で用いる一般不変量では、この族は $S=(e^2-b^2)/2=-c/2$、
+$\Pem=0$、$Z=-k$ に対応する。二成分の直接計算は一般の特性多項式を
+仮定しない。次頁ではこの族のブロック構造から因数分解を導く。
+
+\newpage
+\section{判別式の正の枝と極限}
+$M=\Id-\lambda\Tmix=\Delta\Sinv g$ とおく。
+$\Delta M$ の左上ブロック $N$ と残る対角成分 $1,R$ に着目すれば、
+\begin{equation}\label{eq:N}
+N=\begin{pmatrix}
+1+u+\lambda b^2&u+\lambda eb\\
+-u-\lambda eb&1-u-\lambda e^2
+\end{pmatrix},\qquad \tr N=2+\lambda c,\quad \det N=R
+\end{equation}
+である。従って直接行列から
+\begin{equation}\label{eq:twofield-char}
+\det(z\Id-M)
+=\left(z^2-\frac{2+\lambda c}{\Delta}z+1\right)
+ \left(z^2-\frac{1+R}{\Delta}z+1\right)
+\end{equation}
+が得られる。基本対称式 $E_1=\tr M$、$E_2=((\tr M)^2-\tr M^2)/2$ は
+\begin{equation}\label{eq:E-twofield}
+E_1=\frac{3+\lambda c+R}{\Delta},\qquad
+E_2=2+\frac{(2+\lambda c)(1+R)}{R}
+\end{equation}
+なので、判別式とその正の根は
+\begin{equation}\label{eq:disc-twofield}
+\mathcal D:=E_1^2-4E_2+8
+=\frac{(1+\lambda c-R)^2}{R}=\frac{\lambda^4k^2}{\Delta^2},\qquad
+\sqrt{\mathcal D}=\frac{\lambda^2k}{\Delta}
+\end{equation}
+となる。$k\geq0$ と $\Delta>0$ が符号を固定する。
+\eqref{eq:trace-directional} と $\tr\Tmix=(4-E_1)/\lambda$ から
+$Q=(E_1+\sqrt{\mathcal D}-4)/(4\lambda^2)$ に一致する。
+
+\paragraph{配向による相殺}
+$e=b$ なら、非零の場でも $c=k=0$ となり
+\begin{equation}\label{eq:equal}
+R=\Delta=1,\qquad L=Q=\Cmet=0,\qquad E_1=4,\quad E_2=6
+\end{equation}
+である。応力テンソル自体が零であるとは主張しない。
+一方 $e=-b$ なら $c=0,k=4a^2e^2$、
+$R=1-4\lambda^2a^2e^2>0$ であり $Q=k/[\Delta(1+\Delta)]$。
+$e^2=b^2$ だけでは補正は消えない。
+$b=0$ は前段階の横方向族
+$R=1-\lambda e^2-\lambda^2a^2e^2$ を回収する。
+同じ $v$ で電場を $F_{01}=e$ のみに揃えると
+$R_\parallel=1-\lambda e^2$、$v^{\mathsf T}T_\parallel v=C_{\mathrm{met},\parallel}=0$ となる。
+
+\paragraph{弱結合と純 BI}
+直接微分または展開から
+\begin{equation}\label{eq:weak}
+\Delta=1+\frac c2\lambda-\left(\frac k2+\frac{c^2}{8}\right)\lambda^2+O(\lambda^3),
+\qquad Q\longrightarrow\frac{(b^2-e^2)^2}{8}+\frac k2
+\end{equation}
+を得る。$a\to0$ では $k\to0$、計量補正が消えて純 BI の
+$Q=\Qbi=-\tr\Tmix/(4\lambda)$ に戻る。
+
+\newpage
+\section{一般 null の収縮消去と符号}
+ここから $F$ は任意の実反対称場であり、二成分には制限しない。
+固定原稿と合わせ、$\epsilon^{0123}=+1$ として
+\begin{equation}\label{eq:field-invariants}
+\begin{gathered}
+S=-\tfrac14F_{\mu\nu}F^{\mu\nu},\quad
+\Pem=-\tfrac14F_{\mu\nu}\widetilde F^{\mu\nu},\quad
+\widetilde F^{\mu\nu}=\frac{\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}}{2\sqrt{-\det g}},\\
+Z=v_\mu F^\mu{}_{\rho}F^\rho{}_{\nu}v^\nu,\qquad
+w_\mu=F_{\mu\nu}v^\nu
+\end{gathered}
+\end{equation}
+と定義する。原稿の \texttt{eq:delta-fields} を既知の入力として使うと
+\begin{equation}\label{eq:known-det}
+\Delta^2=1+\lambda(X-2S)+\lambda^2(Z-2SX-\Pem^2)
+\end{equation}
+である。本ノートはこの一般行列式恒等式自体を独立に証明しない。
+
+$G_t=g+\lambda t vv^{\mathsf T}+\sqrt\lambda F$ として
+$vv^{\mathsf T}\mapsto t vv^{\mathsf T}$ とすると、$X,Z$ はともに $t$ 倍される。
+従って既知式から
+\begin{equation}\label{eq:amplitude}
+\Delta_t^2=1+\lambda(tX-2S)+\lambda^2(tZ-2StX-\Pem^2),\qquad
+\left.\partial_t\Delta_t^2\right|_1=\lambda^2Z\quad(X=0)
+\end{equation}
+を得る。一方、Jacobi 公式を\textbf{行列式比}に適用すれば
+\begin{equation}\label{eq:amplitude-jacobi}
+\left.\partial_t\Delta_t^2\right|_1
+=\lambda\Delta^2v^{\mathsf T}G^{-1}v=\lambda\Delta^2J
+\end{equation}
+であり、\eqref{eq:stress} と組み合わせて
+\begin{equation}\label{eq:general-contraction}
+\boxed{J=\frac{\lambda Z}{\Delta^2},\qquad
+v^{\mathsf T}Tv=-\frac Z\Delta,\qquad \Cmet=-\frac Z{2\Delta}}
+\end{equation}
+となる。$\partial_tL$ を $v^{\mathsf T}Tv$ と同定せず、まず行列式から $J$ を求めた。
+二成分族の $Z=-k$ なら \eqref{eq:Tvv-twofield} に一致する。
+
+反対称性より $w\cdot v=0$、$Z=-w_\mu w^\mu$ である。
+非零 null 共変ベクトルは Lorentz 枠で $v=\pm a(1,1,0,0)$、$a>0$ と書ける。
+符号は $vv^{\mathsf T}$ と $w^2$ に影響しない。正符号なら
+\begin{equation}\label{eq:general-sign}
+\begin{gathered}
+w=a(F_{01},F_{01},F_{02}-F_{12},F_{03}-F_{13})^{\mathsf T},\\
+Z=-a^2\left[(F_{02}-F_{12})^2+(F_{03}-F_{13})^2\right]\leq0
+\end{gathered}
+\end{equation}
+である。$F_{23}$ は零と置いておらず、$\Delta$ などに入り得る。
+$Z=0$ は $w=0$ に限らず $w$ が null の場合も含む。
+この符号は原稿の \texttt{eq:null-Z-sign} に既存であり、$v=0$ は別途 $Z=0$ となる。
+
+\newpage
+\section{既知の特性恒等式との接続と再現性}
+一般 null の特性多項式については、原稿の因数分解を入力とする。
+$X=0$ では $E_4=\det M=1$ なので既知式は
+\begin{equation}\label{eq:known-factor}
+\begin{gathered}
+\det(z\Id-M)=(z^2-\alpha z+1)(z^2-\beta z+1),\qquad
+E_1=\alpha+\beta,\quad E_2=2+\alpha\beta,\\
+\alpha=\frac{2-2\lambda S+\lambda^2Z}{\Delta},\qquad
+\beta=\frac{2-2\lambda S}{\Delta}
+\end{gathered}
+\end{equation}
+である。出典は \texttt{eq:factor-coefficients-app} と
+\texttt{eq:null-alpha-beta-fields}。
+二成分ブロック計算の類推ではなく、一般行列に対する既知恒等式を使う段階である。
+$Z\leq0,\Delta>0$ と前頁の収縮式から
+\begin{equation}\label{eq:general-discriminant}
+\mathcal D=(\alpha-\beta)^2=\frac{\lambda^4Z^2}{\Delta^2},\qquad
+\sqrt{\mathcal D}=-\frac{\lambda^2Z}{\Delta}=\lambda^2v^{\mathsf T}Tv
+\end{equation}
+となる。従って CH 連鎖律を整理した \eqref{eq:trace-directional} は
+\begin{equation}\label{eq:bridge}
+\boxed{Q=\frac{E_1-4}{4\lambda^2}-\frac{Z}{4\Delta}
+=\frac{E_1+\sqrt{E_1^2-4E_2+8}-4}{4\lambda^2}}
+\end{equation}
+となり、既存の \texttt{eq:null-E} を回収する。
+既知の一般行列式・特性恒等式を使う条件の下で、前段階に残した一般 null の
+方向収縮と枝の問題は解消される。新公式や全行列代数の独立証明ではない。
+非 null の CH からの独立な一般消去と、$\lambda$ を陽に含まない自律形の構成は未実行である。
+
+\subsection*{検査の水準と実行記録}
+\texttt{check.py} の厳密残差は \textbf{27 件すべて零}、記録時間は
+\textbf{44.454 秒}。25 件は二成分の行列計算・特殊化・極限・対照および
+一般六成分の低次数多項式検査、2 件は既知の $\alpha,\beta$ 恒等式の形式代入である。
+六成分検査は $Z$ の符号構造、振幅行列式の一階微分と $t$ 線形性の 3 件に限る。
+一般六成分の逆行列・応力・判別式をすべて記号的に検査したものではない。
+入力恒等式の形式代入を新たな行列定理の証明として数えない。
+
+環境は Python 3.12.14、SymPy 1.14.0、Linux 6.18.57 x86\_64、glibc 2.41。
+CPU 上の記号計算であり、一回の時間は性能保証ではない。
+各残差は \texttt{results.json}、実行方法と CPU モデルは \texttt{README.md} に記録する。
+今回のスクリプトは出典をメタデータとして保存するが、元原稿の blob 検証や
+前段階ベースラインの再実行は行わない。
+
+\subsection*{固定出典と位置づけ}
+\small
+\noindent
+\begin{tabular}{@{}ll@{}}
+コミット & \texttt{c304d28526e7ed1b8deff80890eb1f7ac060f712}\\
+原稿 Git blob SHA-1 & \texttt{4e78787d298956360ec2971bc06a1c5a973adc9a}\\
+上流原稿 & \texttt{paper/paper.tex}
+\end{tabular}\par
+\noindent
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/blob/c304d28526e7ed1b8deff80890eb1f7ac060f712/paper/paper.tex}{固定原稿へのリンク}\par
+既存の出発関係、行列式、因数分解、符号、最終根式の参照ラベルを本文に明示した。
+成果は CH 経路の接続の明記と再現可能な回帰検査である。
+文献との追加比較は別紙に分け、文献初出性を主張しない。
+\end{document}

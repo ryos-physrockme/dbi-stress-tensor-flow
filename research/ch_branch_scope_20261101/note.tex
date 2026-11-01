@@ -1,0 +1,259 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{DejaVu Sans Mono}[Scale=0.80]
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 0.05em minus 0.01em
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{tt}
+\hypersetup{pdftitle={DBI 流れの二分枝連続族と Maxwell 極限},pdfauthor={DBI algebraic research note}}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{3em}
+\linespread{1.04}
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+\newcommand{\sym}{\operatorname{sym}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Id}{\mathbf 1}
+\newcommand{\Tmix}{\mathsf T}
+\begin{document}
+\begin{center}
+{\Large\bfseries DBI 流れの二分枝連続族と Maxwell 極限}\par
+\vspace{4pt}
+{\large 同一混合応力を持つ実配置と結論の適用範囲}\par
+\vspace{4pt}
+2026 年 11 月 1 日
+\end{center}
+\noindent\textbf{要旨}\quad
+四次元単一実スカラー DBI について、同じ完全な混合応力と同じラグランジアンを持つが、
+固定場での結合定数微分 $Q$ が異なる二つの実配置を連続族として与える。
+時間的勾配と空間的勾配を組み合わせたこの族は、共通の Maxwell 点へ任意に近づく。
+したがって、両セクターを含むその点の全場・結合定数近傍に、単一の応力のみの自律関数
+$Q=f(\Tmix)$ は存在しない。$\lambda$ を引数に残す流れ、固定した勾配符号の全領域、
+一般の単純スペクトルに対する不可能性は示さない。新規性は未確認である。
+
+\section{規約と固定場での微分}
+$g=\diag(-1,1,1,1)$ とし、$v=(\partial_\mu\phi)$ は共変勾配の列、
+$F^{\mathsf T}=-F$ とする。正の平方根を取り、$\sym A=(A+A^{\mathsf T})/2$ と置く。
+\begin{equation}\label{eq:def}
+\begin{gathered}
+h=g+\lambda vv^{\mathsf T},\qquad G=h+\sqrt\lambda F,\qquad
+\Delta=\sqrt{\det G/\det g}>0,\\
+L=\frac{1-\Delta}{\lambda},\qquad
+Q=\left.\frac{\partial L}{\partial\lambda}\right|_{g,F,v},\qquad
+X=v^{\mathsf T}g^{-1}v .
+\end{gathered}
+\end{equation}
+応力は元の DBI 作用の Hilbert 応力を用い、改良項を加えない。
+反変成分の行列 $T$ と混合成分の行列 $\Tmix$ を区別する。
+\begin{equation}\label{eq:stress}
+T=\frac{g^{-1}-\Delta\sym(G^{-1})}{\lambda},\qquad
+\Tmix=Tg,\qquad U=\Id-\lambda\Tmix .
+\end{equation}
+比較には共通の固定質量尺度 $\mu$ を用い、
+\begin{equation}\label{eq:units}
+\widehat\lambda=\lambda\mu^4,\quad
+(\widehat v,\widehat F)=(v,F)/\mu^2,\quad
+(\widehat T,\widehat L)=(T,L)/\mu^4,\quad
+\widehat Q=Q/\mu^8
+\end{equation}
+と無次元化した後、帽子を省略する。状態ごとに単位や結合定数の規格化を変えない。
+
+\section{二つの制限された軸方向配置}
+独立な電磁場成分は $F_{01}=e>0$ のみとする。
+時間的配置 A と空間的配置 B を次のように定める。
+\begin{equation}\label{eq:axial}
+\begin{array}{c|c|c|c}
+ &v& r=\det h/\det g&P=\Delta^2\\ \hline
+\mathrm A &(a,0,0,0)^{\mathsf T}&1-\lambda a^2&1-\lambda(a^2+e^2)\\
+\mathrm B &(0,b,0,0)^{\mathsf T}&1+\lambda b^2&1+\lambda(b^2-e^2)
+\end{array}
+\end{equation}
+この ansatz では、行列の逆を取るだけで
+\begin{equation}\label{eq:U}
+U_{\mathrm A}=\diag(\Delta^{-1},r\Delta^{-1},\Delta,\Delta),\qquad
+U_{\mathrm B}=\diag(r\Delta^{-1},\Delta^{-1},\Delta,\Delta)
+\end{equation}
+を得る。以後の構成はこの二つの制限された配置内で行う。
+
+\newpage
+\section{同一応力を持つ連続族}
+任意の
+\begin{equation}\label{eq:domain}
+q>0,\qquad \rho>s>q
+\end{equation}
+を選ぶ。各行では場 $v,F$ を固定したまま $\lambda$ を変え、指定した端点
+$\lambda_{\mathrm A}$ または $\lambda_{\mathrm B}$ で物理量を評価する。
+\begin{center}
+\renewcommand{\arraystretch}{1.65}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & 時間的配置 A & 空間的配置 B\\
+\midrule
+端点の結合定数 & $\displaystyle\lambda_{\mathrm A}=\frac{\rho-q}{\rho q}$
+ & $\displaystyle\lambda_{\mathrm B}=\frac{s-q}{sq}$\\
+勾配の振幅 & $\displaystyle a^2=\frac{q(\rho-s)}{\rho}$
+ & $\displaystyle b^2=\frac{q(\rho-s)}{s}$\\
+電場の振幅 & $\displaystyle e_{\mathrm A}^{\,2}=\frac{q(q+s)}{\rho}$
+ & $\displaystyle e_{\mathrm B}^{\,2}=\frac{q(\rho+q)}{s}$\\
+勾配の符号 & $X_{\mathrm A}=-a^2<0$ & $X_{\mathrm B}=b^2>0$\\
+$\Delta$ & $q/\rho$ & $q/s$\\
+$L$ & $q$ & $q$\\
+$Q$ & $\rho q/2$ & $sq/2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+$a,b,e_{\mathrm A},e_{\mathrm B}$ は表示した正数の正の平方根とする。
+式 \eqref{eq:stress} から得られる完全な混合応力は
+\begin{equation}\label{eq:same-T}
+\boxed{\Tmix_{\mathrm A}=\Tmix_{\mathrm B}=\diag(-\rho,-s,q,q),\qquad
+Q_{\mathrm A}-Q_{\mathrm B}=\frac{q(\rho-s)}2>0 .}
+\end{equation}
+従って、応力の全不変量を使っても二つの $Q$ を区別できず、$L$ を加えても区別できない。
+これは結合定数が異なる二点の比較であり、同じ $\lambda$ での非一意性ではない。
+
+$Q$ の計算では、表の端点の式を先に $L$ に代入して微分してはならない。
+$P(\lambda)$ を式 \eqref{eq:axial} の固定場での一次関数として、
+\begin{equation}\label{eq:Q-direct}
+Q(\lambda)=\frac{\Delta-1}{\lambda^2}
+-\frac{P'(\lambda)}{2\lambda\Delta}
+\end{equation}
+を求めてから、それぞれの端点を代入する。
+この直接微分と行列式・逆行列の評価が、表と式 \eqref{eq:same-T} の検算である。
+
+\section{弱結合から端点まで実枝に留まること}
+各配置について $0\leq\lambda\leq\lambda_{\mathrm A,\mathrm B}$ を考える。
+$P$ は一次関数であり、その両端は
+\begin{equation}\label{eq:positive}
+P_{\mathrm A}(0)=P_{\mathrm B}(0)=1,\qquad
+P_{\mathrm A}(\lambda_{\mathrm A})=(q/\rho)^2>0,\qquad
+P_{\mathrm B}(\lambda_{\mathrm B})=(q/s)^2>0 .
+\end{equation}
+したがって区間全体で $P>0$ である。また
+$r_{\mathrm A}=P_{\mathrm A}+\lambda e_{\mathrm A}^2>0$、
+$r_{\mathrm B}=1+\lambda b^2\geq1$ である。
+よって両配置で $h$ は Lorentz 計量、$G$ は非退化であり、正の平方根の実 DBI 枝に沿って
+$\lambda=0$ から端点まで連結する。これは代数方程式の候補根だけを並べた反例ではない。
+
+\newpage
+\section{共通の Maxwell 点へ近づく族}
+$q>0$ を固定し、
+\begin{equation}\label{eq:eps}
+\rho=q+2\varepsilon,\qquad s=q+\varepsilon,\qquad\varepsilon>0
+\end{equation}
+と置く。表の二配置は、それぞれ
+\begin{equation}\label{eq:weak}
+\begin{gathered}
+\lambda_{\mathrm A}\longrightarrow0^+,\qquad
+\lambda_{\mathrm B}\longrightarrow0^+,\qquad
+v_{\mathrm A},v_{\mathrm B}\longrightarrow0,\qquad
+ e_{\mathrm A}^2,e_{\mathrm B}^2\longrightarrow2q,\\
+\Tmix_{\mathrm A}=\Tmix_{\mathrm B}\longrightarrow\diag(-q,-q,q,q),\qquad
+L_{\mathrm A}=L_{\mathrm B}=q,\qquad
+Q_{\mathrm A},Q_{\mathrm B}\longrightarrow q^2/2
+\end{gathered}
+\end{equation}
+を満たす。一方、任意の $\varepsilon>0$ では
+\begin{equation}\label{eq:weak-gap}
+\Tmix_{\mathrm A}=\Tmix_{\mathrm B}=\diag(-q-2\varepsilon,-q-\varepsilon,q,q),
+\qquad Q_{\mathrm A}-Q_{\mathrm B}=q\varepsilon/2>0 .
+\end{equation}
+両者は同じ $F_{01}=\sqrt{2q}$、$v=0$、$\lambda=0$ の Maxwell 点へ近づく。
+$q>0$ を固定するため非零電磁場への弱結合極限であり、弱電場や真空への極限ではない。
+両方の $Q$ とその差は連続的に収束し、不連続性を主張しているのでもない。
+
+\paragraph{近傍に対する結論}
+場と結合定数を座標とする空間で、この Maxwell 点の任意の全近傍を取る。
+ $\lambda\geq0$ の相対位相での近傍を $\lambda>0$ に制限してもよい。式 \eqref{eq:weak} より、十分小さい
+$\varepsilon>0$ で A と B の両点がその近傍に入る。
+もし近傍全体に単一の関数 $Q=f(\Tmix)$ が存在すれば、同じ入力
+$\Tmix_{\mathrm A}=\Tmix_{\mathrm B}$ に対して同じ値を返す必要があるが、
+式 \eqref{eq:weak-gap} と矛盾する。従ってこのような関数は存在しない。
+この議論には $f$ の連続性や解析性さえ仮定しない。
+
+ただし、時間的・空間的の\textbf{両セクターを含む全近傍}という量化が重要である。
+一方の符号だけに制限した集合や、片方の族を除いた部分領域への結論ではない。
+また極限点そのものでは二つの $Q$ は一致する。不一致は、極限へ任意に近い二点で生じる。
+
+\paragraph{二種類の経路を区別する}
+前節の実枝の確認では、各配置の場を固定して $\lambda$ だけを変えた。
+これに対して式 \eqref{eq:eps} の極限では、$\lambda$ とともに $v,F$ も変わる。
+ここで比較した $Q$ は、各 $\varepsilon$ の配置における
+$\partial_\lambda L|_{g,F,v}$ であり、この族に沿う全微分 $dL/d\varepsilon$ ではない。
+$L=q$ が族に沿って一定であることは、$Q=0$ を意味しない。
+
+\section{各 ansatz 内での分枝選択}
+式 \eqref{eq:U} は、A では $U_{00}U_{22}=1$、B では $U_{11}U_{22}=1$ を与える。
+目標応力 \eqref{eq:same-T} に対して、対応する条件は
+\begin{equation}\label{eq:pair}
+\begin{aligned}
+\mathrm A:&\quad(1+\lambda\rho)(1-\lambda q)=1
+ &&\Longrightarrow\quad\lambda=\frac{\rho-q}{\rho q},\\
+\mathrm B:&\quad(1+\lambda s)(1-\lambda q)=1
+ &&\Longrightarrow\quad\lambda=\frac{s-q}{sq}
+\end{aligned}\qquad(\lambda\ne0)
+\end{equation}
+であり、\textbf{各制限 ansatz 内}では非零の $\lambda$ が一意に選ばれる。
+異なる配置で逆数対の割り当てが変わることが、同一応力で二つの値が生じる仕組みである。
+これは一般の固定 $X$ 符号セクターにおける一意性定理ではない。
+
+\newpage
+\section{既存結果との関係}
+本ノートは DBI 行列式、Hilbert 応力、逆数対を持つ特性因数分解そのものを新結果としない。
+固定原稿の \texttt{eq:char-factor-app}、\texttt{eq:beta-app} と、前段の二点反例を出発点としている。
+今回の追加は、反例を連続族にし、共通の弱結合点へ近づけたうえで、結論の範囲を明示したことである。
+
+\paragraph{四次元 DBI の流れに対する問い}
+Brizio らの \href{https://arxiv.org/abs/2602.24058v2}{arXiv:2602.24058v2} 第 5.2 節の式 (119) の後は、
+四次元単一スカラー DBI の応力テンソル流れを $f(T;\lambda)$ の形で問うている。
+この問いは、$\lambda$ を陽に含まない自律形 $f(T)$ だけを要求するものではない。
+本族では $\lambda_{\mathrm A}\ne\lambda_{\mathrm B}$ なので、応力だけの自律化への反例は
+$\lambda$ を残す流れの存在に対する反例ではない。
+
+\paragraph{純粋な非線形電磁気学との区別}
+\href{https://arxiv.org/abs/2610.35135v1}{arXiv:2610.35135v1} 第 4 節の局所・大域の議論は、
+純粋な非線形電磁気学の文脈にある。スカラー勾配が非零の二つの配置を比較する本構成へ、
+そのまま定理を移してはいない。
+また \href{https://arxiv.org/abs/2309.04253v4}{arXiv:2309.04253v4} 第 5 節の定理 3 は
+$\lambda$ 依存を許す枠組みであり、
+\href{https://arxiv.org/abs/2610.33887v1}{arXiv:2610.33887v1} 第 2.2--2.3 節の分枝可逆性の議論も、
+どの枝と領域を固定するかを区別して比較する必要がある。
+これらは範囲の比較であって、本連続族の新規性を確定する文献調査ではない。
+
+\section{検算記録と到達点}
+同梱の \texttt{check.py} は、$s=q+u$、$\rho=q+u+w$、$q,u,w>0$ と置いて
+仮定 \eqref{eq:domain} を実装している。行列式と逆行列を直接評価し、
+\texttt{results.json} に\textbf{成分ごとの厳密零残差 50 件}を記録した。
+内訳は、各配置の $\Delta^2$、混合応力 16 成分、$L$、$Q$ の計 38 件と、
+逆数対 2 件、流れの差 1 件、弱結合極限 8 件、弱結合族の流れの差 1 件である。
+区間正値性はこれらとは別に、一次性と正の端点に対する assertion で検査した。
+
+記録環境は Python 3.12.14、SymPy 1.14.0、CPU 実行時間 0.363 秒であり、
+探索・数値近似を必要としない。一回の環境依存の時間であって性能保証ではない。
+スクリプトは文献の内容や新規性を検証するものではない。
+別実装の \texttt{independent\_check.py} でも、端点の代入前に対角計量成分の直接変分と
+固定場の結合定数微分を行い、成分ごとの厳密零残差 43 件を確認した。
+二つの検算には重複があり、件数は独立な物理恒等式の数ではない。
+
+\paragraph{ここまでで示したこと}
+共通の結合定数規格化と元の Hilbert 応力のもとで、両勾配符号を含む実 DBI 領域には
+単一の $Q=f(\Tmix)$ が存在しない。さらに、その障害は Maxwell 点の任意の全近傍に残る。
+ただし固有値 $q$ は二重であり、一般の単純スペクトルでの不可能性は示していない。
+分枝局所的な自律化、固定 $X$ 符号の一般配置、改良応力や再パラメータ化は別問題である。
+局所的一定場の代数的構成に留まり、動力学的安定性、因果的安定性、有限全エネルギーは主張しない。
+
+\vspace{3pt}
+\noindent\textbf{固定出典}\quad
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/tree/45c11bc3f2396bcb523a6e4906bba89316e16ce9}{\texttt{ryos-physrockme/dbi-stress-tensor-flow}}\par
+\noindent\small
+取得基点コミット\quad\texttt{45c11bc3f2396bcb523a6e4906bba89316e16ce9}\par
+\noindent
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/blob/45c11bc3f2396bcb523a6e4906bba89316e16ce9/paper/paper.tex}{参照原稿}と
+\href{https://github.com/ryos-physrockme/dbi-stress-tensor-flow/blob/45c11bc3f2396bcb523a6e4906bba89316e16ce9/research/ch_autonomy_20261101/note.tex}{前段ノート}をこのコミットに固定した。
+本ノートは追加検算の記録であり、新規性の確定や一般分類の完成を主張しない。
+\end{document}

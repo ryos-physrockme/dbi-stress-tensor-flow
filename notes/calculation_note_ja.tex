@@ -32,7 +32,7 @@
 stress-tensor flow\\[2mm]
 \large 記号・背景・途中計算を省略しない詳細計算ノート（改訂稿）}
 \author{}
-\date{2026年8月（論文最終稿との整合を反映した改訂版）}
+\date{2026年10月（Courant--Hilbert 構成の検算を追加）}
 
 \begin{document}
 \maketitle
@@ -54,7 +54,7 @@ stress-tensor flow\\[2mm]
  =\frac{2\lambda\det T-e_3(T)}
  {2\left[\tr T-\lambda e_2(T)+\lambda^2e_3(T)-\lambda^3\det T\right]}
 \]
-と書けることである。さらに $X=0$ の null な場合と pure Born--Infeld 極限を別の正則な式で扱い、既知の5次元 Born--Infeld flow を次元還元して同じ4次元式が得られることを別の導出として示す。主要な恒等式は SymPy の exact arithmetic で再検算している。
+と書けることである。さらに $X=0$ の null な場合と pure Born--Infeld 極限を別の正則な式で扱い、既知の5次元 Born--Infeld flow を次元還元して同じ4次元式が得られることを別の導出として示す。主要な恒等式は SymPy の exact arithmetic で再検算している。2026年10月の追補では Courant--Hilbert 構成を導入し、誘導計量の変形パラメータ依存を含む DBI flow の連鎖律を導く。
 \end{abstract}
 
 \tableofcontents
@@ -143,8 +143,9 @@ Hilbert stress tensor を
  \item 第6章で4次元から直接 flow を導く。ここが最短の解析証明である。
  \item 第7章で既知の5次元 BI flow を4次元へ次元還元し、別の導出として同じ式を得る。
  \item 第8章で null branch、pure BI limit、stress-tensor invariant space の代数関係を扱う。
- \item 第9章で数値探索の写像、loss、および解析式へ移るまでの手順を記録する。
- \item 第10章で SymPy exact checks と numerical validation を整理する。
+ \item 第9章で Courant--Hilbert 構成と誘導計量に関する連鎖律を導く。
+ \item 第10章で数値探索の写像、loss、および解析式へ移るまでの手順を記録する。
+ \item 第11章で SymPy exact checks と numerical validation を整理する。
 \end{enumerate}
 
 \chapter{基礎事項と記法}
@@ -1351,6 +1352,8 @@ $E_1=4-\lambda\tr T$ だから
 \end{equation}
 を得る。これは既知の4D Born--Infeld stress-tensor flow\cite{Ferko2023b,Brizio2026}と一致する。
 
+\input{ch_dbi_construction_ja.tex}
+
 \chapter{数値探索}
 
 この章では、解析式を得る前に実際に行った machine-learning 探索を再現できる形で記録する。最初に何を入力し、何を出力させ、どの量を loss として最小化したかを明示する。ネットワークが近似した対象は flow equation の右辺を与える一変数の時間発展則ではなく、stress tensor の不変量から deformation generator を復元する関数である。
@@ -1988,6 +1991,11 @@ C.~D.~A.~Blair, J.~Lahnsteiner, N.~A.~Obers and Z.~Yan,
 ``Matrix Theory Reloaded: A BPS Road to Holography,''
 JHEP \textbf{02} (2025) 024,
 \href{https://arxiv.org/abs/2410.03591}{arXiv:2410.03591 [hep-th]}.
+
+\bibitem{Pezhman2026}
+Z.~Pezhman, H.~Babaei-Aghbolagh and K.~Babaei Velni,
+\emph{Exact $T\bar{T}$-Like Flows in Nonlinear Electrodynamics},
+\href{https://arxiv.org/abs/2610.23281}{arXiv:2610.23281v1 [hep-th]} (2026).
 
 \bibitem{Babaei2026}
 H.~Babaei-Aghbolagh, B.~Chen, S.~He and J.~Hou,
